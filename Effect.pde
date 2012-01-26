@@ -1,8 +1,8 @@
 //generate buffer
 void generator() {
 
+  //for each buffer
   for (int i=0; i<strKali.length(); i++) {
-
     switch(mode) {
     case 0:
       colorArray[i] = Wheel(frame+i*8);
@@ -35,9 +35,9 @@ void generator() {
       break;
 
     case 5:      
+      int r=int(random(25));
       colorArray[i] = color(255, 255, 255);
-      if (i==4 || i==6) {
-        int r=int(random(25));
+      if (i==4 || i==6) {        
         if (r==2) {
           colorArray[i] = color(0, 0, 0);
         }
@@ -45,34 +45,13 @@ void generator() {
       break;
     }
   }
-}
-
-//colorize buffer
-void tintBuffer() {
-  int col, rr, gg, bb, tintR, tintG, tintB;
   
-  int tintCol = cp.getColorValue();
-  tintR = tintCol & 255;
-  tintCol >>= 8;
-  tintG = tintCol & 255;
-  tintCol >>= 8;
-  tintB = tintCol & 255;
-  
-  for (int i=0; i<colorArray.length; i++) {
-    col = colorArray[i];
-    rr = col & 255;
-    col >>= 8;
-    gg = col & 255;
-    col >>= 8;
-    bb = col & 255;
-    col >>= 8;
-
-    rr = rr*(tintR+1) >> 8;
-    gg = gg*(tintG+1) >> 8;
-    bb = bb*(tintB+1) >> 8;
-
-    //    colorArray[i] = (rr << 16) | (gg << 8) | bb;
-    colorArray[i] = color(rr, gg, bb);
+  //very seldom in hotel mode, make everything black
+  int r=int(random(77));
+  if (mode == 5 && r==34) {
+    for (int i=0; i<strKali.length(); i++) {
+      colorArray[i] = color(0, 0, 0);
+    }
   }
 }
 

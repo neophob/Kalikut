@@ -6,19 +6,21 @@ import controlP5.*;
  * The text() function is used for writing words to the screen. 
  */
 
-PFont fontA;
-final String strKali = "KALIKUT now";
-int frame;
+private PFont fontA;
+private final String strKali = "KALIKUTn";
+private int frame;
 
 //gui
 private ControlP5 cp5;
 private RadioButton modeButton;
 private ColorPicker cp;
+private Slider slider;
 
 //internal fx
-int mode=0;
+private int mode=0;
 
-int[] colorArray;  
+//buffer
+private int[] colorArray;  
 
 void setup() {
   size(800, 400);
@@ -56,6 +58,10 @@ void draw() {
 
     wrote += strKali.charAt(i);
     sw=int(textWidth(wrote));
+    
+    //simulate space
+    if (i==6) sw+=40;
   }
+  text("ow", 70+sw, 130);
   frame++;
 }
