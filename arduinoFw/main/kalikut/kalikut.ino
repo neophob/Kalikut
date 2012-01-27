@@ -50,6 +50,7 @@
 #define NR_OF_PANELS 4
 #define PIXELS_PER_PANEL 32
 
+byte modulesPerLetter[] = {17, 17, 10, 9, 17, 17, 11, 10};
 //this should match RX_BUFFER_SIZE from HardwareSerial.cpp
 //array that will hold the serial input string
 byte serInStr[COLOR_5BIT_FRAME_SIZE+SERIAL_HEADER_SIZE]; 	 				 
