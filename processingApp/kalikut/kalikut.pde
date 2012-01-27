@@ -3,7 +3,7 @@ import processing.serial.*;
 import controlP5.*;
 
 import com.neophob.lpd6803.*;
-
+import com.neophob.lpd6803.misc.*;
 
 /**
  * Words. 
@@ -50,7 +50,8 @@ void setup() {
     lpd6803 = new Lpd6803(this, NR_OF_PIXELS);          
     this.initialized = lpd6803.ping();
     println("ping result: "+ this.initialized);
-  } catch (NoSerialPortFoundException e) {
+  } 
+  catch (NoSerialPortFoundException e) {
     println("failed to initialize serial port!");
   }
 
@@ -83,6 +84,11 @@ void draw() {
   }
   //write rest of text
   text("ow", 70+sw, 130);
+
+  if (initialized) {
+    lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RBG);
+  }
+
   frame++;
 }
 
