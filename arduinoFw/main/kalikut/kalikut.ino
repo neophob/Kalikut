@@ -38,7 +38,7 @@
 
 //frame size for specific color resolution
 //32pixels * 2 byte per color (15bit - one bit wasted)
-#define COLOR_5BIT_FRAME_SIZE 64
+//#define COLOR_5BIT_FRAME_SIZE 64
 #define SERIAL_HEADER_SIZE 5
 //--- protocol data end
 
@@ -46,14 +46,15 @@
 #define SERIAL_DELAY_LOOP 3
 #define SERIAL_WAIT_DELAY 3
 
-//define nr of Panels*2 here, 4 means 2 panels
-#define NR_OF_PANELS 4
-#define PIXELS_PER_PANEL 32
+//the sum of all modulesPerLetter should  be equal to TOTAL_MODULES
+#define TOTAL_MODULES 108
+#define TOTAL_LETTERS 8
+byte modulesPerLetter[] = {
+  17, 17, 10, 9, 17, 17, 11, 10};
 
-byte modulesPerLetter[] = {17, 17, 10, 9, 17, 17, 11, 10};
 //this should match RX_BUFFER_SIZE from HardwareSerial.cpp
 //array that will hold the serial input string
-byte serInStr[COLOR_5BIT_FRAME_SIZE+SERIAL_HEADER_SIZE]; 	 				 
+byte serInStr[TOTAL_LETTERS+SERIAL_HEADER_SIZE]; 	 				 
 
 // Choose which 2 pins you will use for output.
 // Can be any valid output pins.
@@ -61,7 +62,7 @@ int dataPin = 2;       // 'green' wire
 int clockPin = 3;      // 'blue' wire
 
 //initialize pixels
-LPD6803 strip = LPD6803(PIXELS_PER_PANEL*NR_OF_PANELS, dataPin, clockPin);
+LPD6803 strip = LPD6803(TOTAL_MODULES, dataPin, clockPin);
 
 #define SERIALBUFFERSIZE 4
 byte serialResonse[SERIALBUFFERSIZE];
@@ -81,7 +82,7 @@ static void sendAck() {
   serialResonse[2] = Serial.available();
   serialResonse[3] = g_errorCounter;
   Serial.write(serialResonse, SERIALBUFFERSIZE);
-  
+
   //comment out next line on arduino!
   //Serial.send_now();
 }
@@ -99,21 +100,21 @@ unsigned int Color(byte r, byte g, byte b) {
 unsigned int Wheel(byte WheelPos) {
   byte r,g,b;
   switch(WheelPos >> 5) {
-    case 0:
-      r=31- WheelPos % 32;   //Red down
-      g=WheelPos % 32;      // Green up
-      b=0;                  //blue off
-      break; 
-    case 1:
-      g=31- WheelPos % 32;  //green down
-      b=WheelPos % 32;      //blue up
-      r=0;                  //red off
-      break; 
-    case 2:
-      b=31- WheelPos % 32;  //blue down 
-      r=WheelPos % 32;      //red up
-      g=0;                  //green off
-      break; 
+  case 0:
+    r=31- WheelPos % 32;   //Red down
+    g=WheelPos % 32;      // Green up
+    b=0;                  //blue off
+    break; 
+  case 1:
+    g=31- WheelPos % 32;  //green down
+    b=WheelPos % 32;      //blue up
+    r=0;                  //red off
+    break; 
+  case 2:
+    b=31- WheelPos % 32;  //blue down 
+    r=WheelPos % 32;      //red up
+    g=0;                  //green off
+    break; 
   }
   return(Color(r,g,b));
 }
@@ -123,19 +124,19 @@ unsigned int Wheel(byte WheelPos) {
 // --------------------------------------------
 void rainbow() {
   delay(2);
-  
+
   k++;
   if (k>50) {
     k=0;
     j++;
     if (j>96*3) {  // 3 cycles of all 96 colors in the wheel
-       j=0; 
+      j=0; 
     }
-    
-  	for (int i=0; i < strip.numPixels(); i++) {
-    	 strip.setPixelColor(i, Wheel((i + j) % 96));
-  	}
-  	strip.doSwapBuffersAsap(strip.numPixels());    
+
+    for (int i=0; i < strip.numPixels(); i++) {
+      strip.setPixelColor(i, Wheel((i + j) % 96));
+    }
+    strip.doSwapBuffersAsap(strip.numPixels());    
   }
 }
 
@@ -144,11 +145,11 @@ void rainbow() {
 //     create initial image
 // --------------------------------------------
 void showInitImage() {
-    for (int i=0; i < strip.numPixels(); i++) {
-      strip.setPixelColor(i, Wheel( i % 96));
-    }    
-    // Update the strip, to start they are all 'off'
-    strip.show();
+  for (int i=0; i < strip.numPixels(); i++) {
+    strip.setPixelColor(i, Wheel( i % 96));
+  }    
+  // Update the strip, to start they are all 'off'
+  strip.show();
 }
 
 
@@ -164,9 +165,9 @@ void setup() {
 
   strip.setCPUmax(80);  // start with 50% CPU usage. up this if the strand flickers or is slow  
   strip.begin();        // Start up the LED counter
-  
+
   showInitImage();      // display some colors
-  
+
   serialDataRecv = 0;   //no serial data received yet  
 }
 
@@ -182,13 +183,13 @@ void loop() {
     if (g_errorCounter!=0 && g_errorCounter!=102) {
       sendAck();
     }
-    
+
     if (serialDataRecv==0) { //if no serial data arrived yet, show the rainbow...
-    	  rainbow();    	
+      rainbow();    	
     }
     return;
   }
-  
+
   //led offset
   byte ofs    = serInStr[1];
   //how many bytes we're sending
@@ -197,26 +198,27 @@ void loop() {
   byte type = serInStr[3];
   //get the image data
   byte* cmd    = serInStr+5;
-  
-  switch (type) {
-     case CMD_SENDFRAME:
-    	//the size of an image must be exactly 64bytes for 8*4 pixels
-        if (sendlen == COLOR_5BIT_FRAME_SIZE) {
-          updatePixels(ofs, cmd);
-        } else {
-          g_errorCounter=100;
-        }
-        break;
 
-      case CMD_PING:
-        //just send the ack!
-    	  serialDataRecv = 1;        
-        break;
-        
-      default:
-        //invalid command
-        g_errorCounter=130; 
-        break;
+  switch (type) {
+  case CMD_SENDFRAME:
+    //the size of buffer must match the number of all letters
+    if (sendlen == TOTAL_LETTERS) {
+      updatePixels(ofs, cmd);
+    } 
+    else {
+      g_errorCounter=100;
+    }
+    break;
+
+  case CMD_PING:
+    //just send the ack!
+    serialDataRecv = 1;        
+    break;
+
+  default:
+    //invalid command
+    g_errorCounter=130; 
+    break;
   }
 
   //send ack to library - command processed
@@ -228,25 +230,39 @@ void loop() {
 //    ofs: which panel, 0 (ofs=0), 1 (ofs=32), 2 (ofs=64)...
 // --------------------------------------------
 void updatePixels(byte ofs, byte* buffer) {
-  uint16_t currentLed = ofs*PIXELS_PER_PANEL;
-  byte x=0;
-  for (byte i=0; i < PIXELS_PER_PANEL; i++) {
-    strip.setPixelColor(currentLed, buffer[x]<<8 | buffer[x+1]);
-    x+=2;
-    currentLed++;
-  }  
-  strip.doSwapBuffersAsap(ofs*PIXELS_PER_PANEL);   // write all the pixels out
+  /*  uint16_t currentLed = ofs*PIXELS_PER_PANEL;
+   byte x=0;
+   for (byte i=0; i < PIXELS_PER_PANEL; i++) {
+   strip.setPixelColor(currentLed, buffer[x]<<8 | buffer[x+1]);
+   x+=2;
+   currentLed++;
+   }  
+   strip.doSwapBuffersAsap(ofs*PIXELS_PER_PANEL);   // write all the pixels out*/
+
+  byte src=0;
+  byte dst=0;
+  for (byte i=0; i < TOTAL_LETTERS; i++) {
+
+    byte nrOfModulesPerLetter = modulesPerLetter[i];
+
+    for (byte j=0; j<nrOfModulesPerLetter; j++) {
+      //two bytes per pixel
+      strip.setPixelColor(dst++, buffer[src]<<8 | buffer[src+1]);
+    }        
+    
+    src+=2;
+  }
 }
 
 /* 
  --------------------------------------------
-     read serial command
+ read serial command
  --------------------------------------------
-read a string from the serial and store it in an array
-you must supply the str array variable
-returns number of bytes read, or zero if fail
-
-example ping command:
+ read a string from the serial and store it in an array
+ you must supply the str array variable
+ returns number of bytes read, or zero if fail
+ 
+ example ping command:
  		cmdfull[0] = START_OF_CMD (marker);
  		cmdfull[1] = addr;
  		cmdfull[2] = 0x01; 
@@ -255,7 +271,7 @@ example ping command:
  		cmdfull[5] = 0x02;
  		cmdfull[6] = END_OF_DATA (marker);
  */
- 
+
 byte readCommand(byte *str) {
   byte b,i,sendlen;
 
@@ -280,7 +296,8 @@ byte readCommand(byte *str) {
   while (i<SERIAL_HEADER_SIZE) {
     if (Serial.available()) {
       str[i++] = Serial.read();
-    } else {
+    } 
+    else {
       delay(SERIAL_WAIT_DELAY); 
       if (b-- == 0) {
         g_errorCounter = 103;
@@ -306,7 +323,8 @@ byte readCommand(byte *str) {
   while (i<sendlen+1) {
     if (Serial.available()) {
       str[SERIAL_HEADER_SIZE+i++] = Serial.read();
-    } else {
+    } 
+    else {
       delay(SERIAL_WAIT_DELAY); 
       if (b-- == 0) {
         g_errorCounter = 105;
@@ -315,7 +333,7 @@ byte readCommand(byte *str) {
     }
   }
 
-  //check if data is correct, 0x20 = END_OF_DATA
+  //check if data footer is correct, 0x20 = END_OF_DATA
   if (str[SERIAL_HEADER_SIZE+sendlen] != END_OF_DATA) {
     g_errorCounter = 106;
     return 0;
@@ -324,3 +342,5 @@ byte readCommand(byte *str) {
   //return data size (without meta data)
   return sendlen;
 }
+
+
