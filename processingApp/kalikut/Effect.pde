@@ -1,3 +1,5 @@
+int MAX_EFFECT=5;
+
 //generate buffer
 void generator() {
 
