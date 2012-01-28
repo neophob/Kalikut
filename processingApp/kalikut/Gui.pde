@@ -26,12 +26,21 @@ void initGui() {
         ;
 
   // add a vertical slider
-  slider = cp5.addSlider("slider")
+  fpsSlider = cp5.addSlider("Speed")
     .setPosition(300, 280)
       .setSize(200, 20)
         .setRange(0, 1)
           .setValue(.6)
             ;
+
+
+  allColorSlider = cp5.addSlider("RGB Colors")
+    .setPosition(300, 320-1)
+      .setSize(200, 20)
+        .setRange(0, 255)
+          .setValue(255)
+            .setDecimalPrecision(0)
+              ;
 }
 
 
@@ -46,10 +55,16 @@ void controlEvent(ControlEvent theEvent) {
     return;
   }
 
-  if (theEvent.isFrom(slider)) {
-    int fps = 5+int(35*slider.getValue());
-    println("framerate: "+fps);
+  if (theEvent.isFrom(fpsSlider)) {
+    int fps = 5+int(35*fpsSlider.getValue());
+    //println("framerate: "+fps);
     frameRate(fps);
+  }
+
+  if (theEvent.isFrom(allColorSlider)) {
+    int x = int(allColorSlider.getValue());
+    cp.setColorValue(color(x,x,x));
+    //println("allrgb: "+x);
   }
 }
 

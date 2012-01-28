@@ -12,15 +12,16 @@ import com.neophob.lpd6803.misc.*;
  */
 private static final int NR_OF_PIXELS = 8;
 
-private PFont fontA;
 private final String strKali = "KALIKUTn";
+
+private PFont fontA;
 private int frame;
 
 //gui
 private ControlP5 cp5;
 private RadioButton modeButton;
 private ColorPicker cp;
-private Slider slider;
+private Slider fpsSlider, allColorSlider;
 
 //internal fx
 private int mode=0;
