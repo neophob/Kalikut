@@ -1,6 +1,7 @@
 import processing.serial.*;
 
 import controlP5.*;
+import oscP5.*;
 
 import com.neophob.lpd6803.*;
 import com.neophob.lpd6803.misc.*;
@@ -30,8 +31,11 @@ private int mode=0;
 private int[] colorArray;  
 
 //Serial
-Lpd6803 lpd6803;
-boolean initialized;
+private Lpd6803 lpd6803;
+private boolean initialized;
+
+//OSC
+private OscP5 oscP5;
 
 void setup() {
   size(800, 400);
@@ -56,6 +60,10 @@ void setup() {
     println("failed to initialize serial port!");
   }
 
+  /* start oscP5, listening for incoming messages at port 12000 */
+  oscP5 = new OscP5(this, 12000);
+
+
 
   frameRate(25);
 }
@@ -70,6 +78,7 @@ void draw() {
   //tint buffer
   tintBuffer();
 
+  //show simulation
   String wrote="";
   int sw = 0;
   for (int i=0; i<strKali.length(); i++) {
@@ -86,6 +95,7 @@ void draw() {
   //write rest of text
   text("ow", 70+sw, 130);
 
+  //send serial data
   if (initialized) {
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RBG);
   }
