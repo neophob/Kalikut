@@ -56,7 +56,6 @@ void drawBeatStatus() {
     fill(inActiveCol);
   }
   rect(60, 0, 30, 20);
-
 }
 
 

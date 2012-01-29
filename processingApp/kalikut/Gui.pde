@@ -47,7 +47,7 @@ void initGui() {
   soundSensitive= cp5.addSlider("Sound Sensitive")
     .setPosition(300, 360-2)
       .setSize(200, 20)
-        .setRange(1, 2500)
+        .setRange(1, 5000)
           .setValue(255)
             .setDecimalPrecision(0)
               ;
@@ -57,11 +57,6 @@ void initGui() {
 void controlEvent(ControlEvent theEvent) {
   if (theEvent.isFrom(modeButton)) {
     mode = int(theEvent.getValue());
-
-    //init hotel mode
-    if (mode==5) {
-      //cp.setColorValue(color(255, 72, 0));
-    }
     return;
   }
 
