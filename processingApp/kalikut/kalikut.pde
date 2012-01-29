@@ -97,7 +97,7 @@ void draw() {
 
   //send serial data
   if (initialized) {
-    lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RBG);
+    lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
   }
 
   frame++;
