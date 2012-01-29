@@ -1,3 +1,8 @@
+import ddf.minim.*;
+import ddf.minim.signals.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+
 import processing.serial.*;
 
 import controlP5.*;
@@ -50,7 +55,8 @@ void setup() {
   colorArray = new color[strKali.length()];
   smooth();
   initGui();
-
+  initAudio();
+  
   try {
     lpd6803 = new Lpd6803(this, NR_OF_PIXELS);          
     this.initialized = lpd6803.ping();
@@ -77,6 +83,8 @@ void draw() {
 
   //tint buffer
   tintBuffer();
+
+  drawBeatStatus();
 
   //show simulation
   String wrote="";

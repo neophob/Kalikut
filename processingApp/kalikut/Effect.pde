@@ -1,4 +1,4 @@
-int MAX_EFFECT=5;
+int MAX_EFFECT=6;
 
 //generate buffer
 void generator() {
@@ -45,9 +45,19 @@ void generator() {
         }
       }
       break;
+
+    case 6:
+      if (beat.isKick()) {
+        colorArray[i] = color(255, 255, 255);
+      } 
+      else {
+        colorArray[i] = color(0,0,0);
+      }
+
+      break;
     }
   }
-  
+
   //very seldom in hotel mode, make everything black
   int r=int(random(77));
   if (mode == 5 && r==34) {

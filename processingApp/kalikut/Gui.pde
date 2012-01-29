@@ -9,7 +9,7 @@ void initGui() {
         .setColorForeground(color(120))
           .setColorActive(color(255))
             .setColorLabel(color(255))
-              .setItemsPerRow(8)
+              .setItemsPerRow(6)
                 .setSpacingColumn(80)
                   .setNoneSelectedAllowed(false)
                     .addItem("Rainbow", 0)
@@ -18,7 +18,8 @@ void initGui() {
                           .addItem("Strobo 2", 3)
                             .addItem("Solid", 4)
                               .addItem("Hotel", 5)
-                                .activate(0);
+                                .addItem("Beat", 6)
+                                  .activate(0);
 
   cp = cp5.addColorPicker("picker")
     .setPosition(20, 280)
@@ -63,7 +64,7 @@ void controlEvent(ControlEvent theEvent) {
 
   if (theEvent.isFrom(allColorSlider)) {
     int x = int(allColorSlider.getValue());
-    cp.setColorValue(color(x,x,x));
+    cp.setColorValue(color(x, x, x));
     //println("allrgb: "+x);
   }
 }
