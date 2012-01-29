@@ -7,7 +7,7 @@
 #X msg 265 387 disconnect;
 #X obj 246 426 mrpeach/udpsend;
 #X obj 285 2 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -258113
--1 -1 0 1;
+-1 -1 10400 1;
 #X obj 320 2 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -4034 -1
 -1 0 1;
 #X obj 358 2 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -4160 -1

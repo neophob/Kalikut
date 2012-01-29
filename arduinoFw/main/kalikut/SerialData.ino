@@ -82,8 +82,7 @@ byte readCommand(byte *str) {
   while (i<sendlen+1) {
     if (Serial.available()) {
       str[SERIAL_HEADER_SIZE+i++] = Serial.read();
-    } 
-    else {
+    } else {
       delay(SERIAL_WAIT_DELAY); 
       if (b-- == 0) {
         g_errorCounter = 105;

@@ -43,17 +43,20 @@
 //--- protocol data end
 
 //8ms is the minimum! else we dont get any data!
-#define SERIAL_DELAY_LOOP 3
+#define SERIAL_DELAY_LOOP 6
 #define SERIAL_WAIT_DELAY 3
 
-//the sum of all modulesPerLetter should  be equal to TOTAL_MODULES
-#define TOTAL_MODULES 20
-//#define TOTAL_MODULES 108
+//how many letters
 #define TOTAL_LETTERS 8
 
 byte modulesPerLetter[TOTAL_LETTERS] = {
   5, 2, 1, 1, 5, 2, 2, 2};
 //  17, 17, 10, 9, 17, 17, 11, 10};
+
+//the sum of all modulesPerLetter should  be equal to TOTAL_MODULES
+#define TOTAL_MODULES 20
+//#define TOTAL_MODULES 108
+
 
 //this should match RX_BUFFER_SIZE from HardwareSerial.cpp
 //array that will hold the serial input string
@@ -108,7 +111,7 @@ void loop() {
     }
 
     if (serialDataRecv==0) { //if no serial data arrived yet, show the rainbow...
-      //   rainbow();    	
+      rainbow();    	
     }
     return;
   }
@@ -123,9 +126,10 @@ void loop() {
   switch (type) {
   case CMD_SENDFRAME:
     //the size of buffer must match the number of all letters
-    if (sendlen == TOTAL_LETTERS) {
+    if (sendlen == TOTAL_LETTERS*2) {
       updatePixels(0, cmd); 
-    } else {
+    } 
+    else {
       g_errorCounter=100;
     }
     break;
@@ -165,4 +169,5 @@ void updatePixels(byte ofs, byte* buffer) {
 
   strip.doSwapBuffersAsap(0); 
 }
+
 
