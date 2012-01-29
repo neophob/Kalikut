@@ -128,8 +128,7 @@ void loop() {
     //the size of buffer must match the number of all letters
     if (sendlen == TOTAL_LETTERS*2) {
       updatePixels(0, cmd); 
-    } 
-    else {
+    } else {
       g_errorCounter=100;
     }
     break;

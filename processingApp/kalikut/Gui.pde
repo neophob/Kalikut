@@ -56,7 +56,7 @@ void controlEvent(ControlEvent theEvent) {
   }
 
   if (theEvent.isFrom(fpsSlider)) {
-    int fps = 5+int(35*fpsSlider.getValue());
+    int fps = 5+int(55*fpsSlider.getValue());
     //println("framerate: "+fps);
     frameRate(fps);
   }
