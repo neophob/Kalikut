@@ -27,7 +27,7 @@ private int frame;
 private ControlP5 cp5;
 private RadioButton modeButton;
 private ColorPicker cp;
-private Slider fpsSlider, allColorSlider;
+private Slider fpsSlider, allColorSlider, soundSensitive;
 
 //internal fx
 private int mode=0;

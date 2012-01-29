@@ -19,7 +19,8 @@ void initGui() {
                             .addItem("Solid", 4)
                               .addItem("Hotel", 5)
                                 .addItem("Beat", 6)
-                                  .activate(0);
+                                  .addItem("Volume", 7)
+                                    .activate(0);
 
   cp = cp5.addColorPicker("picker")
     .setPosition(20, 280)
@@ -39,6 +40,14 @@ void initGui() {
     .setPosition(300, 320-1)
       .setSize(200, 20)
         .setRange(0, 255)
+          .setValue(255)
+            .setDecimalPrecision(0)
+              ;
+
+  soundSensitive= cp5.addSlider("Sound Sensitive")
+    .setPosition(300, 360-2)
+      .setSize(200, 20)
+        .setRange(1, 2500)
           .setValue(255)
             .setDecimalPrecision(0)
               ;

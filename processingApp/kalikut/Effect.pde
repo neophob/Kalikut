@@ -49,12 +49,18 @@ void generator() {
     case 6:
       if (beat.isKick()) {
         colorArray[i] = color(255, 255, 255);
-      } 
-      else {
+      } else {
         colorArray[i] = color(0,0,0);
       }
-
       break;
+      
+    case 7:
+    println(soundSensitive.getValue());
+      int c = int(in.mix.level()*soundSensitive.getValue());
+      if (c>255) c=255;
+      colorArray[i] = color(c,c,c);
+      break;
+      
     }
   }
 

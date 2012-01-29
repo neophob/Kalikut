@@ -1,12 +1,8 @@
 private Minim minim;
 
-/** The in. */
 private AudioInput in;
-
-/** The beat. */
 private BeatDetect beat;
 
-/** The bl. */
 @SuppressWarnings("unused")
 private BeatListener bl;
 
@@ -32,31 +28,34 @@ void initAudio() {
   bl = new BeatListener(beat, in);
 }
 
-color activeCol = color(255,255,255);
-color inActiveCol = color(64,64,64);
+color activeCol = color(255, 255, 255);
+color inActiveCol = color(64, 64, 64);
 
 
 void drawBeatStatus() {
   if (beat.isKick()) {
     fill(activeCol);
-  } else {
+  } 
+  else {
     fill(inActiveCol);
   }
-  rect(0,0,30,20);
+  rect(0, 0, 30, 20);
 
   if (beat.isSnare()) {
     fill(activeCol);
-  } else {
+  } 
+  else {
     fill(inActiveCol);
   }
-  rect(30,0,30,20);
+  rect(30, 0, 30, 20);
 
   if (beat.isHat()) {
     fill(activeCol);
-  } else {
+  } 
+  else {
     fill(inActiveCol);
   }
-  rect(60,0,30,20);
+  rect(60, 0, 30, 20);
 
 }
 
