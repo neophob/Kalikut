@@ -51,8 +51,23 @@ void initGui() {
           .setValue(255)
             .setDecimalPrecision(0)
               ;
+
+  myTextarea = cp5.addTextarea("txt")
+    .setPosition(580, 280)
+      .setSize(200, 80)
+        .setFont(createFont("arial", 12))
+          .setLineHeight(14)
+            .setColor(color(192))
+              .setColorBackground(color(255, 100))
+                .setColorForeground(color(255, 100));
+  ;
 }
 
+void updateTextfield(String text) {
+  String s = myTextarea.getText();
+  s += text+"\n";
+  myTextarea.setText(s);
+}
 
 void controlEvent(ControlEvent theEvent) {
   if (theEvent.isFrom(modeButton)) {

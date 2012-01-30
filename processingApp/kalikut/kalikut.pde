@@ -28,6 +28,7 @@ private ControlP5 cp5;
 private RadioButton modeButton;
 private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
+private Textarea myTextarea;
 
 //internal fx
 private int mode=0;
@@ -45,7 +46,8 @@ private OscP5 oscP5;
 void setup() {
   size(800, 400);
   background(0);
-
+  frameRate(25);
+  
   // Load the font. Fonts must be placed within the data 
   // directory of your sketch. 
   fontA = loadFont("PTSans-Bold-120.vlw");
@@ -57,21 +59,10 @@ void setup() {
   initGui();
   initAudio();
   
-  try {
-    lpd6803 = new Lpd6803(this, NR_OF_PIXELS);          
-    this.initialized = lpd6803.ping();
-    println("ping result: "+ this.initialized);
-  } 
-  catch (NoSerialPortFoundException e) {
-    println("failed to initialize serial port!");
-  }
-
+  initSerial();
+  
   /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this, 12000);
-
-
-
-  frameRate(25);
 }
 
 
