@@ -52,15 +52,15 @@ void tintBuffer() {
 }
 
 void initSerial() {
-  updateTextfield("init serial port");
+  updateTextfield("Init serial port");
   try {
     lpd6803 = new Lpd6803(this, NR_OF_PIXELS);          
     this.initialized = lpd6803.ping();
-    println("ping result: "+ this.initialized);
-    updateTextfield("ping result: "+ this.initialized);
+    println("Ping result: "+ this.initialized);
+    updateTextfield(" -> Ping result: "+ this.initialized);
   } 
   catch (NoSerialPortFoundException e) {
-    updateTextfield("failed to initialize serial port!");
+    updateTextfield(" -> Failed to initialize serial port!");
     println("failed to initialize serial port!");
   }
 }

@@ -2,6 +2,10 @@ private Minim minim;
 
 private AudioInput in;
 private BeatDetect beat;
+private FFT fft;
+
+color activeCol = color(255, 255, 255);
+color inActiveCol = color(64, 64, 64);
 
 @SuppressWarnings("unused")
 private BeatListener bl;
@@ -26,10 +30,12 @@ void initAudio() {
   beat.detectMode(BeatDetect.FREQ_ENERGY);
 
   bl = new BeatListener(beat, in);
-}
 
-color activeCol = color(255, 255, 255);
-color inActiveCol = color(64, 64, 64);
+  fft = new FFT(in.bufferSize(), in.sampleRate());
+  // use 128 averages.
+  // the maximum number of averages we could ask for is half the spectrum size. 
+  fft.linAverages(32);
+}
 
 
 void drawBeatStatus() {
@@ -56,6 +62,15 @@ void drawBeatStatus() {
     fill(inActiveCol);
   }
   rect(60, 0, 30, 20);
+/*
+  fill(inActiveCol);
+  fft.forward(in.mix);
+  int w = int(fft.specSize()/32);
+  for (int i = 0; i < fft.specSize(); i++) {
+    // draw a rectangle for each average, multiply the value by 5 so we can see it better
+    rect(i, height, i, height - fft.getBand(i)*50);
+  }
+  */
 }
 
 
