@@ -83,7 +83,7 @@ void draw() {
   for (int i=0; i<strKali.length(); i++) {
 
     fill(colorArray[i]);
-    text(""+strKali.charAt(i), 30+sw, 130);
+    text(""+strKali.charAt(i), 30+sw, 150);
 
     wrote += strKali.charAt(i);
     sw=int(textWidth(wrote));
@@ -92,7 +92,7 @@ void draw() {
     if (i==6) sw+=40;
   }
   //write rest of text
-  text("ow", 70+sw, 130);
+  text("ow", 70+sw, 150);
 
   //send serial data
   if (initialized) {

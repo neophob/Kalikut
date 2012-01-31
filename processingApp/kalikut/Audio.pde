@@ -8,8 +8,8 @@ private BeatListener bl;
 
 void initAudio() {
   minim = new Minim(this);
-  //in = minim.getLineIn( Minim.STEREO, 512 );
-  in = minim.getLineIn( Minim.MONO, 1024 );
+  in = minim.getLineIn( Minim.STEREO, 512 );
+  //in = minim.getLineIn( Minim.MONO, 1024 );
 
   // a beat detection object that is FREQ_ENERGY mode that 
   // expects buffers the length of song's buffer size
@@ -56,6 +56,14 @@ void drawBeatStatus() {
     fill(inActiveCol);
   }
   rect(60, 0, 30, 20);
+  
+  stroke(255);  
+  // draw the waveforms
+  for(int i = 0; i < in.bufferSize()-1; i++) {
+    line(237+i, 30 + in.mix.get(i)*30, 237+i+1, 30 + in.mix.get(i+1)*30);
+  }
+  
+  stroke(0); 
 }
 
 
