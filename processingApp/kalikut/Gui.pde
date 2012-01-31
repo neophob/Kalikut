@@ -61,7 +61,53 @@ void initGui() {
               .setColorBackground(color(255, 100))
                 .setColorForeground(color(255, 100));
   ;
+
+  Textlabel tl = cp5.addTextlabel("sdesc", "KICK/SNARE/HAT", BOX_X, 175);
+  tl.setFont(ControlP5.standard58);
 }
+
+
+final int BOX_X = 37;
+final int BOX_Y = 150;
+final int BOX_X_SIZE = 30;
+final int BOX_Y_SIZE = 20;
+
+void drawBeatStatus() {
+  if (beat.isKick()) {
+    fill(activeCol);
+  } 
+  else {
+    fill(inActiveCol);
+  }
+  rect(BOX_X, BOX_Y, BOX_X_SIZE, BOX_Y_SIZE);
+
+  if (beat.isSnare()) {
+    fill(activeCol);
+  } 
+  else {
+    fill(inActiveCol);
+  }
+  rect(BOX_X+BOX_X_SIZE, BOX_Y, BOX_X_SIZE, BOX_Y_SIZE);
+
+  if (beat.isHat()) {
+    fill(activeCol);
+  } 
+  else {
+    fill(inActiveCol);
+  }
+  rect(BOX_X+BOX_X_SIZE*2, BOX_Y, BOX_X_SIZE,BOX_Y_SIZE);
+  
+  final int SINE_X = BOX_X+BOX_X_SIZE*4;
+  stroke(255);  
+  // draw the waveforms
+  for(int i = 0; i < in.bufferSize()-1; i++) {
+    line(SINE_X+i, 10+BOX_Y + in.mix.get(i)*30, SINE_X+i+1, 10+BOX_Y + in.mix.get(i+1)*30);
+  }
+  
+  stroke(0); 
+}
+
+
 
 void updateTextfield(String text) {
   String s = myTextarea.getText();
@@ -88,3 +134,17 @@ void controlEvent(ControlEvent theEvent) {
   }
 }
 
+
+void drawGradientBackground() {
+  this.loadPixels();	
+  int ofs=this.width*(this.height-255);
+
+  for (int y=0; y<255; y++) {
+    int pink = color(y/2, y/2, y/2);
+    for (int x=0; x<this.width; x++) {
+      this.pixels[ofs+x] = pink;
+    }
+    ofs += this.width;
+  }
+  this.updatePixels();
+}
