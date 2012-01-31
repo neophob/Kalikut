@@ -31,6 +31,10 @@ void initAudio() {
   bl = new BeatListener(beat, in);
 }
 
+final int BOX_X = 50;
+final int BOX_Y = 150;
+final int BOX_X_SIZE = 30;
+final int BOX_Y_SIZE = 20;
 
 void drawBeatStatus() {
   if (beat.isKick()) {
@@ -39,7 +43,7 @@ void drawBeatStatus() {
   else {
     fill(inActiveCol);
   }
-  rect(0, 0, 30, 20);
+  rect(BOX_X, BOX_Y, BOX_X_SIZE, BOX_Y_SIZE);
 
   if (beat.isSnare()) {
     fill(activeCol);
@@ -47,7 +51,7 @@ void drawBeatStatus() {
   else {
     fill(inActiveCol);
   }
-  rect(30, 0, 30, 20);
+  rect(BOX_X+BOX_X_SIZE, BOX_Y, BOX_X_SIZE, BOX_Y_SIZE);
 
   if (beat.isHat()) {
     fill(activeCol);
@@ -55,12 +59,12 @@ void drawBeatStatus() {
   else {
     fill(inActiveCol);
   }
-  rect(60, 0, 30, 20);
+  rect(BOX_X+BOX_X_SIZE*2, BOX_Y, BOX_X_SIZE,BOX_Y_SIZE);
   
   stroke(255);  
   // draw the waveforms
   for(int i = 0; i < in.bufferSize()-1; i++) {
-    line(237+i, 30 + in.mix.get(i)*30, 237+i+1, 30 + in.mix.get(i+1)*30);
+    line(237+i, BOX_Y + in.mix.get(i)*30, 237+i+1, BOX_Y + in.mix.get(i+1)*30);
   }
   
   stroke(0); 

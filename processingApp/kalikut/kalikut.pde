@@ -63,7 +63,7 @@ void setup() {
   
   updateTextfield(VERSION); 
   initAudio();  
-  initSerial();
+  //initSerial();
   
   /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this, OSC_PORT);
@@ -90,7 +90,7 @@ void draw() {
   for (int i=0; i<strKali.length(); i++) {
 
     fill(colorArray[i]);
-    text(""+strKali.charAt(i), 30+sw, 150);
+    text(""+strKali.charAt(i), 30+sw, 120);
 
     wrote += strKali.charAt(i);
     sw=int(textWidth(wrote));
@@ -99,7 +99,7 @@ void draw() {
     if (i==6) sw+=40;
   }
   //write rest of text
-  text("ow", 70+sw, 150);
+  text("ow", 70+sw, 120);
 
   //send serial data
   if (initialized) {
