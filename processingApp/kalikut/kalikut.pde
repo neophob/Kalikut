@@ -18,6 +18,7 @@ import com.neophob.lpd6803.misc.*;
  */
 private static final int NR_OF_PIXELS = 8;
 private static final int OSC_PORT = 10000;
+private static final String VERSION = "KALIKUT v0.1";
 
 private final String strKali = "KALIKUTn";
 
@@ -48,6 +49,7 @@ void setup() {
   size(800, 400);
   background(0);
   frameRate(25);
+  smooth();
   
   // Load the font. Fonts must be placed within the data 
   // directory of your sketch. 
@@ -56,11 +58,12 @@ void setup() {
   // Set the font and its size (in units of pixels)
   textFont(fontA, 120);
   colorArray = new color[strKali.length()];
-  smooth();
+
   initGui();
-  initAudio();
   
- // initSerial();
+  updateTextfield(VERSION); 
+  initAudio();  
+  initSerial();
   
   /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this, OSC_PORT);
@@ -70,13 +73,15 @@ void setup() {
 
 void draw() {
   background(0);
-
+  drawGradientBackground();
+  
   //generate buffer content
   generator();
 
   //tint buffer
   tintBuffer();
 
+  //display some audio stuff
   drawBeatStatus();
 
   //show simulation

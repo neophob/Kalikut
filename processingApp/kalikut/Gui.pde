@@ -37,7 +37,7 @@ void initGui() {
 
 
   allColorSlider = cp5.addSlider("RGB Colors")
-    .setPosition(300, 320-1)
+    .setPosition(20, 360-1)
       .setSize(200, 20)
         .setRange(0, 255)
           .setValue(255)
@@ -45,7 +45,7 @@ void initGui() {
               ;
 
   soundSensitive= cp5.addSlider("Sound Sensitive")
-    .setPosition(300, 360-2)
+    .setPosition(300, 320-1)
       .setSize(200, 20)
         .setRange(1, 5000)
           .setValue(255)
