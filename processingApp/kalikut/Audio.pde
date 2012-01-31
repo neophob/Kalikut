@@ -2,14 +2,18 @@ private Minim minim;
 
 private AudioInput in;
 private BeatDetect beat;
+private FFT fft;
+
+color activeCol = color(255, 255, 255);
+color inActiveCol = color(64, 64, 64);
 
 @SuppressWarnings("unused")
 private BeatListener bl;
 
 void initAudio() {
   minim = new Minim(this);
-  in = minim.getLineIn( Minim.STEREO, 512 );
-  //in = minim.getLineIn( Minim.MONO, 1024 );
+  //in = minim.getLineIn( Minim.STEREO, 512 );
+  in = minim.getLineIn( Minim.MONO, 1024 );
 
   // a beat detection object that is FREQ_ENERGY mode that 
   // expects buffers the length of song's buffer size
@@ -26,10 +30,12 @@ void initAudio() {
   beat.detectMode(BeatDetect.FREQ_ENERGY);
 
   bl = new BeatListener(beat, in);
-}
 
-color activeCol = color(255, 255, 255);
-color inActiveCol = color(64, 64, 64);
+  fft = new FFT(in.bufferSize(), in.sampleRate());
+  // use 128 averages.
+  // the maximum number of averages we could ask for is half the spectrum size. 
+  fft.linAverages(32);
+}
 
 
 void drawBeatStatus() {
@@ -56,14 +62,15 @@ void drawBeatStatus() {
     fill(inActiveCol);
   }
   rect(60, 0, 30, 20);
-  
-  stroke(255);  
-  // draw the waveforms
-  for(int i = 0; i < in.bufferSize()-1; i++) {
-    line(237+i, 30 + in.mix.get(i)*30, 237+i+1, 30 + in.mix.get(i+1)*30);
+/*
+  fill(inActiveCol);
+  fft.forward(in.mix);
+  int w = int(fft.specSize()/32);
+  for (int i = 0; i < fft.specSize(); i++) {
+    // draw a rectangle for each average, multiply the value by 5 so we can see it better
+    rect(i, height, i, height - fft.getBand(i)*50);
   }
-  
-  stroke(0); 
+  */
 }
 
 
@@ -101,4 +108,3 @@ class BeatListener implements AudioListener {
     beat.detect(source.mix);
   }
 }
-
