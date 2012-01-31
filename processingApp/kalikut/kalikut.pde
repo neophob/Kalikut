@@ -17,6 +17,7 @@ import com.neophob.lpd6803.misc.*;
  * The text() function is used for writing words to the screen. 
  */
 private static final int NR_OF_PIXELS = 8;
+private static final int OSC_PORT = 10000;
 
 private final String strKali = "KALIKUTn";
 
@@ -59,10 +60,11 @@ void setup() {
   initGui();
   initAudio();
   
-  initSerial();
+ // initSerial();
   
   /* start oscP5, listening for incoming messages at port 12000 */
-  oscP5 = new OscP5(this, 12000);
+  oscP5 = new OscP5(this, OSC_PORT);
+  updateTextfield("OSC Server startet on port "+ OSC_PORT);
 }
 
 
