@@ -1,7 +1,39 @@
 int MAX_EFFECT=8;
 
+private int[] fireColors;
+private int[] fireBuffer;
+
+void initGenerator() {
+  fireColors = new int[256];
+  fireBuffer = new int[NR_OF_PIXELS+1];
+
+  //setup fire pallete
+  for (int i = 0; i < 32; ++i) {
+    /* black to blue, 32 values*/
+    fireColors[i]=color(i<<1, 0, 0);
+
+    /* blue to red, 32 values*/
+    fireColors[i + 32]=color(64 - (i << 1), 0, i << 3);
+
+    /*red to yellow, 32 values*/
+    fireColors[i + 64]=color(0, i << 3, 255);
+
+    /* yellow to white, 162 */
+    fireColors[i + 96]=color(i << 2, 255, 255);
+    fireColors[i + 128]=color(64+(i << 2), 255, 255);
+    fireColors[i + 160]=color(128+(i << 2), 255, 255);
+    fireColors[i + 192]=color(192+i, 255, 255);
+    fireColors[i + 224]=color(224+i, 255, 255);
+  }
+}
+
 //generate buffer
 void generator() {
+
+  if (mode==8) {
+    updateFireBuffer();
+  }
+
 
   //for each buffer
   for (int i=0; i<strKali.length(); i++) {
@@ -62,13 +94,7 @@ void generator() {
       break;
 
     case 8:
-      float noiseValr = noise(i, frame);
-      float noiseValg = noise(i, frame);
-      float noiseValb = noise(i, frame);
-      int rr = int(noiseValr*255);
-      int gg = int(noiseValg*255);
-      int bb = int(noiseValb*255);
-      colorArray[i] = color(rr,gg,bb);
+      colorArray[i] = fireColors[ fireBuffer[i+1] ];
       break;
     }
   }
@@ -79,6 +105,26 @@ void generator() {
     for (int i=0; i<strKali.length(); i++) {
       colorArray[i] = color(0, 0, 0);
     }
+  }
+}
+
+
+void updateFireBuffer() {
+  int rnd = int(random(16));
+  /* the lower the value, the intense the fire, compensate a lower value with a higher decay value*/
+  if (rnd > 8) {
+    fireBuffer[0] = 255;
+  } 
+  else {
+    fireBuffer[0] = 0;
+  }
+
+  for (int i=0; i<NR_OF_PIXELS; i++) {
+    int a = (fireBuffer[i] + fireBuffer[i+1])/2;
+    if (a>1) {
+      a--;
+    }
+    fireBuffer[i+1]=a;
   }
 }
 

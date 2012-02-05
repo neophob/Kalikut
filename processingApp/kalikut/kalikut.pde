@@ -65,6 +65,7 @@ void setup() {
   
   updateTextfield(VERSION); 
   initAudio();  
+  initGenerator();
   //initSerial();
   
   /* start oscP5, listening for incoming messages at port 12000 */

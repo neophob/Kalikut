@@ -15,6 +15,7 @@ color Wheel(int WheelPos) {
 }
 
 
+
 //colorize buffer
 void tintBuffer() {
   int col, rr, gg, bb, tintR, tintG, tintB;
@@ -64,5 +65,4 @@ void initSerial() {
     println("failed to initialize serial port!");
   }
 }
-
 

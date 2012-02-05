@@ -20,7 +20,7 @@ void initGui() {
                               .addItem("Hotel", 5)
                                 .addItem("Beat", 6)
                                   .addItem("Volume", 7)
-                                    .addItem("Test", 8)
+                                    .addItem("Fire", 8)
                                       .activate(0);
 
   cp = cp5.addColorPicker("picker")
