@@ -31,9 +31,11 @@ private RadioButton modeButton;
 private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
+private CheckBox checkbox;
 
 //internal fx
-private int mode=0;
+private int mode = 0;
+private boolean invertNow = false;
 
 //buffer
 private int[] colorArray;  

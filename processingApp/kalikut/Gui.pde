@@ -20,7 +20,8 @@ void initGui() {
                               .addItem("Hotel", 5)
                                 .addItem("Beat", 6)
                                   .addItem("Volume", 7)
-                                    .activate(0);
+                                    .addItem("Test", 8)
+                                      .activate(0);
 
   cp = cp5.addColorPicker("picker")
     .setPosition(20, 280)
@@ -62,6 +63,15 @@ void initGui() {
                 .setColorForeground(color(255, 100));
   ;
 
+  checkbox = cp5.addCheckBox("checkBox")
+    .setPosition(300, 360-1)
+      .setColorForeground(color(120))
+        .setColorActive(color(255))
+          .setColorLabel(color(255))
+            .setSize(20, 20)
+              .addItem("Invert NOW", 0)
+                ;
+
   Textlabel tl = cp5.addTextlabel("sdesc", "KICK/SNARE/HAT", BOX_X, 175);
   tl.setFont(ControlP5.standard58);
 }
@@ -95,16 +105,16 @@ void drawBeatStatus() {
   else {
     fill(inActiveCol);
   }
-  rect(BOX_X+BOX_X_SIZE*2, BOX_Y, BOX_X_SIZE,BOX_Y_SIZE);
-  
+  rect(BOX_X+BOX_X_SIZE*2, BOX_Y, BOX_X_SIZE, BOX_Y_SIZE);
+
   final int SINE_X = BOX_X+BOX_X_SIZE*4;
   stroke(255);  
   // draw the waveforms
-  for(int i = 0; i < in.bufferSize()-1; i++) {
+  for (int i = 0; i < in.bufferSize()-1; i++) {
     line(SINE_X+i, 10+BOX_Y + in.mix.get(i)*30, SINE_X+i+1, 10+BOX_Y + in.mix.get(i+1)*30);
   }
-  
-  stroke(0); 
+
+  stroke(0);
 }
 
 
@@ -132,6 +142,15 @@ void controlEvent(ControlEvent theEvent) {
     cp.setColorValue(color(x, x, x));
     //println("allrgb: "+x);
   }
+  
+  if (theEvent.isFrom(checkbox)) {
+    if (checkbox.getArrayValue()[0] > 0) {
+      invertNow = true;
+    } else {
+      invertNow = false;
+    }
+  }
+  
 }
 
 
@@ -148,3 +167,4 @@ void drawGradientBackground() {
   }
   this.updatePixels();
 }
+

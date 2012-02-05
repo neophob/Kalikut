@@ -1,4 +1,4 @@
-int MAX_EFFECT=6;
+int MAX_EFFECT=8;
 
 //generate buffer
 void generator() {
@@ -15,7 +15,7 @@ void generator() {
       break;
 
     case 2:
-      if ((i+frame>>4)%2==1) {
+      if (((frame-i)>>4)%2==1) {
         colorArray[i] = color(0, 0, 0);
       } 
       else {
@@ -24,7 +24,7 @@ void generator() {
       break;
 
     case 3:
-      if ((i+frame>>1)%2==1) {
+      if ((frame-i>>1)%2==1) {
         colorArray[i] = color(0, 0, 0);
       } 
       else {
@@ -49,17 +49,27 @@ void generator() {
     case 6:
       if (beat.isKick()) {
         colorArray[i] = color(255, 255, 255);
-      } else {
-        colorArray[i] = color(0,0,0);
+      } 
+      else {
+        colorArray[i] = color(0, 0, 0);
       }
       break;
-      
+
     case 7:
       int c = int(in.mix.level()*soundSensitive.getValue());
       if (c>255) c=255;
-      colorArray[i] = color(c,c,c);
+      colorArray[i] = color(c, c, c);
       break;
-      
+
+    case 8:
+      float noiseValr = noise(i, frame);
+      float noiseValg = noise(i, frame);
+      float noiseValb = noise(i, frame);
+      int rr = int(noiseValr*255);
+      int gg = int(noiseValg*255);
+      int bb = int(noiseValb*255);
+      colorArray[i] = color(rr,gg,bb);
+      break;
     }
   }
 
