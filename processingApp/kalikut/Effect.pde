@@ -39,7 +39,7 @@ void generator() {
   for (int i=0; i<strKali.length(); i++) {
     switch(mode) {
     case 0:
-      colorArray[i] = Wheel((frame-i)*8);
+      colorArray[i] = Wheel((frame-i)*2);
       break;
 
     case 1:
