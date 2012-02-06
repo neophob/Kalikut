@@ -5,7 +5,7 @@ private int[] fireBuffer;
 
 void initGenerator() {
   fireColors = new int[256];
-  fireBuffer = new int[NR_OF_PIXELS+1];
+  fireBuffer = new int[NR_OF_PIXELS+3];
 
   //setup fire pallete
   for (int i = 0; i < 32; ++i) {
@@ -94,7 +94,7 @@ void generator() {
       break;
 
     case 8:
-      colorArray[i] = fireColors[ fireBuffer[i+1] ];
+      colorArray[i] = fireColors[ fireBuffer[i+3] ];
       break;
     }
   }
@@ -119,7 +119,7 @@ void updateFireBuffer() {
     fireBuffer[0] = 0;
   }
 
-  for (int i=0; i<NR_OF_PIXELS; i++) {
+  for (int i=0; i<fireBuffer.length(); i++) {
     int a = (fireBuffer[i] + fireBuffer[i+1])/2;
     if (a>1) {
       a--;
