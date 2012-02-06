@@ -21,7 +21,8 @@ void initGui() {
                                 .addItem("Beat", 6)
                                   .addItem("Volume", 7)
                                     .addItem("Fire", 8)
-                                      .activate(0);
+                                      .addItem("Plasma", 9)
+                                        .activate(0);
 
   cp = cp5.addColorPicker("picker")
     .setPosition(20, 280)
@@ -142,15 +143,15 @@ void controlEvent(ControlEvent theEvent) {
     cp.setColorValue(color(x, x, x));
     //println("allrgb: "+x);
   }
-  
+
   if (theEvent.isFrom(checkbox)) {
     if (checkbox.getArrayValue()[0] > 0) {
       invertNow = true;
-    } else {
+    } 
+    else {
       invertNow = false;
     }
   }
-  
 }
 
 

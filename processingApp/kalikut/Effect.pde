@@ -1,13 +1,18 @@
-int MAX_EFFECT=8;
+int MAX_EFFECT=9;
 
 private int[] fireColors;
 private int[] fireBuffer;
 
+//plasma code ripped from http://www.openprocessing.org/visuals/?visualID=10148
+private int[] plasmaPal=new int[128];
+private int[] cls;
+
 void initGenerator() {
+  //---------------------------
+  //setup fire
   fireColors = new int[256];
   fireBuffer = new int[NR_OF_PIXELS+4];
 
-  //setup fire pallete
   for (int i = 0; i < 32; ++i) {
     /* black to blue, 32 values*/
     fireColors[i]=color(i<<1, 0, 0);
@@ -24,6 +29,21 @@ void initGenerator() {
     fireColors[i + 160]=color(128+(i << 2), 255, 255);
     fireColors[i + 192]=color(192+i, 255, 255);
     fireColors[i + 224]=color(224+i, 255, 255);
+  }
+
+  //---------------------------  
+  //setup plasma
+  float s1, s2;
+  for (int i=0;i<128;i++) {
+    s1=sin(i*PI/25);
+    s2=sin(i*PI/50+PI/4);
+    plasmaPal[i]=color(128+s1*128, 128+s2*128, s1*128);
+  }
+  cls = new int[NR_OF_PIXELS];
+
+  int y=0;
+  for (int x = 0; x < NR_OF_PIXELS; x++) {
+    cls[x] = (int)((127.5 + +(127.5 * sin(x / 32.0)))+ (127.5 + +(127.5 * cos(y / 32.0))) + (127.5 + +(127.5 * sin(sqrt((x * x + y * y)) / 32.0)))  ) / 4;
   }
 }
 
@@ -95,6 +115,10 @@ void generator() {
 
     case 8:
       colorArray[i] = fireColors[ fireBuffer[i+4] ];
+      break;
+
+    case 9:
+      colorArray[i] = plasmaPal[frame-(cls[i])&127];
       break;
     }
   }
