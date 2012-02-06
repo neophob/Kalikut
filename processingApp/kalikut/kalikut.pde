@@ -62,7 +62,7 @@ void setup() {
   colorArray = new color[strKali.length()];
 
   initGui();
-  
+  frame=NR_OF_PIXELS*2; //init the safe way
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();
