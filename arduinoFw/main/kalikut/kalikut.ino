@@ -49,11 +49,23 @@
 //how many letters
 #define TOTAL_LETTERS 8
 
-byte modulesPerLetter[TOTAL_LETTERS] = {
+//the sum of all modulesPerLetter must be equal to TOTAL_MODULES
+#define TOTAL_MODULES 20
+//#define TOTAL_MODULES 103
+
+//-----------------------------
+//v 1.0 starts here
+const byte modulesPerLetter[TOTAL_LETTERS] = {
   5, 2, 1, 1, 5, 2, 2, 2}; //test with one strand
 // 16, 15, 10, 10, 16, 15, 11, 10}; //actual
 
-//v 2.0
+//v 1.0 ends here
+//-----------------------------
+
+
+/*
+//-----------------------------
+//v 2.0 starts here
 //spliter, lower: 3 lines
 //K   lower: 00,01,02,13,14,15       // upper: 03,04,05,06,07,08,09,10,11,12   total: 16 / 16
 //A   lower: 16,17,18,26,27,28,29,30 // upper: 19,20,21,22,23,24,25            total: 15 / 31
@@ -64,11 +76,33 @@ byte modulesPerLetter[TOTAL_LETTERS] = {
 //T   lower: 90,91,92                // upper: 82,83,84,85,86,87,88,89         total: 11 / 93
 //now lower: 93,94,95,96,97,98,99,100,101,102                                  total: 10
 
+//each letter is splitted up in two segments, a lower and a higher
+//"now" uses only lower segment
+const byte pixelOffsetForSplittetLetter[16][10] = {
+  { 0, 1, 2,13,14,15},                { 3, 4, 5, 6, 7, 8, 9,10,11,12},  //K
+  {16,17,18,26,27,28,29,30},          {19,20,21,22,23,24,25},           //A
+  {35,36,37,38,39,40},                {31,32,33,34},                    //L
+  {46,47,48,49,50},                   {41,42,43,44,45},                 //I
+  {51,52,53,64,65,66},                {54,55,56,57,58,59,60,61,62,63},  //K
+  {71,72,73,74,75,76,77},             {67,68,69,70,78,79,80,81},        //U
+  {90,91,92},                         {82,83,84,85,86,87,88,89},        //T
+  {93,94,95,96,97,98,99,100,101,102}, {}                                //NOW
+};
 
-
-//the sum of all modulesPerLetter must be equal to TOTAL_MODULES
-#define TOTAL_MODULES 20
-//#define TOTAL_MODULES 103
+//how many modules per segment
+const byte segmentSize[16] = {
+  6, 10, //K
+  8, 7,  //A
+  6, 4,  //L
+  5, 5,  //I
+  6, 10, //K
+  7, 8,  //U
+  3, 8,  //T
+  10,0
+};
+/**/
+//v 2.0 ends here
+//-----------------------------
 
 //array that will hold the serial input string
 byte serInStr[TOTAL_LETTERS+SERIAL_HEADER_SIZE]; 	 				 
@@ -168,6 +202,7 @@ void updatePixels(byte ofs, byte* buffer) {
   uint16_t color;
   byte src=0;
 
+  //v1: one color per letter
   for (byte i=0; i < TOTAL_LETTERS; i++) {
     color = buffer[src]<<8 | buffer[src+1];
     for (byte n=0; n < modulesPerLetter[i]; n++) {
@@ -176,6 +211,17 @@ void updatePixels(byte ofs, byte* buffer) {
     }        
     src+=2;
   }
+
+  //v2: two segments per letter
+/*  for (byte i=0; i < TOTAL_LETTERS; i++) {
+    color = buffer[src]<<8 | buffer[src+1];
+    for (byte n=0; n < segmentSize[i]; n++) {
+      //two bytes per pixel
+      strip.setPixelColor(pixelOffsetForSplittetLetter[i][n], color);
+    }        
+    src+=2;
+  }
+*/
 
   strip.doSwapBuffersAsap(0); 
 }
