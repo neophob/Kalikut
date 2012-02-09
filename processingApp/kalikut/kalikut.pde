@@ -64,7 +64,7 @@ void setup() {
 
   // Set the font and its size (in units of pixels)
   textFont(fontA, 120);
-  colorArray = new color[strKali.length()];
+  colorArray = new color[NR_OF_PIXELS];
 
   initGui();
   frame=NR_OF_PIXELS*2; //init the safe way

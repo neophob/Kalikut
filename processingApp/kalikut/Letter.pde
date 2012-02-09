@@ -54,15 +54,17 @@ public void drawLetter() {
   int ofs=0;
   for (int i=0; i<colorArray.length; i++) {
     pg.fill(colorArray[i]);
-    pg.rect(ofs, 0, letterWidth[i], 120);
-    ofs += letterWidth[i];
+    pg.rect(ofs, 0, letterWidth[i], 65*2);
+
+//    color c = colorArray[i];
+//    pg.fill(255-red(c), 255-green(c), 255-blue(c));
+//    pg.rect(ofs, 65, letterWidth[i % strKali.length()], 60);
+
+    ofs += letterWidth[i % strKali.length()];
   }
   pg.endDraw();
   
   pg.blend(logoImg, 0, 0, ofs, 120, 0, 0, ofs, 120, MULTIPLY);
-//  pg.image(logoImg, 0, 0);
-//PImage xx = logoImg;
-
   image(pg, OFS, 0);
 }
 

@@ -41,10 +41,12 @@ void generator() {
     switch(mode) {
     case 0:
       colorArray[i] = Wheel((frame-i)*2);
+//      colorArray[i+8] = Wheel((frame-i)*2);
       break;
 
     case 1:
       colorArray[i] = Wheel(frame);
+//      colorArray[i+8] = Wheel(frame);
       break;
 
     case 2:
@@ -59,9 +61,11 @@ void generator() {
     case 3:
       if ((frame-i>>1)%2==1) {
         colorArray[i] = color(0, 0, 0);
+//        colorArray[i+8] = color(0, 0, 0);
       } 
       else {
         colorArray[i] = color(255, 255, 255);
+//        colorArray[i+8] = color(255, 255, 255);
       }
       break;
 
