@@ -1,3 +1,4 @@
+PGraphics pg;
 
 public void initLetter() {
   String letters = "KALIKUTn";
@@ -9,7 +10,7 @@ public void initLetter() {
   for (int i=0; i<letters.length(); i++) {
     String s = ""+letters.charAt(i);
     if (s.equals("n")) {
-      s = "now";
+      s = "now ";
     }
 
     int w = int(textWidth(s));
@@ -18,24 +19,34 @@ public void initLetter() {
     totalWidth += w;
   }
 
-  PGraphics pg;
-  pg=createGraphics(totalWidth, 200, JAVA2D);
-
+  pg=createGraphics(totalWidth, 120, JAVA2D);
   pg.beginDraw();
-  pg.background(color(255,255,0));
-  pg.fill(color(0,0,255));
-  pg.text("KALIKUT now",50 ,20);
+  pg.background(color(0, 0, 0));
+  pg.fill(color(255, 255, 255));
   pg.textFont(fontA, 120);
-  pg.textSize(140);
-  
+  pg.textSize(120);
+  pg.text("KALIKUT now", 0, 110);
   pg.endDraw();
   logoImg = pg;
-//  logoImg = createImage(totalWidth, 200, RGB);
-//  logoImg.text("KALIKUT now");
 }
 
-
+private static final int OFS = 40;
 
 public void drawLetter() {
-  image(logoImg, 30, 120);
+  pg.beginDraw();
+  pg.background(0);
+//pg.image(logoImg, 0, 0);
+
+  int ofs=0;
+  for (int i=0; i<colorArray.length; i++) {
+    pg.fill(colorArray[i]);
+
+    pg.rect(ofs, 0, letterWidth[i], 50);
+    ofs += letterWidth[i];
+  }
+  pg.blend(logoImg, 0, 0, logoImg.width, logoImg.height, 0, 0, logoImg.width, logoImg.height, ADD);
+
+  pg.endDraw();
+  image(pg, OFS, 0);
 }
+

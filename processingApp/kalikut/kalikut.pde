@@ -75,7 +75,7 @@ void setup() {
   initLetter();
   
   /* start oscP5, listening for incoming messages at port 12000 */
-  oscP5 = new OscP5(this, OSC_PORT);
+  //oscP5 = new OscP5(this, OSC_PORT);
   updateTextfield("OSC Server startet on port "+ OSC_PORT);
 }
 
@@ -93,11 +93,11 @@ void draw() {
   //display some audio stuff
   drawBeatStatus();
 
-  //drawLetter();
+  drawLetter();
   //show simulation
   String wrote="";
   int sw = 0;
-  
+  /*
   for (int i=0; i<strKali.length(); i++) {
 
     fill(colorArray[i]);
@@ -111,7 +111,7 @@ void draw() {
   }
   //write rest of text
   text("ow", 70+sw, 120);
-
+/**/
   //send serial data
   if (initialized) {
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
