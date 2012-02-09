@@ -50,15 +50,13 @@
 #define TOTAL_LETTERS 8
 
 byte modulesPerLetter[TOTAL_LETTERS] = {
-  5, 2, 1, 1, 5, 2, 2, 2};
-//  17, 17, 10, 9, 17, 17, 11, 10};
+  5, 2, 1, 1, 5, 2, 2, 2}; //test with one strand
+// 16, 15, 10, 10, 16, 15, 11, 10}; //actual
 
-//the sum of all modulesPerLetter should  be equal to TOTAL_MODULES
+//the sum of all modulesPerLetter must be equal to TOTAL_MODULES
 #define TOTAL_MODULES 20
-//#define TOTAL_MODULES 108
+//#define TOTAL_MODULES 103
 
-
-//this should match RX_BUFFER_SIZE from HardwareSerial.cpp
 //array that will hold the serial input string
 byte serInStr[TOTAL_LETTERS+SERIAL_HEADER_SIZE]; 	 				 
 
