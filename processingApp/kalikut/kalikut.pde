@@ -47,6 +47,11 @@ private boolean initialized;
 //OSC
 private OscP5 oscP5;
 
+//output
+private int[] letterWidth;
+PImage logoImg;
+
+
 void setup() {
   size(800, 400);
   background(0);
@@ -67,6 +72,7 @@ void setup() {
   initAudio();  
   initGenerator();
   //initSerial();
+  initLetter();
   
   /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this, OSC_PORT);
@@ -87,9 +93,11 @@ void draw() {
   //display some audio stuff
   drawBeatStatus();
 
+  //drawLetter();
   //show simulation
   String wrote="";
   int sw = 0;
+  
   for (int i=0; i<strKali.length(); i++) {
 
     fill(colorArray[i]);
