@@ -94,24 +94,7 @@ void draw() {
   drawBeatStatus();
 
   drawLetter();
-  //show simulation
-  String wrote="";
-  int sw = 0;
-  /*
-  for (int i=0; i<strKali.length(); i++) {
 
-    fill(colorArray[i]);
-    text(""+strKali.charAt(i), 30+sw, 120);
-
-    wrote += strKali.charAt(i);
-    sw=int(textWidth(wrote));
-
-    //simulate space
-    if (i==6) sw+=40;
-  }
-  //write rest of text
-  text("ow", 70+sw, 120);
-/**/
   //send serial data
   if (initialized) {
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);

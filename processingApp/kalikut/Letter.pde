@@ -27,26 +27,42 @@ public void initLetter() {
   pg.textSize(120);
   pg.text("KALIKUT now", 0, 110);
   pg.endDraw();
-  logoImg = pg;
+  
+  logoImg = createImage(totalWidth, 120, ARGB);
+
+  logoImg.loadPixels();
+  pg.loadPixels();
+  
+  for (int i=0; i<pg.pixels.length; i++) {
+    logoImg.pixels[i] = pg.pixels[i];
+  }
+  
+  pg.updatePixels();
+  logoImg.updatePixels();
 }
 
 private static final int OFS = 40;
 
 public void drawLetter() {
   pg.beginDraw();
+  pg.smooth();
+  pg.noStroke();
+
   pg.background(0);
 //pg.image(logoImg, 0, 0);
 
   int ofs=0;
   for (int i=0; i<colorArray.length; i++) {
     pg.fill(colorArray[i]);
-
-    pg.rect(ofs, 0, letterWidth[i], 50);
+    pg.rect(ofs, 0, letterWidth[i], 120);
     ofs += letterWidth[i];
   }
-  pg.blend(logoImg, 0, 0, logoImg.width, logoImg.height, 0, 0, logoImg.width, logoImg.height, ADD);
-
   pg.endDraw();
+  
+  pg.blend(logoImg, 0, 0, ofs, 120, 0, 0, ofs, 120, MULTIPLY);
+//  pg.image(logoImg, 0, 0);
+//PImage xx = logoImg;
+
   image(pg, OFS, 0);
 }
 
