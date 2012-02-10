@@ -16,7 +16,8 @@ import com.neophob.lpd6803.misc.*;
  * 
  * The text() function is used for writing words to the screen. 
  */
-private static final int NR_OF_PIXELS = 8;
+private static final int NR_OF_PIXELS_X = 8;
+private static final int NR_OF_PIXELS_Y = 1;
 private static final int OSC_PORT = 10000;
 private static final String VERSION = "KALIKUT v0.1";
 
@@ -64,10 +65,10 @@ void setup() {
 
   // Set the font and its size (in units of pixels)
   textFont(fontA, 120);
-  colorArray = new color[NR_OF_PIXELS];
+  colorArray = new color[NR_OF_PIXELS_X*NR_OF_PIXELS_Y];
 
   initGui();
-  frame=NR_OF_PIXELS*2; //init the safe way
+  frame=NR_OF_PIXELS_X*2; //init the safe way
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();

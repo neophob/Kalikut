@@ -7,7 +7,7 @@ void initGenerator() {
   //---------------------------
   //setup fire
   fireColors = new int[256];
-  fireBuffer = new int[NR_OF_PIXELS+4];
+  fireBuffer = new int[(NR_OF_PIXELS_X+4)*NR_OF_PIXELS_Y];
 
   for (int i = 0; i < 32; ++i) {
     /* black to blue, 32 values*/
