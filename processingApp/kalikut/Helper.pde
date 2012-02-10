@@ -41,7 +41,7 @@ void tintBuffer() {
     bb = bb*(tintB+1) >> 8;
 
     //invert last color ("now")
-    if (invertNow && i==colorArray.length-1) {
+    if (invertNow && i==NR_OF_PIXELS_X-1) {
       rr = 256-rr;
       gg = 256-gg;
       bb = 256-bb;
