@@ -92,7 +92,7 @@ void generator() {
         break;
 
       case 6:
-        if (beat.isKick()) {
+        if (beat.isKick() || beat.isHat() || beat.isSnare()) {
           colorArray[i] = color(255, 255, 255);
         } 
         else {

@@ -44,26 +44,30 @@
 
 //8ms is the minimum! else we dont get any data!
 #define SERIAL_DELAY_LOOP 6
-#define SERIAL_WAIT_DELAY 3
+#define SERIAL_WAIT_DELAY 5
+
 
 //how many letters
 #define TOTAL_LETTERS 8
 
+
 //the sum of all modulesPerLetter must be equal to TOTAL_MODULES
-#define TOTAL_MODULES 20
-//#define TOTAL_MODULES 103
+//#define TOTAL_MODULES 20
+#define TOTAL_MODULES 103
+//#define TOTAL_MODULES 31
 
 //-----------------------------
 //v 1.0 starts here
 const byte modulesPerLetter[TOTAL_LETTERS] = {
-  5, 2, 1, 1, 5, 2, 2, 2}; //test with one strand
-// 16, 15, 10, 10, 16, 15, 11, 10}; //actual
+//  5, 2, 1, 1, 5, 2, 2, 2}; //test with one strand
+ 16, 15, 10, 10, 16, 15, 11, 10}; //actual
+
 
 //v 1.0 ends here
 //-----------------------------
 
-
 /*
+
 //-----------------------------
 //v 2.0 starts here
 //spliter, lower: 3 lines
@@ -172,7 +176,8 @@ void loop() {
   case CMD_SENDFRAME:
     //the size of buffer must match the number of all letters
     if (sendlen == TOTAL_LETTERS*2) {
-      updatePixels(0, cmd); 
+      updatePixels(0, cmd);
+      g_errorCounter = 0;
     } else {
       g_errorCounter=100;
     }
@@ -213,7 +218,7 @@ void updatePixels(byte ofs, byte* buffer) {
   }
 
   //v2: two segments per letter
-/*  for (byte i=0; i < TOTAL_LETTERS; i++) {
+/*  for (byte i=0; i < TOTAL_LETTERS*2*2; i++) {
     color = buffer[src]<<8 | buffer[src+1];
     for (byte n=0; n < segmentSize[i]; n++) {
       //two bytes per pixel
