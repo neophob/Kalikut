@@ -22,7 +22,7 @@ private static final String STR_KALIKUT = "KALIKUTn";
 private static final int NR_OF_PIXELS_X = STR_KALIKUT.length();
 private static final int NR_OF_PIXELS_Y = 1;
 private static final int OSC_PORT = 10000;
-private static final String VERSION = "KALIKUT v0.1";
+private static final String VERSION = "KALIKUT v0.3";
 
 private PFont fontA;
 private int frame;
@@ -101,7 +101,6 @@ void draw() {
   if (initialized) {
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
   }
-
   frame++;
 }
 
