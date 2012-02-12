@@ -47,7 +47,7 @@ void generator() {
 
       switch(mode) {
       case 0:
-        colorArray[i] = Wheel((frame-a)*2);
+        colorArray[i] = Wheel((frame-a*8)*2);
         a+=1;
         break;
 
@@ -116,7 +116,8 @@ void generator() {
           long l = colorArray[x]&0xffffff;
           if (l>0) {
             colorArray[i] = color(0, 0, 0);
-          } else {
+          } 
+          else {
             colorArray[i] = color(255, 255, 255);
           }
           break;
@@ -128,9 +129,26 @@ void generator() {
           colorArray[i] = color(255, 255, 255);
         }
         break;
+
+
+      case 10:
+        int rnd = int(random(4));
+        switch (rnd) {
+        case 0:
+          colorArray[i] = color(0, 0, 255);
+          break;
+
+        case 1: 
+          colorArray[i] = color(255, 0, 0);
+          break;
+
+        default:
+          colorArray[i] = color(0, 255, 0);
+          break;
+        }
+
+        break;
       }
-      
-      
     }
   }
 

@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- * 	
+ * 	 
  */
 
 //the lpd6803 library needs the timer1 library
@@ -53,14 +53,14 @@
 
 //the sum of all modulesPerLetter must be equal to TOTAL_MODULES
 //#define TOTAL_MODULES 20
-#define TOTAL_MODULES 103
+#define TOTAL_MODULES 108
 //#define TOTAL_MODULES 31
 
 //-----------------------------
 //v 1.0 starts here
 const byte modulesPerLetter[TOTAL_LETTERS] = {
 //  5, 2, 1, 1, 5, 2, 2, 2}; //test with one strand
- 16, 15, 10, 10, 16, 15, 11, 10}; //actual
+ 16, 15, 10, 10, 16, 15, 11, 15}; //actual
 
 
 //v 1.0 ends here
@@ -82,7 +82,7 @@ const byte modulesPerLetter[TOTAL_LETTERS] = {
 
 //each letter is splitted up in two segments, a lower and a higher
 //"now" uses only lower segment
-const byte pixelOffsetForSplittetLetter[16][10] = {
+const byte pixelOffsetForSplittetLetter[16][15] = {
   { 0, 1, 2,13,14,15},                { 3, 4, 5, 6, 7, 8, 9,10,11,12},  //K
   {16,17,18,26,27,28,29,30},          {19,20,21,22,23,24,25},           //A
   {35,36,37,38,39,40},                {31,32,33,34},                    //L
@@ -90,7 +90,7 @@ const byte pixelOffsetForSplittetLetter[16][10] = {
   {51,52,53,64,65,66},                {54,55,56,57,58,59,60,61,62,63},  //K
   {71,72,73,74,75,76,77},             {67,68,69,70,78,79,80,81},        //U
   {90,91,92},                         {82,83,84,85,86,87,88,89},        //T
-  {93,94,95,96,97,98,99,100,101,102}, {}                                //NOW
+  {93,94,95,96,97,98,99,100,101,102,103,104,105,106,107}, {}                                //NOW
 };
 
 //how many modules per segment
@@ -102,7 +102,7 @@ const byte segmentSize[16] = {
   6, 10, //K
   7, 8,  //U
   3, 8,  //T
-  10,0
+  15,0
 };
 /**/
 //v 2.0 ends here

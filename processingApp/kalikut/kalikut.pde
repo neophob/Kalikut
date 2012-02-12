@@ -45,13 +45,14 @@ private int[] colorArray;
 //Serial
 private Lpd6803 lpd6803;
 private boolean initialized;
+private long lastSendTime;
 
 //OSC
 private OscP5 oscP5;
 
 //output
 private int[] letterWidth;
-PImage logoImg;
+private PImage logoImg;
 
 
 void setup() {
@@ -75,9 +76,9 @@ void setup() {
   initGenerator();
   initSerial();
   initLetter();
-  
+
   /* start oscP5, listening for incoming messages at port 12000 */
-  //oscP5 = new OscP5(this, OSC_PORT);
+  oscP5 = new OscP5(this, OSC_PORT);
   updateTextfield("OSC Server startet on port "+ OSC_PORT);
 }
 
@@ -97,9 +98,10 @@ void draw() {
 
   drawLetter();
 
-  //send serial data
-  if (initialized) {
-    //println("send: "+colorArray.length);
+  //send serial data if initialized and wait at leas 19ms before sending again
+  if (initialized && System.currentTimeMillis()-lastSendTime > 19) {    
+    lastSendTime = System.currentTimeMillis();
+    //println(lastSendTime+" send: "+colorArray.length);
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
   }
   frame++;
