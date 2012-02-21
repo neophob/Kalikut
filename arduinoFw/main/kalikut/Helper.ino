@@ -1,11 +1,10 @@
-
 unsigned int Color(byte r, byte g, byte b) {
   //Take the lowest 5 bits of each value and append them end to end
   return( ((unsigned int)g & 0x1F )<<10 | ((unsigned int)b & 0x1F)<<5 | (unsigned int)r & 0x1F);
 }
 
 // --------------------------------------------
-//     Input a value 0 to 127 to get a color value.
+//     Input a value 0 to 95 to get a color value.
 //     The colours are a transition r - g -b - back to r
 // --------------------------------------------
 unsigned int Wheel(byte WheelPos) {
