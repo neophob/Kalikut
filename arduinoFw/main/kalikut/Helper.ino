@@ -46,7 +46,8 @@ void rainbow() {
     for (int i=0; i < strip.numPixels(); i++) {
       strip.setPixelColor(i, Wheel((i + j) % 96));
     }
-    strip.doSwapBuffersAsap(strip.numPixels());    
+    //strip.doSwapBuffersAsap(strip.numPixels());  //testme with this setting  
+    strip.show();
   }
 }
 
