@@ -1,3 +1,18 @@
 Hint, the default librxtxSerial.jnilib will crash on osx, don't know why.
 
 i replaced the version (/Applications/Processing.app/Contents/Resources/Java/modes/java/libraries/serial/library/macosx/) with mine.
+
+
+Trace errors:
+-------------
+-replace power supply (impulsstrom issues)
+-twistet pair kabel verwenden?
+
+
+Already done:
+-------------
+-Elkos/Kerkos zur Spannungsglättung
+-Strom neu einspeisen
+-Common Ground
+-Nie, aber GAR nie lautsprecherkabel (2 Polige Kabel) für EINE Leitung verwenden!
+-Kabel überprüft
