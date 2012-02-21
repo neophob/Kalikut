@@ -254,7 +254,7 @@ void updatePixels(byte ofs, byte* buffer) {
   }*/
 
 
-  strip.show(0); 
+  strip.show(); 
 }
 
 

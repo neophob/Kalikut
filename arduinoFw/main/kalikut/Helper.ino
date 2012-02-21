@@ -33,13 +33,13 @@ unsigned int Wheel(byte WheelPos) {
 //     do some animation until serial data arrives
 // --------------------------------------------
 void rainbow() {
-  delay(2);
+  delay(1);
 
   k++;
   if (k>50) {
     k=0;
     j++;
-    if (j>96*3) {  // 3 cycles of all 96 colors in the wheel
+    if (j>96) {  // 3 cycles of all 96 colors in the wheel
       j=0; 
     }
 
