@@ -7,7 +7,8 @@ Trace errors:
 -------------
 -Replace power supply (impulsstrom issues)
 -Twistet pair Kabel verwenden?
-
+-Use Teensy instead an Arduino
+-Increase CPU Power for the LPD6803 (strip.setCPUmax(90))
 
 Already done:
 -------------
