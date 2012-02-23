@@ -33,7 +33,7 @@ unsigned int Wheel(byte WheelPos) {
 //     do some animation until serial data arrives
 // --------------------------------------------
 void rainbow() {
-  delay(1);
+  delay(1);  //remove this delay to check the max cpu setting
 
   k++;
   if (k>50) {
@@ -46,7 +46,6 @@ void rainbow() {
     for (int i=0; i < strip.numPixels(); i++) {
       strip.setPixelColor(i, Wheel((i + j) % 96));
     }
-    //strip.doSwapBuffersAsap(strip.numPixels());  //testme with this setting  
     strip.show();
   }
 }

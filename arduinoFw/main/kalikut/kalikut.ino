@@ -103,11 +103,11 @@ const byte segmentSize[16] = {
   7,  8,  //U
   3,  8,  //T
   15, 0
-};
+};/**/
 
-/*
+
 //test with one strand
-const uint16_t pixelOffsetForSplittetLetter[16][5] = {
+/*const uint16_t pixelOffsetForSplittetLetter[16][5] = {
   { 0 }, { 1 }, 
   { 2 }, { 3 }, 
   { 4 }, { 5 }, 
@@ -133,12 +133,13 @@ const byte segmentSize[16] = {
 //-----------------------------
 
 //array that will hold the serial input string
-byte serInStr[2*TOTAL_LETTERS+SERIAL_HEADER_SIZE]; //*2 is only needed for v2 				 
+byte serInStr[4*TOTAL_LETTERS+SERIAL_HEADER_SIZE]; //*2 is only needed for v2 				 
 
-// Choose which 2 pins you will use for output.
-// Can be any valid output pins.
-int dataPin = 2;       // 'green' wire
-int clockPin =3;      // 'blue' wire
+// Choose which 2 pins you will use for output. Can be any valid output pins.
+// Teensy 2.0 ++: 22/23
+// Arduino 2/3
+int dataPin = 22;       // 'green' wire
+int clockPin =23;      // 'blue' wire
 
 //initialize pixels
 LPD6803 strip = LPD6803(TOTAL_MODULES, dataPin, clockPin);
@@ -200,8 +201,8 @@ void loop() {
   switch (type) {
   case CMD_SENDFRAME:
     //the size of buffer must match the number of all letters
-    if (sendlen == TOTAL_LETTERS*2) { //v1
-//    if (sendlen == TOTAL_LETTERS*4) { //v2
+ //  if (sendlen == TOTAL_LETTERS*2) { //v1
+    if (sendlen == TOTAL_LETTERS*4) { //v2
       updatePixels(0, cmd);
       g_errorCounter = 0;
     } else {
@@ -234,25 +235,24 @@ void updatePixels(byte ofs, byte* buffer) {
   byte src=0;
 
   //v1: one color per letter
-  for (byte i=0; i < TOTAL_LETTERS; i++) {
+/*  for (byte i=0; i < TOTAL_LETTERS; i++) {
     color = buffer[src]<<8 | buffer[src+1];
     for (byte n=0; n < modulesPerLetter[i]; n++) {
       //two bytes per pixel
       strip.setPixelColor(dst++, color);
     }        
     src+=2;
-  }
+  }/**/
 
   //v2: two segments per letter
-/*  for (byte i=0; i < TOTAL_LETTERS*2; i++) {
+  for (byte i=0; i < TOTAL_LETTERS; i++) {
     color = buffer[src]<<8 | buffer[src+1];
     for (byte n=0; n < segmentSize[i]; n++) {
       //two bytes per pixel
       strip.setPixelColor(pixelOffsetForSplittetLetter[i][n], color);
     }        
     src+=2;
-  }*/
-
+  }/**/
 
   strip.show(); 
 }
