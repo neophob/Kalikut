@@ -84,6 +84,7 @@ static final int SHIFT_COL = 3; //8bpp-3bpp=5bpp, tadaaa
 //return a 15bpp color instead a 24bpp color
 color getSimulated5BitColor(int ofs) {
   int col = colorArray[ofs];
+
   int r = (int) ((col>>16) & 255);
   int g = (int) ((col>>8)  & 255);
   int b = (int) ( col      & 255);

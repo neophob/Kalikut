@@ -46,16 +46,16 @@ void generator() {
       int i = y*NR_OF_PIXELS_X+x;
 
       switch(mode) {
-      case 0:
+      case 0: //Rainbow
         colorArray[i] = Wheel((frame-a*8)*2);
         a+=1;
         break;
 
-      case 1:
+      case 1: //Rainbow Solid
         colorArray[i] = Wheel(frame);
         break;
 
-      case 2:
+      case 2: //Strobo 1
         if (((frame-x)>>4)%2==1) {
           colorArray[i] = color(0, 0, 0);
         } 
@@ -64,7 +64,7 @@ void generator() {
         }
         break;
 
-      case 3:
+      case 3: //Strobo 2
         if ((frame-x>>1)%2==1) {
           colorArray[i] = color(0, 0, 0);
         } 
@@ -73,7 +73,7 @@ void generator() {
         }
         break;
 
-      case 4:
+      case 4: //Solid
         colorArray[i] = color(255, 255, 255);
         break;
 
@@ -91,7 +91,7 @@ void generator() {
         }
         break;
 
-      case 6:
+      case 6: //Beat
         if (beat.isKick() || beat.isHat() || beat.isSnare()) {
           colorArray[i] = color(255, 255, 255);
         } 
@@ -100,7 +100,7 @@ void generator() {
         }
         break;
 
-      case 7:
+      case 7: //volume
         int c = int(in.mix.level()*soundSensitive.getValue());
         if (c>255) c=255;
         colorArray[i] = color(c, c, c);
@@ -111,7 +111,7 @@ void generator() {
         colorArray[i] = fireColors[ fireBuffer[fireOfs] ];
         break;
 
-      case 9:
+      case 9: //Test
         if (y>0) {   
           long l = colorArray[x]&0xffffff;
           if (l>0) {
@@ -130,31 +130,55 @@ void generator() {
         }
         break;
 
-
-      case 10:
-        int rnd = int(random(4));
-        switch (rnd) {
-        case 0:
-          colorArray[i] = color(0, 0, 255);
-          break;
-
-        case 1: 
-          colorArray[i] = color(255, 0, 0);
-          break;
-
-        default:
-          colorArray[i] = color(0, 255, 0);
+      case 10: //RGB Color
+        //just one line of fx
+        if (y>0) {
+          colorArray[i] = colorArray[x];
           break;
         }
 
+        int rnd = int(random(3));
+        switch (rnd) {
+        case 0:
+          colorArray[x] = color(0, 0, 255);
+          break;
+
+        case 1: 
+          colorArray[x] = color(255, 0, 0);
+          break;
+
+        default:
+          colorArray[x] = color(0, 255, 0);
+          break;
+        }
+        break;
+
+      case 11: //One Char
+        if ((frame/4-x)%STR_KALIKUT.length()==1) {
+          colorArray[i] = color(255, 255, 255);
+        } 
+        else {
+          colorArray[i] = color(0, 0, 0);
+        }
+        break;
+
+      case 12: //Random Char        
+        colorArray[0] = color(255,22,222);
+        colorArray[1] = color(255,22,222);
+        colorArray[2] = color(255,22,222);
+        colorArray[3] = color(255,22,222);
+        colorArray[4] = color(255,22,222);
+        colorArray[5] = color(255,22,222);
+        break;
+
+      case 13: //Funny        
         break;
       }
     }
   }
 
   //very seldom in hotel mode, make everything black
-  int r=int(random(77));
-  if (mode == FX_HOTEL && r==34) {
+  if (mode == FX_HOTEL && int(random(77))==34) {
     for (int i=0; i<NR_OF_PIXELS_X*NR_OF_PIXELS_Y; i++) {
       colorArray[i] = color(0, 0, 0);
     }

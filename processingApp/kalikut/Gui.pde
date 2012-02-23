@@ -22,8 +22,11 @@ void initGui() {
                                   .addItem("Volume", 7)
                                     .addItem("Fire", 8)
                                       .addItem("Test", 9)
-                                      .addItem("Test2", 10)
-                                        .activate(0);
+                                        .addItem("RGB Color", 10)
+                                          .addItem("One Char", 11)
+                                            .addItem("Random Char", 12)
+                                              .addItem("Funny", 13)
+                                                .activate(0);
 
   cp = cp5.addColorPicker("picker")
     .setPosition(20, 280)

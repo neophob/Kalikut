@@ -18,37 +18,27 @@ color Wheel(int WheelPos) {
 
 //colorize buffer
 void tintBuffer() {
-  int col, rr, gg, bb, tintR, tintG, tintB;
-
-  int tintCol = cp.getColorValue();
-  tintB = tintCol & 255;
-  tintCol >>= 8;
-  tintG = tintCol & 255;
-  tintCol >>= 8;
-  tintR = tintCol & 255;
+  //TODO use alpha value
+  int tintCol = 0xff000000 | cp.getColorValue();
 
   for (int i=0; i<colorArray.length; i++) {
-    col = colorArray[i];
-    rr = col & 255;
-    col >>= 8;
-    gg = col & 255;
-    col >>= 8;
-    bb = col & 255;
-    col >>= 8;
 
-    rr = rr*(tintR+1) >> 8;
-    gg = gg*(tintG+1) >> 8;
-    bb = bb*(tintB+1) >> 8;
+    int col = 0xff000000 | colorArray[i];
+
+    int blendedColor;
+    if (tintCol == 0x0ffffffff) {
+      blendedColor = col;
+    } 
+    else {
+      blendedColor = blendColor(tintCol, col, MULTIPLY);
+    }
 
     //invert last color ("now")
     if (invertNow && i==NR_OF_PIXELS_X-1) {
-      rr = 256-rr;
-      gg = 256-gg;
-      bb = 256-bb;
+      blendedColor = blendColor(blendedColor, 0xffffffff, DIFFERENCE);
     }
 
-    //    colorArray[i] = (rr << 16) | (gg << 8) | bb;
-    colorArray[i] = color(rr, gg, bb);
+    colorArray[i] = blendedColor;
   }
 }
 
