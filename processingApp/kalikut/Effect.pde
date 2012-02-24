@@ -47,7 +47,7 @@ void generator() {
 
       switch(mode) {
       case 0: //Rainbow
-        colorArray[i] = Wheel((frame-a*8)*2);
+        colorArray[i] = Wheel(frame-a*8);
         a+=1;
         break;
 
