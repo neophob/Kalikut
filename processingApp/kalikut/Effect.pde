@@ -8,11 +8,79 @@ private static final int FIRE_BUFFER = 4;
 private int[] fireColors;
 private int[] fireBuffer;
 
+private List<Integer[]> funnyWords;
+
 void initGenerator() {
   //---------------------------
   //setup fire
   fireColors = new int[256];
   fireBuffer = new int[(NR_OF_PIXELS_X+FIRE_BUFFER)*NR_OF_PIXELS_Y];
+
+  funnyWords = new ArrayList<Integer[]>();
+  funnyWords.add(new Integer[] { 
+    0, 1, 4
+  } 
+  );  //KAK
+  funnyWords.add(new Integer[] { 
+    1, 2, 4
+  } 
+  );  //ALK
+  funnyWords.add(new Integer[] { 
+    1, 2, 4, 7
+  } 
+  );  //ALK NOW
+  funnyWords.add(new Integer[] { 
+    1, 2, 3
+  } 
+  );  //ALI  
+  funnyWords.add(new Integer[] { 
+    1, 4, 5, 6
+  } 
+  );  //AKUT  
+  funnyWords.add(new Integer[] { 
+    2, 3, 4
+  } 
+  );  //LIK
+  funnyWords.add(new Integer[] { 
+    0, 1, 6
+  } 
+  );  //KAT  
+  funnyWords.add(new Integer[] { 
+    1, 2, 5
+  } 
+  );  //ALU
+  funnyWords.add(new Integer[] { 
+    3, 4
+  } 
+  );  //IK
+  funnyWords.add(new Integer[] { 
+    1, 3, 6
+  } 
+  );  //AIT  
+  funnyWords.add(new Integer[] { 
+    0, 1, 2, 6
+  } 
+  );  //KALT
+  funnyWords.add(new Integer[] { 
+    1, 2, 6
+  } 
+  );  //ALT
+  funnyWords.add(new Integer[] { 
+    1, 4, 6
+  } 
+  );  //AKT
+  funnyWords.add(new Integer[] { 
+    1, 4, 6, 7
+  } 
+  );  //AKT NOW  
+  funnyWords.add(new Integer[] { 
+    0, 1, 2, 4
+  } 
+  );  //KALK
+  funnyWords.add(new Integer[] { 
+    0, 3, 4, 6
+  } 
+  );  //KIKT  
 
   for (int i = 0; i < 32; ++i) {
     /* black to blue, 32 values*/
@@ -131,25 +199,26 @@ void generator() {
         break;
 
       case 10: //RGB Color
-        //just one line of fx
-        if (y>0) {
-          colorArray[i] = colorArray[x];
-          break;
-        }
+        if (frame%10==1) {
+          if (y>0) {
+            colorArray[i] = colorArray[x];
+            break;
+          }
 
-        int rnd = int(random(3));
-        switch (rnd) {
-        case 0:
-          colorArray[x] = color(0, 0, 255);
-          break;
+          int rnd = int(random(3));
+          switch (rnd) {
+          case 0:
+            colorArray[x] = color(0, 0, 255);
+            break;
 
-        case 1: 
-          colorArray[x] = color(255, 0, 0);
-          break;
+          case 1: 
+            colorArray[x] = color(255, 0, 0);
+            break;
 
-        default:
-          colorArray[x] = color(0, 255, 0);
-          break;
+          default:
+            colorArray[x] = color(0, 255, 0);
+            break;
+          }
         }
         break;
 
@@ -162,30 +231,64 @@ void generator() {
         }
         break;
 
-      case 12: //Random Char        
-        colorArray[0] = color(255,22,222);
-        colorArray[1] = color(255,22,222);
-        colorArray[2] = color(255,22,222);
-        colorArray[3] = color(255,22,222);
-        colorArray[4] = color(255,22,222);
-        colorArray[5] = color(255,22,222);
+      case 12: //Random Char
+        // this fx is not done in this loop
         break;
 
-      case 13: //Funny        
+      case 13: //Funny
+        // this fx is not done in this loop     
         break;
       }
     }
   }
 
-  //very seldom in hotel mode, make everything black
-  if (mode == FX_HOTEL && int(random(77))==34) {
-    for (int i=0; i<NR_OF_PIXELS_X*NR_OF_PIXELS_Y; i++) {
-      colorArray[i] = color(0, 0, 0);
+  //not single characte post fx
+
+  switch(mode) {
+  case FX_HOTEL:
+    if (int(random(77))==34) {
+      //very seldom in hotel mode, make everything black
+      clearAllChars();
     }
+    break;
+
+  case 12: //Random char
+    if (frame%10==1) {
+      clearAllChars();
+      int selectedChar = int(random(STR_KALIKUT.length()));
+      int col = color(random(255), random(255), random(255));
+      colorArray[selectedChar] = col;
+      if (NR_OF_PIXELS_Y>1) {
+        colorArray[selectedChar+NR_OF_PIXELS_X] = col;
+      }
+    }
+    break;
+
+  case 13: //Funny
+    if (frame%10==1) {
+      clearAllChars();
+      int selectedWord = int(random(funnyWords.size()));
+      int col = color(random(255), random(255), random(255));
+
+      for (int i: funnyWords.get(selectedWord)) {
+        colorArray[i] = col;
+        if (NR_OF_PIXELS_Y>1) {
+          colorArray[i+NR_OF_PIXELS_X] = col;
+        }
+      }
+    }
+    break;
   }
 }
 
+//black baby!
+void clearAllChars() {
+  for (int i=0; i<NR_OF_PIXELS_X*NR_OF_PIXELS_Y; i++) {
+    colorArray[i] = color(0, 0, 0);
+  }
+}  
 
+//fire fx
 void updateFireBuffer() {
   int ofs;
 
