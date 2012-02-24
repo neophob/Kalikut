@@ -19,17 +19,17 @@ void initGenerator() {
     fireColors[i]=color(i<<1, 0, 0);
 
     /* blue to red, 32 values*/
-    fireColors[i + 32]=color(64 - (i << 1), 0, i << 3);
+    fireColors[i + 32]=color(i << 3, 0, 64 - (i << 1));
 
     /*red to yellow, 32 values*/
-    fireColors[i + 64]=color(0, i << 3, 255);
+    fireColors[i + 64]=color(255, i << 3, 0);
 
     /* yellow to white, 162 */
-    fireColors[i + 96]=color(i << 2, 255, 255);
-    fireColors[i + 128]=color(64+(i << 2), 255, 255);
-    fireColors[i + 160]=color(128+(i << 2), 255, 255);
-    fireColors[i + 192]=color(192+i, 255, 255);
-    fireColors[i + 224]=color(224+i, 255, 255);
+    fireColors[i + 96]=color(255, 255, i << 2);
+    fireColors[i + 128]=color(255, 255, 64+(i << 2));
+    fireColors[i + 160]=color(255, 255, 128+(i << 2));
+    fireColors[i + 192]=color(255, 255, 192+i);
+    fireColors[i + 224]=color(255, 255, 224+i);
   }
 }
 
