@@ -4,7 +4,7 @@ void initGui() {
   cp5 = new ControlP5(this);
 
   colorModeButton = cp5.addRadioButton("colorModeButton")
-    .setPosition(20, 200)
+    .setPosition(20, 190)
       .setSize(40, 20)
         .setColorForeground(color(120))
           .setColorActive(color(255))
@@ -18,6 +18,25 @@ void initGui() {
                           .addItem("Fire", GEN_COL_FIRE)
                             .addItem("RGB Color", GEN_COL_RGBCOL)
                               .activate(0);
+
+  animationButton = cp5.addRadioButton("animationButton")
+    .setPosition(20, 220)
+      .setSize(40, 20)
+        .setColorForeground(color(120))
+          .setColorActive(color(255))
+            .setColorLabel(color(255))
+              .setItemsPerRow(6)
+                .setSpacingColumn(80)
+                  .setNoneSelectedAllowed(false)
+                    .addItem("Nothing", GEN_ANIM_NOTHING)
+                      .addItem("Strobo 1", GEN_ANIM_STROBO1)
+                        .addItem("Strobo 2", GEN_ANIM_STROBO2)
+                          .addItem("One Char", GEN_ANIM_ONE_CHAR)
+                            .addItem("Random Char", GEN_ANIM_RANDOM_CHAR)
+                              .addItem("Funny", GEN_ANIM_FUNNY)
+                                .addItem("Hotel", GEN_ANIM_HOTEL)
+                                  .activate(0);
+
 
   cp = cp5.addColorPicker("picker")
     .setPosition(20, 280)
@@ -124,6 +143,11 @@ void updateTextfield(String text) {
 void controlEvent(ControlEvent theEvent) {
   if (theEvent.isFrom(colorModeButton)) {
     genColor = int(theEvent.getValue());
+    return;
+  }
+  
+  if (theEvent.isFrom(animationButton)) {
+    genAnim = int(theEvent.getValue());
     return;
   }
 

@@ -40,7 +40,7 @@ private int frame;
 
 //gui
 private ControlP5 cp5;
-private RadioButton colorModeButton;
+private RadioButton colorModeButton, animationButton;
 private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
