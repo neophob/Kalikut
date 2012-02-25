@@ -10,10 +10,30 @@ private static final int FIRE_BUFFER = 4;
 
 private int[] fireColors;
 private int[] fireBuffer;
+private int[] rgbColBuffer = new int[NR_OF_PIXELS_X];
 
 void generateColor() {
   if (genColor==GEN_COL_FIRE) {
     updateFireBuffer();
+  }
+
+  if (frame%10==1) {
+    for (int x=0; x<NR_OF_PIXELS_X; x++) {
+      int rnd = int(random(3));
+      switch (rnd) {
+      case 0:
+        rgbColBuffer[x] = color(0, 0, 255);
+        break;
+
+      case 1: 
+        rgbColBuffer[x] = color(255, 0, 0);
+        break;
+
+      default:
+        rgbColBuffer[x] = color(0, 255, 0);
+        break;
+      }
+    }
   }
 
   int a=0;
@@ -41,27 +61,7 @@ void generateColor() {
         break;
 
       case GEN_COL_RGBCOL:
-        if (frame%10==1) {
-          if (y>0) {
-            colorArray[i] = colorArray[x];
-            break;
-          }
-
-          int rnd = int(random(3));
-          switch (rnd) {
-          case 0:
-            colorArray[x] = color(0, 0, 255);
-            break;
-
-          case 1: 
-            colorArray[x] = color(255, 0, 0);
-            break;
-
-          default:
-            colorArray[x] = color(0, 255, 0);
-            break;
-          }
-        }
+        colorArray[i] = rgbColBuffer[x];
         break;
       }
     }
