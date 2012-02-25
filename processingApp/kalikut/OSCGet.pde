@@ -32,10 +32,10 @@ void oscEvent(OscMessage theOscMessage) {
   }
 
   if (theOscMessage.checkTypetag("i")) {
-    if (theOscMessage.checkAddrPattern("/mode")) {
+    if (theOscMessage.checkAddrPattern("/colormode")) {
       int val = theOscMessage.get(0).intValue();
       if (val>=0 && val <=MAX_EFFECT) {
-        modeButton.activate(val);
+        colorModeButton.activate(val);
       }
     }
   }

@@ -40,14 +40,14 @@ private int frame;
 
 //gui
 private ControlP5 cp5;
-private RadioButton modeButton;
+private RadioButton colorModeButton;
 private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
 private CheckBox checkbox;
 
 //internal fx
-private int mode = 0;
+private int genAnim = GEN_ANIM_NOTHING, genColor = GEN_COL_RAINBOW, genSnd = GEN_SND_NOTHING;
 private boolean invertNow = false;
 
 //buffer
@@ -85,11 +85,11 @@ void setup() {
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();
-//  initSerial();
+  //initSerial();
   initLetter();
 
   /* start oscP5, listening for incoming messages at port 12000 */
-//  oscP5 = new OscP5(this, OSC_PORT);
+  //oscP5 = new OscP5(this, OSC_PORT);
   updateTextfield("OSC Server startet on port "+ OSC_PORT);
 }
 

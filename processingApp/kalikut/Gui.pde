@@ -3,7 +3,7 @@
 void initGui() {
   cp5 = new ControlP5(this);
 
-  modeButton = cp5.addRadioButton("modeButton")
+  colorModeButton = cp5.addRadioButton("colorModeButton")
     .setPosition(20, 200)
       .setSize(40, 20)
         .setColorForeground(color(120))
@@ -12,21 +12,12 @@ void initGui() {
               .setItemsPerRow(6)
                 .setSpacingColumn(80)
                   .setNoneSelectedAllowed(false)
-                    .addItem("Rainbow", 0)
-                      .addItem("Rainbow Solid", 1)
-                        .addItem("Strobo 1", 2)
-                          .addItem("Strobo 2", 3)
-                            .addItem("Solid", 4)
-                              .addItem("Hotel", 5)
-                                .addItem("Beat", 6)
-                                  .addItem("Volume", 7)
-                                    .addItem("Fire", 8)
-                                      .addItem("Test", 9)
-                                        .addItem("RGB Color", 10)
-                                          .addItem("One Char", 11)
-                                            .addItem("Random Char", 12)
-                                              .addItem("Funny", 13)
-                                                .activate(0);
+                    .addItem("Rainbow", GEN_COL_RAINBOW)
+                      .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
+                        .addItem("Solid", GEN_COL_SOLID)
+                          .addItem("Fire", GEN_COL_FIRE)
+                            .addItem("RGB Color", GEN_COL_RGBCOL)
+                              .activate(0);
 
   cp = cp5.addColorPicker("picker")
     .setPosition(20, 280)
@@ -131,8 +122,8 @@ void updateTextfield(String text) {
 }
 
 void controlEvent(ControlEvent theEvent) {
-  if (theEvent.isFrom(modeButton)) {
-    mode = int(theEvent.getValue());
+  if (theEvent.isFrom(colorModeButton)) {
+    genColor = int(theEvent.getValue());
     return;
   }
 
