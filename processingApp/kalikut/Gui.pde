@@ -35,7 +35,8 @@ void initGui() {
                             .addItem("Random Char", GEN_ANIM_RANDOM_CHAR)
                               .addItem("Funny", GEN_ANIM_FUNNY)
                                 .addItem("Hotel", GEN_ANIM_HOTEL)
-                                  .activate(0);
+                                  .addItem("KnightRider", GEN_ANIM_KNIGHTRIDER)
+                                    .activate(0);
 
   soundButton = cp5.addRadioButton("soundButton")
     .setPosition(20, 320)
@@ -163,7 +164,7 @@ void controlEvent(ControlEvent theEvent) {
     genAnim = int(theEvent.getValue());
     return;
   }
-  
+
   if (theEvent.isFrom(soundButton)) {
     genSnd = int(theEvent.getValue());
     return;

@@ -7,11 +7,13 @@ private static final int GEN_ANIM_ONE_CHAR = 4;
 private static final int GEN_ANIM_RANDOM_CHAR = 5;
 private static final int GEN_ANIM_FUNNY = 6;
 private static final int GEN_ANIM_HOTEL = 7;
+private static final int GEN_ANIM_KNIGHTRIDER = 8;
 
 private List<Integer[]> funnyWords;
 private int selectedRandomChar = 0;
 private int selectedRandomWord = 0;
-
+private int krDirection = 0;
+private int krPos = 0;
 
 void generateAnimation() {
 
@@ -80,10 +82,16 @@ void generateAnimation() {
           colorArray[i] = 0;
         }
         break;
+
+      case GEN_ANIM_KNIGHTRIDER:
+        if (x!=krPos) {
+          colorArray[i] = color(0, 0, 0);
+        }
+        break;
       }
     }
   }
-
+  //println(frame);
 
   switch(genAnim) {
   case GEN_ANIM_HOTEL:
@@ -93,7 +101,22 @@ void generateAnimation() {
     }
     break;
 
-
+  case GEN_ANIM_KNIGHTRIDER:
+    if (frame%5==1) {
+      if (krDirection == 0) {
+        krPos++;
+        if (krPos == 7) {
+          krDirection=1;
+        }
+      } 
+      else {
+        krPos--;
+        if (krPos == 0) {
+          krDirection=0;
+        }
+      }
+    }
+    break;
   }
 }
 
