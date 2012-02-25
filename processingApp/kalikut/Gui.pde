@@ -36,7 +36,8 @@ void initGui() {
                               .addItem("Funny", GEN_ANIM_FUNNY)
                                 .addItem("Hotel", GEN_ANIM_HOTEL)
                                   .addItem("KnightRider", GEN_ANIM_KNIGHTRIDER)
-                                    .activate(0);
+                                    .addItem("Flipper", GEN_ANIM_FLIPPER)                                  
+                                      .activate(0);
 
   soundButton = cp5.addRadioButton("soundButton")
     .setPosition(20, 320)

@@ -8,6 +8,7 @@ private static final int GEN_ANIM_RANDOM_CHAR = 5;
 private static final int GEN_ANIM_FUNNY = 6;
 private static final int GEN_ANIM_HOTEL = 7;
 private static final int GEN_ANIM_KNIGHTRIDER = 8;
+private static final int GEN_ANIM_FLIPPER = 9;
 
 private List<Integer[]> funnyWords;
 private int selectedRandomChar = 0;
@@ -87,6 +88,20 @@ void generateAnimation() {
         if (x!=krPos) {
           colorArray[i] = color(0, 0, 0);
         }
+        break;
+
+      case GEN_ANIM_FLIPPER:
+        if (y>0) {   
+          long l = colorArray[x]&0xffffff;
+          if (l>0) {
+            colorArray[i] = color(0, 0, 0);
+          } 
+          break;
+        }
+        if ((frame-i>>2)%2==1) {
+          colorArray[i] = color(0, 0, 0);
+        } 
+
         break;
       }
     }
