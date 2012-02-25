@@ -5,12 +5,15 @@ private static final int GEN_COL_RAINBOW_SOLID = 2;
 private static final int GEN_COL_SOLID = 3;
 private static final int GEN_COL_FIRE = 4;
 private static final int GEN_COL_RGBCOL = 5;
+private static final int GEN_COL_PLASMA = 6;
 
 private static final int FIRE_BUFFER = 4;
 
 private int[] fireColors;
 private int[] fireBuffer;
 private int[] rgbColBuffer = new int[NR_OF_PIXELS_X];
+private int[] plasma = new int [100];
+private float plasmaX=0, plasmaY=0;
 
 void generateColor() {
   if (genColor==GEN_COL_FIRE) {
@@ -35,7 +38,7 @@ void generateColor() {
       }
     }
   }
-
+    plasmaY+=0.1;
   int a=0;
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
     for (int y=0; y<NR_OF_PIXELS_Y; y++) {
@@ -62,6 +65,16 @@ void generateColor() {
 
       case GEN_COL_RGBCOL:
         colorArray[i] = rgbColBuffer[x];
+        break;
+
+      case GEN_COL_PLASMA:
+        float ypi = y*PI/2f;
+        float xpi = x*PI/8f;
+        int c=int(sin(ypi*2+plasmaY)*16+sin(ypi*3+PI/6+plasmaY)*16+cos(xpi+plasmaX)*16+cos(xpi*2+PI/2+plasmaX)*25)+32;
+        c=constrain(c, 0, 99);
+        colorArray[i]=plasma[c];
+        plasmaX+=0.01;
+
         break;
       }
     }
@@ -90,6 +103,22 @@ void setupColor() {
     fireColors[i + 160]=color(255, 255, 128+(i << 2));
     fireColors[i + 192]=color(255, 255, 192+i);
     fireColors[i + 224]=color(255, 255, 224+i);
+  }
+
+  //setup plasma lut
+  int i;
+  float s1, s2, s3;
+  for (i=0;i<50;i++) {
+    s1=sin(i*PI/50);
+    s2=sin(i*PI/50+PI/4);
+    s3=sin(i*PI/50+PI/2);
+    plasma[i]=color(128+s1*128, 128+s2*128, 0);
+  }
+  for (i=50;i<100;i++) {
+    s1=sin(i*PI/50);
+    s2=sin(i*PI/50+PI/4);
+    s3=sin(i*PI/50+PI/2);
+    plasma[i]=color(128+s1*128, 0, 128+s3*128);
   }
 }
 
