@@ -194,6 +194,19 @@ void controlEvent(ControlEvent theEvent) {
   }
 }
 
+void drawBackgroundSlide(int ypos, int ysize) {
+  this.loadPixels();	
+  int col = color(48, 48, 48);
+
+  int ofs=this.width*ypos;
+  for (int y=0; y<ysize; y++) {
+    for (int x=10; x<this.width-80; x++) {
+      this.pixels[ofs+x] = col;
+    }
+    ofs += this.width;
+  }
+  this.updatePixels();  
+}
 
 void drawGradientBackground() {
   this.loadPixels();	

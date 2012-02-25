@@ -96,8 +96,13 @@ void setup() {
 
 void draw() {
   background(0);
-  drawGradientBackground();
   
+  drawGradientBackground();
+
+  drawBackgroundSlide(195, 51);
+  drawBackgroundSlide(255, 51);
+  drawBackgroundSlide(315, 51);
+    
   //generate buffer content
   generator();
 
