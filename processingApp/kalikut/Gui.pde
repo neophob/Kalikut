@@ -4,7 +4,7 @@ void initGui() {
   cp5 = new ControlP5(this);
 
   colorModeButton = cp5.addRadioButton("colorModeButton")
-    .setPosition(20, 190)
+    .setPosition(20, 200)
       .setSize(40, 20)
         .setColorForeground(color(120))
           .setColorActive(color(255))
@@ -20,7 +20,7 @@ void initGui() {
                               .activate(0);
 
   animationButton = cp5.addRadioButton("animationButton")
-    .setPosition(20, 220)
+    .setPosition(20, 260)
       .setSize(40, 20)
         .setColorForeground(color(120))
           .setColorActive(color(255))
@@ -37,15 +37,28 @@ void initGui() {
                                 .addItem("Hotel", GEN_ANIM_HOTEL)
                                   .activate(0);
 
+  soundButton = cp5.addRadioButton("soundButton")
+    .setPosition(20, 320)
+      .setSize(40, 20)
+        .setColorForeground(color(120))
+          .setColorActive(color(255))
+            .setColorLabel(color(255))
+              .setItemsPerRow(6)
+                .setSpacingColumn(80)
+                  .setNoneSelectedAllowed(false)
+                    .addItem("Nada", GEN_SND_NOTHING)
+                      .addItem("Beat Detection", GEN_SND_BEAT)
+                        .addItem("Volume", GEN_SND_VOLUME)
+                          .activate(0);
 
   cp = cp5.addColorPicker("picker")
-    .setPosition(20, 280)
+    .setPosition(20, 380)
       .setColorValue(color(255, 255, 255, 255))
         ;
 
   // add a vertical slider
   fpsSlider = cp5.addSlider("Speed")
-    .setPosition(300, 280)
+    .setPosition(300, 380)
       .setSize(200, 20)
         .setRange(0, 1)
           .setValue(.6)
@@ -53,7 +66,7 @@ void initGui() {
 
 
   allColorSlider = cp5.addSlider("RGB Colors")
-    .setPosition(20, 360-1)
+    .setPosition(20, 460-1)
       .setSize(200, 20)
         .setRange(0, 255)
           .setValue(255)
@@ -61,7 +74,7 @@ void initGui() {
               ;
 
   soundSensitive= cp5.addSlider("Sound Sensitive")
-    .setPosition(300, 320-1)
+    .setPosition(300, 420-1)
       .setSize(200, 20)
         .setRange(1, 5000)
           .setValue(255)
@@ -69,7 +82,7 @@ void initGui() {
               ;
 
   myTextarea = cp5.addTextarea("txt")
-    .setPosition(580, 280)
+    .setPosition(580, 380)
       .setSize(200, 80)
         .setFont(createFont("arial", 12))
           .setLineHeight(14)
@@ -79,7 +92,7 @@ void initGui() {
   ;
 
   checkbox = cp5.addCheckBox("checkBox")
-    .setPosition(300, 360-1)
+    .setPosition(300, 460-1)
       .setColorForeground(color(120))
         .setColorActive(color(255))
           .setColorLabel(color(255))
@@ -145,9 +158,14 @@ void controlEvent(ControlEvent theEvent) {
     genColor = int(theEvent.getValue());
     return;
   }
-  
+
   if (theEvent.isFrom(animationButton)) {
     genAnim = int(theEvent.getValue());
+    return;
+  }
+  
+  if (theEvent.isFrom(soundButton)) {
+    genSnd = int(theEvent.getValue());
     return;
   }
 

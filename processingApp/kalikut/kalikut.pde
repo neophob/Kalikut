@@ -33,14 +33,14 @@ private static final String STR_KALIKUT = "KALIKUTn";
 private static final int NR_OF_PIXELS_X = STR_KALIKUT.length();
 private static final int NR_OF_PIXELS_Y = 2;
 private static final int OSC_PORT = 10000;
-private static final String VERSION = "KALIKUT v0.3";
+private static final String VERSION = "KALIKUT v0.4";
 
 private PFont fontA;
 private int frame;
 
 //gui
 private ControlP5 cp5;
-private RadioButton colorModeButton, animationButton;
+private RadioButton colorModeButton, animationButton, soundButton;
 private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
@@ -67,7 +67,7 @@ private PImage logoImg;
 
 
 void setup() {
-  size(800, 400);
+  size(800, 500);
   background(0);
   frameRate(25);
   smooth();
