@@ -68,13 +68,12 @@ void generateColor() {
         break;
 
       case GEN_COL_PLASMA:
-        float ypi = y*PI/2f;
+        float ypi = y*PI;
         float xpi = x*PI/8f;
-        int c=int(sin(ypi*2+plasmaY)*16+sin(ypi*3+PI/6+plasmaY)*16+cos(xpi+plasmaX)*16+cos(xpi*2+PI/2+plasmaX)*25)+32;
+        int c=int(sin(ypi+plasmaY)*16+sin(ypi*1.5f+PI/6+plasmaY)*16+cos(xpi+plasmaX)*16+cos(xpi*2f+PI/2+plasmaX)*25)+32;
         c=constrain(c, 0, 99);
         colorArray[i]=plasma[c];
         plasmaX+=0.01;
-
         break;
       }
     }
