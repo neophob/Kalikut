@@ -28,6 +28,8 @@ void generateAnimation() {
     selectedRandomWord = int(random(funnyWords.size()));
   }
 
+  int hotelRandom=int(random(25));
+
 
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
     for (int y=0; y<NR_OF_PIXELS_Y; y++) {
@@ -48,15 +50,8 @@ void generateAnimation() {
         break;
 
       case GEN_ANIM_HOTEL:
-        if (y>0) {
-          colorArray[i] = colorArray[x];
-          break;
-        }
-        int r=int(random(25));
-        if (x==4 || x==6) {        
-          if (r==2) {
-            colorArray[i] = color(0, 0, 0);
-          }
+        if (x==4 && hotelRandom==2 || x==6 && hotelRandom==4) {
+          colorArray[i] = color(0, 0, 0);
         }
         break;
 
