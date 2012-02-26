@@ -10,6 +10,8 @@ private static final int GEN_ANIM_HOTEL = 7;
 private static final int GEN_ANIM_KNIGHTRIDER = 8;
 private static final int GEN_ANIM_FLIPPER = 9;
 
+private static final int MAX_ANIMATION = 9;
+
 private List<Integer[]> funnyWords;
 private int selectedRandomChar = 0;
 private int selectedRandomWord = 0;

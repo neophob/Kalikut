@@ -32,12 +32,27 @@ void oscEvent(OscMessage theOscMessage) {
   }
 
   if (theOscMessage.checkTypetag("i")) {
+    if (theOscMessage.checkAddrPattern("/animationmode")) {
+      int val = theOscMessage.get(0).intValue();
+      if (val>=0 && val <=MAX_ANIMATION) {
+        animationButton.activate(val);
+      }
+    }
+    
     if (theOscMessage.checkAddrPattern("/colormode")) {
       int val = theOscMessage.get(0).intValue();
-      if (val>=0 && val <=MAX_EFFECT) {
+      if (val>=0 && val <=MAX_COLOR) {
         colorModeButton.activate(val);
       }
     }
+
+    if (theOscMessage.checkAddrPattern("/soundmode")) {
+      int val = theOscMessage.get(0).intValue();
+      if (val>=0 && val <=MAX_SOUND) {
+        soundButton.activate(val);
+      }
+    }
+    
   }
 }
 

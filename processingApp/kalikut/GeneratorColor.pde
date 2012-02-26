@@ -7,6 +7,8 @@ private static final int GEN_COL_FIRE = 4;
 private static final int GEN_COL_RGBCOL = 5;
 private static final int GEN_COL_PLASMA = 6;
 
+private static final int MAX_COLOR = 6;
+
 private static final int FIRE_BUFFER = 4;
 
 private int[] fireColors;
@@ -117,7 +119,7 @@ void setupColor() {
     s1=sin(i*PI/50);
     s2=sin(i*PI/50+PI/4);
     s3=sin(i*PI/50+PI/2);
-    plasma[i]=color(128+s1*128, 0, 128+s3*128);
+    plasma[i]=color(128+s1*128, 64+s2*128, 128+s3*128);
   }
 }
 

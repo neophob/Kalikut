@@ -4,6 +4,8 @@ private static final int GEN_SND_NOTHING = 1;
 private static final int GEN_SND_BEAT = 2;
 private static final int GEN_SND_VOLUME = 3;
 
+private static final int MAX_SOUND = 3;
+
 void generateSound() {
 
   if (genSnd == GEN_SND_NOTHING) {
