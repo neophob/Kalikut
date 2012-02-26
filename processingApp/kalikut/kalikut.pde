@@ -10,23 +10,6 @@ import oscP5.*;
 
 import com.neophob.lpd6803.*;
 import com.neophob.lpd6803.misc.*;
-/*
-einen FARBGENERATOR hast (Rainbow, rainbow soli, solid, fire, rgb color)
-
-der wird dann zusammen mit 
-
-einem BEWEGUNGSGENERATOR (strobo1, strobo2, hotel, one char, randomchar, funny)
-
-gemischt. schlussendlich kann alles noch mit 
-
-einem SOUNDGENERATOR (nix, beat detection oder volume) vermischt werden.
-*/
-
-/**
- * Words. 
- * 
- * The text() function is used for writing words to the screen. 
- */
 
 private static final String STR_KALIKUT = "KALIKUTn";
 

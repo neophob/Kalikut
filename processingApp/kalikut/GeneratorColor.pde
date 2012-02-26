@@ -40,7 +40,8 @@ void generateColor() {
       }
     }
   }
-    plasmaY+=0.1;
+  
+  plasmaY+=0.1;
   int a=0;
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
     for (int y=0; y<NR_OF_PIXELS_Y; y++) {

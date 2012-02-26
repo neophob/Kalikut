@@ -49,7 +49,7 @@ public void drawLetter() {
   pg.noStroke();
   pg.background(0);
 
-  int ydelta = IMAGE_Y_SIZE/NR_OF_PIXELS_Y;
+  int ydelta = IMAGE_Y_SIZE/NR_OF_PIXELS_Y+6;
   int xofs=0;
   int yofs=0;
   int srcOfs=0;
