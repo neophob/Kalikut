@@ -17,8 +17,11 @@ void initGui() {
                         .addItem("Solid", GEN_COL_SOLID)
                           .addItem("Fire", GEN_COL_FIRE)
                             .addItem("RGB Color", GEN_COL_RGBCOL)
-                              .addItem("Plasma", GEN_COL_PLASMA)                            
-                                .activate(0);
+                              .addItem("Plasma", GEN_COL_PLASMA)                  
+                                .addItem("Pulse", GEN_COL_PULSE)        
+                                  .addItem("Slider", GEN_COL_SLIDER)  
+                                    .addItem("Test", GEN_COL_XXX)  
+                                      .activate(0);
 
   animationButton = cp5.addRadioButton("animationButton")
     .setPosition(20, 260)
@@ -205,7 +208,7 @@ void drawBackgroundSlide(int ypos, int ysize) {
     }
     ofs += this.width;
   }
-  this.updatePixels();  
+  this.updatePixels();
 }
 
 void drawGradientBackground() {

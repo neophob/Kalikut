@@ -6,8 +6,11 @@ private static final int GEN_COL_SOLID = 3;
 private static final int GEN_COL_FIRE = 4;
 private static final int GEN_COL_RGBCOL = 5;
 private static final int GEN_COL_PLASMA = 6;
+private static final int GEN_COL_PULSE = 7;
+private static final int GEN_COL_SLIDER = 8;
+private static final int GEN_COL_XXX = 9;
 
-private static final int MAX_COLOR = 6;
+private static final int MAX_COLOR = 9;
 
 private static final int FIRE_BUFFER = 4;
 
@@ -40,7 +43,7 @@ void generateColor() {
       }
     }
   }
-  
+
   plasmaY+=0.1;
   int a=0;
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
@@ -77,6 +80,38 @@ void generateColor() {
         c=constrain(c, 0, 99);
         colorArray[i]=plasma[c];
         plasmaX+=0.01;
+        break;
+
+      case GEN_COL_PULSE:
+        int ofs = i+frame;
+        int xorR = ((frame*frame)>>6)%256; 
+        int xorB = (frame*i)%256;
+        int xorG = 255-xorR;
+        colorArray[i]=color(xorR, xorG, xorB);
+        break;
+        
+      case GEN_COL_SLIDER:
+        ofs = i+frame;
+        xorR = ((i*ofs))%256; 
+        xorB = ((i*ofs)^frame)%256;
+        xorG = (xorR+xorB)>>1;
+        colorArray[i]=color(xorR, xorG, xorB);
+        break;
+        
+      case GEN_COL_XXX:
+        ofs = i+frame;
+        xorB = ((i*frame)^ofs)%256; 
+        xorG = (ofs^i)%256;
+        xorR = (xorG+xorB)>>1;
+
+        //        int xorR = ((frame*frame)>>4)%256; 
+        //        int xorG = (frame*i)%256;
+        //        int xorB = ((i*ofs)^ofs)%256;
+
+        //        int xorR = ((i*frame)^ofs)%256;
+        //        int xorG = (ofs^i)%256;
+        //        int xorB = (ofs^frame)%256;
+        colorArray[i]=color(xorR, xorG, xorB);
         break;
       }
     }
