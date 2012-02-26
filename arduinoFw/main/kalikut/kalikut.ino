@@ -60,8 +60,8 @@
 //v 1.0 starts here
 
 const byte modulesPerLetter[TOTAL_LETTERS] = {
-//  5, 2, 1, 1, 5, 2, 2, 2}; //test with one strand
- 16, 15, 10, 10, 16, 15, 11, 15}; //actual
+  //  5, 2, 1, 1, 5, 2, 2, 2}; //test with one strand
+  16, 15, 10, 10, 16, 15, 11, 15}; //actual
 
 //v 1.0 ends here
 //-----------------------------
@@ -90,7 +90,7 @@ const uint16_t pixelOffsetForSplittetLetter[16][15] = {
   {51,52,53,64,65,66},                {54,55,56,57,58,59,60,61,62,63},  //K
   {71,72,73,74,75,76,77},             {67,68,69,70,78,79,80,81},        //U
   {90,91,92},                         {82,83,84,85,86,87,88,89},        //T
-  {93,94,95,96,97,98,99,100,101,102,103,104,105,106,107}, {}                                //NOW
+  {93,94,95,96,97,98,99,100,101,102,103,104,105,106,107}, {}            //NOW};
 };
 
 //how many modules per segment
@@ -108,26 +108,26 @@ const byte segmentSize[16] = {
 
 //test with one strand
 /*const uint16_t pixelOffsetForSplittetLetter[16][5] = {
-  { 0 }, { 1 }, 
-  { 2 }, { 3 }, 
-  { 4 }, { 5 }, 
-  { 6 }, { 7 },
-  { 10 }, { 11 },
-  { 12 }, { 13 },
-  { 14 }, { 15 },
-  { 17,18,19 }, { } 
-};
-
-const byte segmentSize[16] = {
-  1, 1, 
-  1, 1, 
-  1, 1, 
-  1, 1, 
-  1, 1, 
-  1, 1, 
-  1, 1, 
-  3, 0, 
-};
+ { 0 }, { 1 }, 
+ { 2 }, { 3 }, 
+ { 4 }, { 5 }, 
+ { 6 }, { 7 },
+ { 10 }, { 11 },
+ { 12 }, { 13 },
+ { 14 }, { 15 },
+ { 17,18,19 }, { } 
+ };
+ 
+ const byte segmentSize[16] = {
+ 1, 1, 
+ 1, 1, 
+ 1, 1, 
+ 1, 1, 
+ 1, 1, 
+ 1, 1, 
+ 1, 1, 
+ 3, 0, 
+ };
 /**/
 //v 2.0 ends here
 //-----------------------------
@@ -201,13 +201,18 @@ void loop() {
   switch (type) {
   case CMD_SENDFRAME:
     //the size of buffer must match the number of all letters
- //  if (sendlen == TOTAL_LETTERS*2) { //v1
-    if (sendlen == TOTAL_LETTERS*4) { //v2
-      updatePixels(0, cmd);
+    if (sendlen == TOTAL_LETTERS*2) { //v1
+      updatePixelsv1(0, cmd);
       g_errorCounter = 0;
-    } else {
-      g_errorCounter=100;
-    }
+    } 
+    else
+      if (sendlen == TOTAL_LETTERS*4) { //v2
+        updatePixelsv2(0, cmd);
+        g_errorCounter = 0;
+      } 
+      else {
+        g_errorCounter=100;
+      }
     break;
 
   case CMD_PING:
@@ -229,20 +234,28 @@ void loop() {
 //    update 32 bytes of the led matrix
 //    ofs: which panel, 0 (ofs=0), 1 (ofs=32), 2 (ofs=64)...
 // --------------------------------------------
-void updatePixels(byte ofs, byte* buffer) {
+void updatePixelsv1(byte ofs, byte* buffer) {
   uint16_t dst=0;
   uint16_t color;
   byte src=0;
 
   //v1: one color per letter
-/*  for (byte i=0; i < TOTAL_LETTERS; i++) {
+  for (byte i=0; i < TOTAL_LETTERS; i++) {
     color = buffer[src]<<8 | buffer[src+1];
     for (byte n=0; n < modulesPerLetter[i]; n++) {
       //two bytes per pixel
       strip.setPixelColor(dst++, color);
     }        
     src+=2;
-  }/**/
+  }
+
+  strip.show(); 
+}
+
+void updatePixelsv2(byte ofs, byte* buffer) {
+  uint16_t dst=0;
+  uint16_t color;
+  byte src=0;
 
   //v2: two segments per letter
   for (byte i=0; i < TOTAL_LETTERS; i++) {
@@ -256,5 +269,6 @@ void updatePixels(byte ofs, byte* buffer) {
 
   strip.show(); 
 }
+
 
 
