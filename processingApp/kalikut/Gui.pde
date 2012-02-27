@@ -20,8 +20,9 @@ void initGui() {
                               .addItem("Plasma", GEN_COL_PLASMA)                  
                                 .addItem("Pulse", GEN_COL_PULSE)        
                                   .addItem("Slider", GEN_COL_SLIDER)  
-                                    .addItem("Test", GEN_COL_XXX)  
-                                      .activate(0);
+                                    .addItem("Glace", GEN_COL_GLACE)  
+                                      .addItem("Test", GEN_COL_XXX)  
+                                        .activate(0);
 
   animationButton = cp5.addRadioButton("animationButton")
     .setPosition(20, 260)
@@ -40,8 +41,9 @@ void initGui() {
                               .addItem("Funny", GEN_ANIM_FUNNY)
                                 .addItem("Hotel", GEN_ANIM_HOTEL)
                                   .addItem("KnightRider", GEN_ANIM_KNIGHTRIDER)
-                                    .addItem("Flipper", GEN_ANIM_FLIPPER)                                  
-                                      .activate(0);
+                                    .addItem("Flipper", GEN_ANIM_FLIPPER)
+                                      .addItem("Fader", GEN_ANIM_FADER)
+                                        .activate(0);
 
   soundButton = cp5.addRadioButton("soundButton")
     .setPosition(20, 320)
@@ -177,9 +179,8 @@ void controlEvent(ControlEvent theEvent) {
   }
 
   if (theEvent.isFrom(fpsSlider)) {
-    int fps = 5+int(55*fpsSlider.getValue());
-    //println("framerate: "+fps);
-    frameRate(fps);
+    globalDelay = 2+int(18*fpsSlider.getValue());
+    println("framerate: "+globalDelay);
   }
 
   if (theEvent.isFrom(allColorSlider)) {
@@ -198,6 +199,7 @@ void controlEvent(ControlEvent theEvent) {
   }
 }
 
+//draw some rectangles
 void drawBackgroundSlide(int ypos, int ysize) {
   this.loadPixels();	
   int col = color(48, 48, 48);
@@ -212,6 +214,7 @@ void drawBackgroundSlide(int ypos, int ysize) {
   this.updatePixels();
 }
 
+//draw background
 void drawGradientBackground() {
   this.loadPixels();	
   int ofs=this.width*(this.height-255);

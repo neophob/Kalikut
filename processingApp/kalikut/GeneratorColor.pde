@@ -8,9 +8,10 @@ private static final int GEN_COL_RGBCOL = 5;
 private static final int GEN_COL_PLASMA = 6;
 private static final int GEN_COL_PULSE = 7;
 private static final int GEN_COL_SLIDER = 8;
-private static final int GEN_COL_XXX = 9;
+private static final int GEN_COL_GLACE = 9;
+private static final int GEN_COL_XXX = 10;
 
-private static final int MAX_COLOR = 9;
+private static final int MAX_COLOR = 10;
 
 private static final int FIRE_BUFFER = 4;
 
@@ -25,7 +26,7 @@ void generateColor() {
     updateFireBuffer();
   }
 
-  if (frame%10==1) {
+  if (frame%globalDelay==1) {
     for (int x=0; x<NR_OF_PIXELS_X; x++) {
       int rnd = int(random(3));
       switch (rnd) {
@@ -44,20 +45,21 @@ void generateColor() {
     }
   }
 
-  plasmaY+=0.1;
-  int a=0;
+  int globalDelayLocal = globalDelay/2;
+  float globalDelayPlasma = globalDelay/400.0f;
+  plasmaY+=globalDelayPlasma;
+  
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
     for (int y=0; y<NR_OF_PIXELS_Y; y++) {
       int i = y*NR_OF_PIXELS_X+x;
 
       switch(genColor) {
       case GEN_COL_RAINBOW: //Rainbow
-        colorArray[i] = Wheel(frame-a*8);
-        a+=1;
+        colorArray[i] = Wheel((frame+x+y)*globalDelayLocal);
         break;
 
       case GEN_COL_RAINBOW_SOLID: //Rainbow Solid
-        colorArray[i] = Wheel(frame*2);
+        colorArray[i] = Wheel(frame*globalDelayLocal);
         break;
 
       case GEN_COL_SOLID: //Solid
@@ -75,21 +77,21 @@ void generateColor() {
 
       case GEN_COL_PLASMA:
         float ypi = y*PI;
-        float xpi = x*PI/8f;
+        float xpi = x*PI/globalDelayLocal;
         int c=int(sin(ypi+plasmaY)*16+sin(ypi*1.5f+PI/6+plasmaY)*16+cos(xpi+plasmaX)*16+cos(xpi*2f+PI/2+plasmaX)*25)+32;
         c=constrain(c, 0, 99);
         colorArray[i]=plasma[c];
-        plasmaX+=0.01;
+        plasmaX+=globalDelayPlasma;
         break;
 
       case GEN_COL_PULSE:
         int ofs = i+frame;
-        int xorR = (frame<<4)%256; 
+        int xorR = (frame*globalDelayLocal)%256; 
         int xorB = (frame*i)%256;
         int xorG = 255-xorR;
         colorArray[i]=color(xorR, xorG, xorB);
         break;
-        
+
       case GEN_COL_SLIDER:
         ofs = i+frame;
         xorR = ((i*ofs))%256; 
@@ -97,26 +99,26 @@ void generateColor() {
         xorG = (xorR+xorB)>>1;
         colorArray[i]=color(xorR, xorG, xorB);
         break;
-        
-      case GEN_COL_XXX:        
-        if (y>0) {
-           colorArray[i] = WheelInv(frame-a*8);
-        } else {
-           colorArray[i] = Wheel(frame-a*8);          
-        }
-        a+=1;
-      
-//        ofs = i+frame;
-//        xorG=xorB=xorR = (frame<<4)%256; 
 
-        //        int xorR = ((frame*frame)>>4)%256; 
-        //        int xorG = (frame*i)%256;
-        //        int xorB = ((i*ofs)^ofs)%256;
+      case GEN_COL_GLACE:
+        if (y>0) {
+          colorArray[i] = WheelInv((frame+x+y)*globalDelayLocal);
+        } 
+        else {
+          colorArray[i] = Wheel((frame+x+y)*globalDelayLocal);
+        }
+        break;
+
+      case GEN_COL_XXX:        
+        ofs = i+frame;
+        xorR = ((frame*frame)>>4)%256; 
+        xorG = (frame*i)%256;
+        xorB = ((i*ofs)^ofs)%256;
 
         //        int xorR = ((i*frame)^ofs)%256;
         //        int xorG = (ofs^i)%256;
         //        int xorB = (ofs^frame)%256;
-//        colorArray[i]=color(xorR, xorG, xorB);
+        colorArray[i]=color(xorR, xorG, xorB);
         break;
       }
     }
@@ -168,13 +170,13 @@ void setupColor() {
 //fire fx
 void updateFireBuffer() {
   int ofs;
-
+  int localRnd = globalDelay;
   //seed
   for (int y=0; y<NR_OF_PIXELS_Y; y++) {
     ofs = y*(NR_OF_PIXELS_X+FIRE_BUFFER);
-    int rnd = int(random(16));
+    int rnd = int(random(globalDelay));
     /* the lower the value, the intense the fire, compensate a lower value with a higher decay value*/
-    if (rnd > 8) {
+    if (rnd > globalDelay/2) {
       fireBuffer[ofs] = 255;
     } 
     else {

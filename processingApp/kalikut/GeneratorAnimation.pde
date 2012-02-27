@@ -9,14 +9,16 @@ private static final int GEN_ANIM_FUNNY = 6;
 private static final int GEN_ANIM_HOTEL = 7;
 private static final int GEN_ANIM_KNIGHTRIDER = 8;
 private static final int GEN_ANIM_FLIPPER = 9;
+private static final int GEN_ANIM_FADER = 10;
 
-private static final int MAX_ANIMATION = 9;
+private static final int MAX_ANIMATION = 10;
 
 private List<Integer[]> funnyWords;
 private int selectedRandomChar = 0;
 private int selectedRandomWord = 0;
 private int krDirection = 0;
 private int krPos = 0;
+private int hotelRandom;
 
 void generateAnimation() {
 
@@ -25,13 +27,13 @@ void generateAnimation() {
     return;
   }
 
-  if (frame%10==1) {
+  if (frame%globalDelay==1) {
     selectedRandomChar = int(random(STR_KALIKUT.length()));
     selectedRandomWord = int(random(funnyWords.size()));
+    hotelRandom=int(random(25));    
   }
 
-  int hotelRandom=int(random(25));
-
+  int fadrCol = color((frame<<4)%256, (frame<<4)%256, (frame<<4)%256); 
 
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
     for (int y=0; y<NR_OF_PIXELS_Y; y++) {
@@ -98,7 +100,10 @@ void generateAnimation() {
         if ((frame-i>>2)%2==1) {
           colorArray[i] = color(0, 0, 0);
         } 
+        break;
 
+      case GEN_ANIM_FADER:
+        colorArray[i] = blendColor(fadrCol, 0xff000000 | colorArray[i], MULTIPLY);
         break;
       }
     }
@@ -114,7 +119,7 @@ void generateAnimation() {
     break;
 
   case GEN_ANIM_KNIGHTRIDER:
-    if (frame%5==1) {
+    if (frame%globalDelay==1) {
       if (krDirection == 0) {
         krPos++;
         if (krPos == 7) {
