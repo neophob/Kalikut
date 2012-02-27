@@ -180,7 +180,9 @@ void controlEvent(ControlEvent theEvent) {
 
   if (theEvent.isFrom(fpsSlider)) {
     globalDelay = 2+int(18*fpsSlider.getValue());
-    println("framerate: "+globalDelay);
+    globalDelayInv = 21-globalDelay;
+    
+    println("INV: "+globalDelayInv);
   }
 
   if (theEvent.isFrom(allColorSlider)) {

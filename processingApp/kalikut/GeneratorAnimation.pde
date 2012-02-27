@@ -19,6 +19,7 @@ private int selectedRandomWord = 0;
 private int krDirection = 0;
 private int krPos = 0;
 private int hotelRandom;
+private int stroboCount;
 
 void generateAnimation() {
 
@@ -27,13 +28,23 @@ void generateAnimation() {
     return;
   }
 
-  if (frame%globalDelay==1) {
-    selectedRandomChar = int(random(STR_KALIKUT.length()));
-    selectedRandomWord = int(random(funnyWords.size()));
-    hotelRandom=int(random(25));    
+  int globalDelayLocal = globalDelayInv/2;
+  if (globalDelayLocal==0) {
+    globalDelayLocal = 1;
+  }
+  int globalDelayLocal4 = 1+globalDelayInv/6;
+  if (globalDelayLocal4==0) {
+    globalDelayLocal4 = 1;
   }
 
-  int fadrCol = color((frame<<4)%256, (frame<<4)%256, (frame<<4)%256); 
+
+  if (frame%globalDelayInv==0) {
+    selectedRandomChar = int(random(STR_KALIKUT.length()));
+    selectedRandomWord = int(random(funnyWords.size()));
+    hotelRandom = int(random(25));
+  }
+
+  int fadrCol = color((frame*globalDelay)%256, (frame*globalDelay)%256, (frame*globalDelay)%256); 
 
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
     for (int y=0; y<NR_OF_PIXELS_Y; y++) {
@@ -42,13 +53,13 @@ void generateAnimation() {
       switch(genAnim) {
 
       case GEN_ANIM_STROBO1:
-        if (((frame-x)>>4)%2==1) {
+        if (((frame-x)/globalDelayInv)%2==0) {
           colorArray[i] = color(0, 0, 0);
         } 
         break;
 
       case GEN_ANIM_STROBO2:
-        if ((frame-x>>1)%2==1) {
+        if (((frame-x)>>globalDelayLocal4)%2==0) {
           colorArray[i] = color(0, 0, 0);
         } 
         break;
@@ -60,7 +71,7 @@ void generateAnimation() {
         break;
 
       case GEN_ANIM_ONE_CHAR:
-        if ((frame/4-x)%STR_KALIKUT.length()!=1) {
+        if ((frame/globalDelayLocal-x)%STR_KALIKUT.length()!=1) {
           colorArray[i] = color(0, 0, 0);
         }
         break;
@@ -119,7 +130,7 @@ void generateAnimation() {
     break;
 
   case GEN_ANIM_KNIGHTRIDER:
-    if (frame%globalDelay==1) {
+    if (frame%globalDelayInv==0) {
       if (krDirection == 0) {
         krPos++;
         if (krPos == 7) {

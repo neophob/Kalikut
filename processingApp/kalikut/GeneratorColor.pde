@@ -26,7 +26,7 @@ void generateColor() {
     updateFireBuffer();
   }
 
-  if (frame%globalDelay==1) {
+  if (frame%globalDelayInv==0) {
     for (int x=0; x<NR_OF_PIXELS_X; x++) {
       int rnd = int(random(3));
       switch (rnd) {
@@ -86,7 +86,7 @@ void generateColor() {
 
       case GEN_COL_PULSE:
         int ofs = i+frame;
-        int xorR = (frame*globalDelayLocal)%256; 
+        int xorR = (frame*globalDelay)%256; 
         int xorB = (frame*i)%256;
         int xorG = 255-xorR;
         colorArray[i]=color(xorR, xorG, xorB);
@@ -94,7 +94,7 @@ void generateColor() {
 
       case GEN_COL_SLIDER:
         ofs = i+frame;
-        xorR = ((i*ofs))%256; 
+        xorR = (i*ofs)%256; 
         xorB = ((i*ofs)^frame)%256;
         xorG = (xorR+xorB)>>1;
         colorArray[i]=color(xorR, xorG, xorB);
