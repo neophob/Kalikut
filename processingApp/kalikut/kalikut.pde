@@ -68,7 +68,7 @@ void setup() {
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();
-  //initSerial();
+  initSerial();
   initLetter();
 
   /* start oscP5, listening for incoming messages at port 12000 */
@@ -100,7 +100,7 @@ void draw() {
   //send serial data if initialized and wait at least 19ms before sending again
   if (initialized && System.currentTimeMillis()-lastSendTime > 25) {    
     lastSendTime = System.currentTimeMillis();
-    //println(lastSendTime+" send: "+colorArray.length);
+    println(lastSendTime+" send: "+colorArray.length);
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
   }
   frame++;

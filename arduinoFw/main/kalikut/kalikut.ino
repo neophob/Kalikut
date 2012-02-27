@@ -258,7 +258,7 @@ void updatePixelsv2(byte ofs, byte* buffer) {
   byte src=0;
 
   //v2: two segments per letter
-  for (byte i=0; i < TOTAL_LETTERS; i++) {
+  for (byte i=0; i < TOTAL_LETTERS*2; i++) {
     color = buffer[src]<<8 | buffer[src+1];
     for (byte n=0; n < segmentSize[i]; n++) {
       //two bytes per pixel

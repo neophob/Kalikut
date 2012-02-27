@@ -84,7 +84,7 @@ void generateColor() {
 
       case GEN_COL_PULSE:
         int ofs = i+frame;
-        int xorR = ((frame*frame)>>6)%256; 
+        int xorR = (frame<<4)%256; 
         int xorB = (frame*i)%256;
         int xorG = 255-xorR;
         colorArray[i]=color(xorR, xorG, xorB);
@@ -100,8 +100,8 @@ void generateColor() {
         
       case GEN_COL_XXX:
         ofs = i+frame;
-        xorB = ((i*frame)^ofs)%256; 
-        xorG = (ofs^i)%256;
+        xorG = ((1+x)*(1+y)*ofs)%256; 
+        xorB = (ofs*(x+1))%256;
         xorR = (xorG+xorB)>>1;
 
         //        int xorR = ((frame*frame)>>4)%256; 
