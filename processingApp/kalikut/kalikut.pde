@@ -90,9 +90,6 @@ void draw() {
   //generate buffer content
   generator();
 
-  //tint buffer
-  tintBuffer();
-
   //display some audio stuff
   drawBeatStatus();
 

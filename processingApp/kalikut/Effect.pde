@@ -7,6 +7,11 @@ void initGenerator() {
 void generator() {
 
   generateColor();
+  
+    //tint buffer
+  tintBuffer();
+
+
   generateAnimation();
   generateSound();
 }

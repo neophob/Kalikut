@@ -39,11 +39,13 @@ void initGui() {
                           .addItem("One Char", GEN_ANIM_ONE_CHAR)
                             .addItem("Random Char", GEN_ANIM_RANDOM_CHAR)
                               .addItem("Funny", GEN_ANIM_FUNNY)
-                                .addItem("Hotel", GEN_ANIM_HOTEL)
+                                //.addItem("Hotel", GEN_ANIM_HOTEL)
                                   .addItem("KnightRider", GEN_ANIM_KNIGHTRIDER)
                                     .addItem("Flipper", GEN_ANIM_FLIPPER)
                                       .addItem("Fader", GEN_ANIM_FADER)
-                                        .activate(0);
+                                        .addItem("Inverter", GEN_ANIM_INVERTER)
+                                          .addItem("ColorRotate", GEN_ANIM_ROTATOR)
+                                            .activate(0);
 
   soundButton = cp5.addRadioButton("soundButton")
     .setPosition(20, 320)
@@ -181,7 +183,7 @@ void controlEvent(ControlEvent theEvent) {
   if (theEvent.isFrom(fpsSlider)) {
     globalDelay = 2+int(18*fpsSlider.getValue());
     globalDelayInv = 21-globalDelay;
-    
+
     println("INV: "+globalDelayInv);
   }
 

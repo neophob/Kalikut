@@ -10,15 +10,16 @@ private static final int GEN_ANIM_HOTEL = 7;
 private static final int GEN_ANIM_KNIGHTRIDER = 8;
 private static final int GEN_ANIM_FLIPPER = 9;
 private static final int GEN_ANIM_FADER = 10;
+private static final int GEN_ANIM_INVERTER = 11;
+private static final int GEN_ANIM_ROTATOR = 12;
 
-private static final int MAX_ANIMATION = 10;
+private static final int MAX_ANIMATION = 12;
 
 private List<Integer[]> funnyWords;
 private int selectedRandomChar = 0;
 private int selectedRandomWord = 0;
 private int krDirection = 0;
 private int krPos = 0;
-private int hotelRandom;
 private int stroboCount;
 
 void generateAnimation() {
@@ -41,7 +42,6 @@ void generateAnimation() {
   if (frame%globalDelayInv==0) {
     selectedRandomChar = int(random(STR_KALIKUT.length()));
     selectedRandomWord = int(random(funnyWords.size()));
-    hotelRandom = int(random(25));
   }
 
   int fadrCol = color((frame*globalDelay)%256, (frame*globalDelay)%256, (frame*globalDelay)%256); 
@@ -65,9 +65,7 @@ void generateAnimation() {
         break;
 
       case GEN_ANIM_HOTEL:
-        if (x==4 && hotelRandom==2 || x==6 && hotelRandom==4) {
-          colorArray[i] = color(0, 0, 0);
-        }
+      //TODO
         break;
 
       case GEN_ANIM_ONE_CHAR:
@@ -108,7 +106,7 @@ void generateAnimation() {
           } 
           break;
         }
-        if ((frame-i>>2)%2==1) {
+        if (((frame-i)/globalDelayInv)%2==0) {
           colorArray[i] = color(0, 0, 0);
         } 
         break;
@@ -116,6 +114,27 @@ void generateAnimation() {
       case GEN_ANIM_FADER:
         colorArray[i] = blendColor(fadrCol, 0xff000000 | colorArray[i], MULTIPLY);
         break;
+
+      case GEN_ANIM_INVERTER:
+        if (y>0) {
+          int col = colorArray[i];
+          int rr=255-((col>>16)&0xff);
+          int gg=255-((col>>8)&0xff);
+          int bb=255-(col&0xff);
+          colorArray[i] = color(rr, gg, bb);          
+        }
+        break;
+
+      case GEN_ANIM_ROTATOR:
+        if (y>0) {
+          int col = colorArray[i];
+          int rr=255-((col>>16)&0xff);
+          int gg=255-((col>>8)&0xff);
+          int bb=255-(col&0xff);
+          colorArray[i] = color(gg, bb, rr);
+        }
+        break;
+
       }
     }
   }
