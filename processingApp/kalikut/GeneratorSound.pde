@@ -7,6 +7,10 @@ private static final int GEN_SND_VOLUME2 = 4;
 
 private static final int MAX_SOUND = 4;
 
+private static final int SOUND_DELAY_IN_MS = 250;
+
+private long lastSoundFader = 0;
+
 void generateSound() {
 
   if (genSnd == GEN_SND_NOTHING) {
@@ -19,29 +23,49 @@ void generateSound() {
 
   case GEN_SND_BEAT: //Beat
     if (beat.isKick() || beat.isHat() || beat.isSnare()) {
-      sndCol = color(255, 255, 255);
+      sndCol = 255;
+      lastSoundFader = System.currentTimeMillis();
     } 
     else {
-      sndCol = color(0, 0, 0);
+      sndCol = 0;
     }
     break;
 
   case GEN_SND_VOLUME: //volume
-    int c = int(in.mix.level()*soundSensitive.getValue());
-    if (c>255) c=255;
-    sndCol = color(c, c, c);
+    sndCol = int(in.mix.level()*soundSensitive.getValue());
+    if (sndCol>255) {
+      sndCol=255;
+    }
+    if (sndCol>10) {
+      lastSoundFader = System.currentTimeMillis();
+    }
     break;
-    
-   case GEN_SND_VOLUME2:
-    c = int(in.mix.level()*soundSensitive.getValue());
-    if (c>128) c=255; else c=0;
-    sndCol = color(c, c, c);
+
+  case GEN_SND_VOLUME2:
+    sndCol = int(in.mix.level()*soundSensitive.getValue());
+    if (sndCol>128) {
+      sndCol=255;
+      lastSoundFader = System.currentTimeMillis();
+    } 
+    else {
+      sndCol=0;
+    }
     break;
   }
+
+  long delaySinceLastBang = System.currentTimeMillis() - lastSoundFader;
+  if (delaySinceLastBang < SOUND_DELAY_IN_MS) { //fade 
+    sndCol += SOUND_DELAY_IN_MS-delaySinceLastBang;
+    if (sndCol > 255) {
+      sndCol = 255;
+    }
+  }
+
+  sndCol = color(sndCol, sndCol, sndCol);
 
   for (int i=0; i<colorArray.length; i++) {
     int blendedColor = blendColor(sndCol, 0xff000000 | colorArray[i], MULTIPLY);
     colorArray[i] = blendedColor;
   }
-
 }
+
