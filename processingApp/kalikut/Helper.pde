@@ -14,6 +14,20 @@ color Wheel(int WheelPos) {
   }
 }
 
+color WheelInv(int WheelPos) {
+  WheelPos %= 255;
+  if (WheelPos < 85) {
+    return color(255-WheelPos * 3, WheelPos * 3, 255);
+  } 
+  else if (WheelPos < 170) {
+    WheelPos -= 85;
+    return color(WheelPos * 3, 255, 255-WheelPos * 3);
+  } 
+  else {
+    WheelPos -= 170; 
+    return color(255, 255-WheelPos * 3, WheelPos * 3);
+  }
+}
 
 
 //colorize buffer

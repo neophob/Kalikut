@@ -98,9 +98,16 @@ void generateColor() {
         colorArray[i]=color(xorR, xorG, xorB);
         break;
         
-      case GEN_COL_XXX:
-        ofs = i+frame;
-        xorG=xorB=xorR = (frame<<4)%256; 
+      case GEN_COL_XXX:        
+        if (y>0) {
+           colorArray[i] = WheelInv(frame-a*8);
+        } else {
+           colorArray[i] = Wheel(frame-a*8);          
+        }
+        a+=1;
+      
+//        ofs = i+frame;
+//        xorG=xorB=xorR = (frame<<4)%256; 
 
         //        int xorR = ((frame*frame)>>4)%256; 
         //        int xorG = (frame*i)%256;
@@ -109,7 +116,7 @@ void generateColor() {
         //        int xorR = ((i*frame)^ofs)%256;
         //        int xorG = (ofs^i)%256;
         //        int xorB = (ofs^frame)%256;
-        colorArray[i]=color(xorR, xorG, xorB);
+//        colorArray[i]=color(xorR, xorG, xorB);
         break;
       }
     }

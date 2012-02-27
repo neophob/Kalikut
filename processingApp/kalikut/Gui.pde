@@ -55,7 +55,8 @@ void initGui() {
                     .addItem("Nada", GEN_SND_NOTHING)
                       .addItem("Beat Detection", GEN_SND_BEAT)
                         .addItem("Volume", GEN_SND_VOLUME)
-                          .activate(0);
+                          .addItem("Volume Border", GEN_SND_VOLUME2)
+                            .activate(0);
 
   cp = cp5.addColorPicker("picker")
     .setPosition(20, 380)

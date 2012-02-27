@@ -52,7 +52,7 @@ private PImage logoImg;
 void setup() {
   size(800, 500);
   background(0);
-  frameRate(25);
+  frameRate(20);
   smooth();
   
   // Load the font. Fonts must be placed within the data 
@@ -112,3 +112,4 @@ void draw() {
 
 //FX: Voll da, voll weg,  snake,  stobo halb unten und oben
 
+//SND: bei beat oder volume, nachdem voll detection war, langsam rausfaden
