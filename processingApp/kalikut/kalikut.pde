@@ -97,12 +97,18 @@ void draw() {
 
   drawLetter();
 
-  //send serial data if initialized and wait at least 19ms before sending again
-  if (initialized && System.currentTimeMillis()-lastSendTime > 25) {    
-    lastSendTime = System.currentTimeMillis();
+  //send serial data if initialized and wait at least 45ms before sending again
+  if (initialized && System.currentTimeMillis()-lastSendTime > 50) {    
     println(lastSendTime+" send: "+colorArray.length);
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
+    lastSendTime = System.currentTimeMillis();
   }
   frame++;
 }
+
+
+
+//COL: florida, gelb + rosa
+
+//FX: Voll da, voll weg,  snake,  stobo halb unten und oben
 

@@ -57,7 +57,7 @@ void generateColor() {
         break;
 
       case GEN_COL_RAINBOW_SOLID: //Rainbow Solid
-        colorArray[i] = Wheel(frame);
+        colorArray[i] = Wheel(frame*2);
         break;
 
       case GEN_COL_SOLID: //Solid
@@ -100,9 +100,7 @@ void generateColor() {
         
       case GEN_COL_XXX:
         ofs = i+frame;
-        xorG = ((1+x)*(1+y)*ofs)%256; 
-        xorB = (ofs*(x+1))%256;
-        xorR = (xorG+xorB)>>1;
+        xorG=xorB=xorR = (frame<<4)%256; 
 
         //        int xorR = ((frame*frame)>>4)%256; 
         //        int xorG = (frame*i)%256;

@@ -83,26 +83,44 @@ const byte modulesPerLetter[TOTAL_LETTERS] = {
 //each letter is splitted up in two segments, a lower and a higher
 //"now" uses only lower segment
 const uint16_t pixelOffsetForSplittetLetter[16][15] = {
-  { 0, 1, 2,13,14,15},                { 3, 4, 5, 6, 7, 8, 9,10,11,12},  //K
-  {16,17,18,26,27,28,29,30},          {19,20,21,22,23,24,25},           //A
-  {35,36,37,38,39,40},                {31,32,33,34},                    //L
-  {46,47,48,49,50},                   {41,42,43,44,45},                 //I
-  {51,52,53,64,65,66},                {54,55,56,57,58,59,60,61,62,63},  //K
-  {71,72,73,74,75,76,77},             {67,68,69,70,78,79,80,81},        //U
-  {90,91,92},                         {82,83,84,85,86,87,88,89},        //T
-  {93,94,95,96,97,98,99,100,101,102,103,104,105,106,107}, {}            //NOW};
+  { 0, 1, 2,13,14,15},                //K
+  {16,17,18,26,27,28,29,30},          //A
+  {35,36,37,38,39,40},                //L
+  {46,47,48,49,50},                   //I
+  {51,52,53,64,65,66},                //K
+  {71,72,73,74,75,76,77},             //U
+  {90,91,92},                         //T
+  {93,94,95,96,97,98,99,100,101,102,103,104,105,106,107}, //NOW
+  
+  { 3, 4, 5, 6, 7, 8, 9,10,11,12},  //K
+  {19,20,21,22,23,24,25},           //A
+  {31,32,33,34},                    //L
+  {41,42,43,44,45},                 //I
+  {54,55,56,57,58,59,60,61,62,63},  //K
+  {67,68,69,70,78,79,80,81},        //U
+  {82,83,84,85,86,87,88,89},        //T
+  {}            //NOW};
 };
 
 //how many modules per segment
 const byte segmentSize[16] = {
-  6,  10, //K
-  8,  7,  //A
-  6,  4,  //L
-  5,  5,  //I
-  6,  10, //K
-  7,  8,  //U
-  3,  8,  //T
-  15, 0
+  6,  
+  8,  
+  6,  
+  5,  
+  6,  
+  7,  
+  3,  
+  15,
+  
+  10, //K
+  7,  //A
+  4,  //L
+  5,  //I
+  10, //K
+  8,  //U
+  8,  //T
+  0
 };/**/
 
 
@@ -164,7 +182,7 @@ void setup() {
   Serial.begin(BAUD_RATE); //Setup high speed Serial
   Serial.flush();
 
-  strip.setCPUmax(80);  // start with 50% CPU usage. up this if the strand flickers or is slow  
+  strip.setCPUmax(95);  // start with 50% CPU usage. up this if the strand flickers or is slow  
   strip.begin();        // Start up the LED counter
 
   showInitImage();      // display some colors
