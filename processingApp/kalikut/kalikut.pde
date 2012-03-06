@@ -69,11 +69,11 @@ void setup() {
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();
-  //initSerial();
+//  initSerial();
   initLetter();
 
   /* start oscP5, listening for incoming messages at port 12000 */
-  //oscP5 = new OscP5(this, OSC_PORT);
+//  oscP5 = new OscP5(this, OSC_PORT);
   updateTextfield("OSC Server startet on port "+ OSC_PORT);
 }
 
@@ -82,10 +82,6 @@ void draw() {
   background(0);
   
   drawGradientBackground();
-
-  drawBackgroundSlide(195, 51);
-  drawBackgroundSlide(255, 51);
-  drawBackgroundSlide(315, 51);
     
   //generate buffer content
   generator();

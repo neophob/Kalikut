@@ -1,36 +1,40 @@
-#N canvas 0 22 668 541 10;
+#N canvas 429 157 668 541 10;
 #X obj 244 298 cnv 15 100 40 empty empty empty 20 12 0 14 -4034 -66577
 0;
 #X floatatom 311 344 5 0 0 0 - - -;
 #X obj 247 310 mrpeach/packOSC;
-#X msg 41 263 connect 127.0.0.1 12000;
 #X msg 265 387 disconnect;
 #X obj 246 426 mrpeach/udpsend;
-#X obj 285 2 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -258113
--1 -1 10400 1;
-#X obj 320 2 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -4034 -1
+#X obj 442 7 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -258113
+-1 -1 10100 1;
+#X obj 490 8 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -4034 -1
 -1 0 1;
-#X obj 358 2 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -4160 -1
+#X obj 528 8 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -4160 -1
 -1 0 1;
-#X msg 278 241 sendtyped /knbg f \$1;
-#X msg 264 167 sendtyped /knbr f \$1;
-#X msg 358 218 sendtyped /knbb f \$1;
-#X obj 264 144 pack f;
-#X obj 278 218 pack f;
-#X obj 358 195 pack f;
-#X text 87 53 switch to next mode;
-#X msg 75 35 sendtyped /mode i 1;
-#X connect 2 0 5 0;
+#X msg 448 247 sendtyped /knbg f \$1;
+#X msg 434 173 sendtyped /knbr f \$1;
+#X msg 528 224 sendtyped /knbb f \$1;
+#X obj 434 150 pack f;
+#X obj 448 224 pack f;
+#X obj 528 201 pack f;
+#X msg 41 263 connect 127.0.0.1 10000;
+#X msg 146 31 sendtyped /colormode i 1;
+#X text 87 53;
+#X msg 185 68 sendtyped /animationmode i 1;
+#X msg 221 100 sendtyped /soundmode i 1;
+#X connect 2 0 4 0;
 #X connect 2 1 1 0;
-#X connect 3 0 5 0;
-#X connect 4 0 5 0;
+#X connect 3 0 4 0;
+#X connect 5 0 11 0;
 #X connect 6 0 12 0;
 #X connect 7 0 13 0;
-#X connect 8 0 14 0;
+#X connect 8 0 2 0;
 #X connect 9 0 2 0;
 #X connect 10 0 2 0;
-#X connect 11 0 2 0;
-#X connect 12 0 10 0;
-#X connect 13 0 9 0;
-#X connect 14 0 11 0;
-#X connect 16 0 2 0;
+#X connect 11 0 9 0;
+#X connect 12 0 8 0;
+#X connect 13 0 10 0;
+#X connect 14 0 4 0;
+#X connect 15 0 2 0;
+#X connect 17 0 2 0;
+#X connect 18 0 2 0;

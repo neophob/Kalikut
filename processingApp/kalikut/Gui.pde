@@ -203,19 +203,18 @@ void controlEvent(ControlEvent theEvent) {
   }
 }
 
+int slideBackground = color(48, 48, 48);
+
 //draw some rectangles
 void drawBackgroundSlide(int ypos, int ysize) {
-  this.loadPixels();	
-  int col = color(48, 48, 48);
 
   int ofs=this.width*ypos;
   for (int y=0; y<ysize; y++) {
     for (int x=10; x<this.width-80; x++) {
-      this.pixels[ofs+x] = col;
+      this.pixels[ofs+x] = slideBackground;
     }
     ofs += this.width;
   }
-  this.updatePixels();
 }
 
 //draw background
@@ -230,6 +229,11 @@ void drawGradientBackground() {
     }
     ofs += this.width;
   }
+  
+  drawBackgroundSlide(195, 51);
+  drawBackgroundSlide(255, 51);
+  drawBackgroundSlide(315, 51);
+
   this.updatePixels();
 }
 
