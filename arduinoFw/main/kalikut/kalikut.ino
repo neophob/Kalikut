@@ -157,7 +157,7 @@ byte serInStr[4*TOTAL_LETTERS+SERIAL_HEADER_SIZE]; //*2 is only needed for v2
 // Teensy 2.0 ++: 22/23
 // Arduino 2/3
 int dataPin = 22;       // 'green' wire
-int clockPin =23;      // 'blue' wire
+int clockPin =21;      // 'blue' wire
 
 //initialize pixels
 LPD6803 strip = LPD6803(TOTAL_MODULES, dataPin, clockPin);

@@ -16,7 +16,7 @@ private static final String STR_KALIKUT = "KALIKUTn";
 private static final int NR_OF_PIXELS_X = STR_KALIKUT.length();
 private static final int NR_OF_PIXELS_Y = 2;
 private static final int OSC_PORT = 10000;
-private static final String VERSION = "KALIKUT v0.4";
+private static final String VERSION = "KALIKUT v0.5";
 
 private PFont fontA;
 private int frame;
@@ -92,7 +92,7 @@ void draw() {
   drawLetter();
 
   //send serial data if initialized and wait at least 45ms before sending again
-  if (initialized && System.currentTimeMillis()-lastSendTime > 50) {    
+  if (initialized && System.currentTimeMillis()-lastSendTime > 8) {    
     println(lastSendTime+" send: "+colorArray.length);
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
     lastSendTime = System.currentTimeMillis();

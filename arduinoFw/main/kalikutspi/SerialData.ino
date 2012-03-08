@@ -9,7 +9,7 @@ static void sendAck() {
   Serial.write(serialResonse, SERIALBUFFERSIZE);
 
   //comment out next line on arduino!
-  //Serial.send_now();
+  Serial.send_now();
 }
 
 

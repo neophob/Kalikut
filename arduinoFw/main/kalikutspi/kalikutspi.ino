@@ -3,7 +3,7 @@
  * Tested on Teensy and Arduino
  * 
  * This file is part of PixelController.
- *
+ * 
  * PixelController is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
@@ -25,9 +25,7 @@
 #include <SPI.h>
 #include "Neophob_LPD6803.h"
 
-//to draw a frame we need arround 20ms to send an image. the serial baudrate is
-//NOT the bottleneck. 
-//#define BAUD_RATE 230400//
+//should be ignored on the teensy
 #define BAUD_RATE 115200
 
 //--- protocol data start
