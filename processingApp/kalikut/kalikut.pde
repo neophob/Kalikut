@@ -92,7 +92,7 @@ void draw() {
   drawLetter();
 
   //send serial data if initialized and wait at least 45ms before sending again
-  if (initialized && System.currentTimeMillis()-lastSendTime > 8) {    
+  if (initialized && System.currentTimeMillis()-lastSendTime > 28) {    
     println(lastSendTime+" send: "+colorArray.length);
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
     lastSendTime = System.currentTimeMillis();

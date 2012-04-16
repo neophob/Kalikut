@@ -22,6 +22,12 @@
 
 //the lpd6803 library needs the timer1 library
 #include <TimerOne.h>
+
+//8MHZ, only the firstcharacter works
+//2MHZ, better
+//1MHZ, even better
+//0.5 MHZ, very good!
+//0.25 MHZ, quite slow, unusable
 #include <SPI.h>
 #include "Neophob_LPD6803.h"
 
@@ -156,8 +162,8 @@ byte serInStr[4*TOTAL_LETTERS+SERIAL_HEADER_SIZE]; //*2 is only needed for v2
 // Choose which 2 pins you will use for output. Can be any valid output pins.
 // Teensy 2.0 ++: 22/23
 // Arduino 2/3
-int dataPin = 22;       // 'green' wire
-int clockPin =23;      // 'blue' wire
+//int dataPin = 22;       // 'green' wire
+//int clockPin =23;      // 'blue' wire
 
 //initialize pixels
 Neophob_LPD6803 strip = Neophob_LPD6803(TOTAL_MODULES);
@@ -182,8 +188,9 @@ void setup() {
   Serial.begin(BAUD_RATE); //Setup high speed Serial
   Serial.flush();
 
-  strip.setCPUmax(90);  // start with 50% CPU usage. up this if the strand flickers or is slow  
-  strip.begin();        // Start up the LED counter
+  strip.setCPUmax(80);  // start with 50% CPU usage. up this if the strand flickers or is slow  
+  strip.begin(SPI_CLOCK_DIV32);        // Start up the LED counterm 0.5MHz
+//  strip.begin(SPI_CLOCK_DIV16);        // Start up the LED counterm 1.0MHz  
   strip.show();
   showInitImage();      // display some colors
 

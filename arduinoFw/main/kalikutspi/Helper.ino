@@ -50,7 +50,7 @@ void rainbow() {
   }    
 
       strip.show();
-  delay(50);  //remove this delay to check the max cpu setting
+  delay(8);  //remove this delay to check the max cpu setting
 
 /*
   k++;
