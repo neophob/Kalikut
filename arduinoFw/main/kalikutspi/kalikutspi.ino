@@ -188,9 +188,11 @@ void setup() {
   Serial.begin(BAUD_RATE); //Setup high speed Serial
   Serial.flush();
 
-  strip.setCPUmax(80);  // start with 50% CPU usage. up this if the strand flickers or is slow  
-  strip.begin(SPI_CLOCK_DIV32);        // Start up the LED counterm 0.5MHz
-//  strip.begin(SPI_CLOCK_DIV16);        // Start up the LED counterm 1.0MHz  
+  strip.setCPUmax(25);  // start with 50% CPU usage. up this if the strand flickers or is slow  //
+//  strip.begin(SPI_CLOCK_DIV128);        // Start up the LED counterm 0.25MHz - 4uS
+//  strip.begin(SPI_CLOCK_DIV64);        // Start up the LED counterm 0.25MHz - 4uS
+  strip.begin(SPI_CLOCK_DIV32);        // Start up the LED counterm 0.5MHz - 2uS
+//  strip.begin(SPI_CLOCK_DIV16);        // Start up the LED counterm 1.0MHz - 1uS
   strip.show();
   showInitImage();      // display some colors
 

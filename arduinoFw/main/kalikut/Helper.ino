@@ -37,7 +37,7 @@ int ff;
 void rainbow() {
   
     ff++;
-  if (ff>32) ff=0;
+  if (ff>31) ff=0;
 
   for (int i=0; i < strip.numPixels(); i++) {
     //strip.setPixelColor(i, Wheel( i % 96));
@@ -50,7 +50,7 @@ void rainbow() {
   }    
 
       strip.show();
-  delay(80);  //remove this delay to check the max cpu setting
+  delay(8);  //remove this delay to check the max cpu setting
 
 /*
   k++;
