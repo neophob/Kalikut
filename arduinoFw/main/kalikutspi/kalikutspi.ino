@@ -308,10 +308,10 @@ void loop() {
         updatePixelsv4(cmd);
         g_errorCounter = 0;
       } 
-    else{
-      g_errorCounter=100;
-    }
-    break;
+      else {
+        g_errorCounter=100;
+      }
+      break;
 
   case CMD_PING:
     //just send the ack!
@@ -355,7 +355,6 @@ void updatePixelsv1(byte* buffer) {
 void updatePixelsv2(byte* buffer) {
   uint16_t color;
   byte src=0;
-  byte dst=0;
 
   //v2: two segments per letter
   for (byte i=0; i < TOTAL_LETTERS*2; i++) {
@@ -376,14 +375,14 @@ void updatePixelsv2(byte* buffer) {
 void updatePixelsv4(byte* buffer) {
   uint16_t color;
   byte src=0;
-  byte dst=0;
 
   //v4: four segments per letter
   for (byte i=0; i < TOTAL_LETTERS*4; i++) {
     color = buffer[src]<<8 | buffer[src+1];
     for (byte n=0; n < segmentSizeForFourColorsPerLetter[i]; n++) {
       //two bytes per pixel
-      strip.setPixelColor(pixelOffsetForFourColorsPerLetter[i][n], color);
+//      strip.setPixelColor(pixelOffsetForFourColorsPerLetter[i][n], color);
+strip.setPixelColor(0, color);
     }        
     src+=2;
   }
