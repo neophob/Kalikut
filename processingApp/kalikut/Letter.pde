@@ -1,4 +1,10 @@
 private PGraphics pg;
+
+//pixel size of the font
+private static final int FONT_HEIGHT = 84;
+//y offset where the image begins
+private static final int FONT_Y_OFS = 26;
+
 private static final int IMAGE_Y_SIZE = 120;
 private int totalWidth = 0; 
 
@@ -49,9 +55,11 @@ public void drawLetter() {
   pg.noStroke();
   pg.background(0);
 
-  int ydelta = IMAGE_Y_SIZE/NR_OF_PIXELS_Y+6;
+//  int ydelta = IMAGE_Y_SIZE/NR_OF_PIXELS_Y+6;
+  int ydelta = FONT_HEIGHT/NR_OF_PIXELS_Y;
+  
   int xofs=0;
-  int yofs=0;
+  int yofs=FONT_Y_OFS; //26 is the y ofset of the font
   int srcOfs=0;
   
   for (int y=0; y<NR_OF_PIXELS_Y; y++) {
@@ -62,7 +70,7 @@ public void drawLetter() {
       //special handle the now here, now has only one segment
       if (x==NR_OF_PIXELS_X-1) {
         if (y==0) {
-          pg.rect(xofs, 0, letterWidth[x], IMAGE_Y_SIZE);
+          pg.rect(xofs, FONT_Y_OFS, letterWidth[x], FONT_HEIGHT);
         }
       } 
       else {
