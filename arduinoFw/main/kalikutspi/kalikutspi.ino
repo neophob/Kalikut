@@ -37,9 +37,6 @@
 #define START_OF_DATA 0x10 
 #define END_OF_DATA 0x20
 
-//frame size for specific color resolution
-//32pixels * 2 byte per color (15bit - one bit wasted)
-//#define COLOR_5BIT_FRAME_SIZE 64
 #define SERIAL_HEADER_SIZE 5
 //--- protocol data end
 
@@ -107,7 +104,7 @@ const byte segmentSizeForTwoColorsPerLetter[16] = {
   7,  
   3,  
   15,
-  
+
   10, //K
   7,  //A
   4,  //L
@@ -118,6 +115,83 @@ const byte segmentSizeForTwoColorsPerLetter[16] = {
   0
 };
 
+
+const uint16_t pixelOffsetForFourColorsPerLetter[32][15] = {
+  {0,1,14,15},                //K
+  {16,17,27,28},          //A
+  {37,38,39,40},                //L
+  {48,49,50},                   //I
+  {51,52,65,66},                //K
+  {72,73,74,75,76},             //U
+  {91,92},                         //T
+  {93,94,95,96,97,98,99,100,101,102,103,104,105,106,107}, //NOW
+  
+  {2,3,7,12,13},  //K
+  {18,19,25,26,29,30},           //A
+  {35,36},                    //L
+  {46,47},                 //I
+  {53,54,58,63,64},  //K
+  {70,71,77,78},        //U
+  {89,90},        //T
+  {},            //NOW};
+
+  {4,5,8,9,10},  //K
+  {20,21,23,24},           //A
+  {33,34},                    //L
+  {44,45},                 //I
+  {55,56,59,60,61},  //K
+  {68,69,79,80},        //U
+  {87,88},        //T
+  {},            //NOW};
+
+  {11},  //K
+  {22},           //A
+  {31,32},                    //L
+  {41,42,43},                 //I
+  {62},  //K
+  {67,81},        //U
+  {82,83,84,85,86},        //T
+  {}            //NOW};
+};
+
+//how many modules per segment down to up
+const byte segmentSizeForFourColorsPerLetter[32] = {
+  4,  //K
+  4,  //A
+  4,  //L
+  3,  //I
+  4,  //K
+  5,  //U
+  2,  //T
+  15, //NOW
+
+  5, //K
+  6,  //A
+  2,  //L
+  2,  //I
+  5, //K
+  4,  //U
+  2,  //T
+  0,
+
+  5,  //K
+  4,  //A
+  2,  //L
+  2,  //I
+  5,  //K
+  4,  //U
+  2,  //T
+  0, //NOW
+
+  1, //K
+  1,  //A
+  2,  //L
+  3,  //I
+  1, //K
+  2,  //U
+  5,  //T
+  0,
+};
 
 //test with one strand
 /*const uint16_t pixelOffsetForSplittetLetter[16][5] = {
@@ -141,11 +215,12 @@ const byte segmentSizeForTwoColorsPerLetter[16] = {
  1, 1, 
  3, 0, 
  };
-*/
+ */
 
 
 //array that will hold the serial input string
-byte serInStr[4*TOTAL_LETTERS+SERIAL_HEADER_SIZE]; //*2 is only needed for v2 				 
+//byte serInStr[4*TOTAL_LETTERS+SERIAL_HEADER_SIZE]; //*2 is only needed for v2 				 
+byte serInStr[128];
 
 // Choose which 2 pins you will use for output. Can be any valid output pins.
 // Teensy 2.0 ++: 22/23
@@ -174,17 +249,17 @@ void setup() {
   Serial.begin(BAUD_RATE); //Setup high speed Serial
   Serial.flush();
 
-//  strip.setCPUmax(49);  // start with 50% CPU usage. up this if the strand flickers or is slow  //
-//  strip.begin(SPI_CLOCK_DIV64);        // Start up the LED counterm 0.25MHz - 4uS
+  //  strip.setCPUmax(49);  // start with 50% CPU usage. up this if the strand flickers or is slow  //
+  //  strip.begin(SPI_CLOCK_DIV64);        // Start up the LED counterm 0.25MHz - 4uS
 
   //works even better!
   strip.setCPUmax(25);  
   strip.begin(SPI_CLOCK_DIV128);        // Start up the LED counterm 0.125MHz - 8uS
 
-//  strip.begin(SPI_CLOCK_DIV128);        // Start up the LED counterm 0.125MHz - 8uS
-//  strip.begin(SPI_CLOCK_DIV64);        // Start up the LED counterm 0.25MHz - 4uS
-//  strip.begin(SPI_CLOCK_DIV32);        // Start up the LED counterm 0.5MHz - 2uS
-//  strip.begin(SPI_CLOCK_DIV16);        // Start up the LED counterm 1.0MHz - 1uS
+  //  strip.begin(SPI_CLOCK_DIV128);        // Start up the LED counterm 0.125MHz - 8uS
+  //  strip.begin(SPI_CLOCK_DIV64);        // Start up the LED counterm 0.25MHz - 4uS
+  //  strip.begin(SPI_CLOCK_DIV32);        // Start up the LED counterm 0.5MHz - 2uS
+  //  strip.begin(SPI_CLOCK_DIV16);        // Start up the LED counterm 1.0MHz - 1uS
   strip.show();
   showInitImage();      // display some colors
 
@@ -229,9 +304,13 @@ void loop() {
         updatePixelsv2(cmd);
         g_errorCounter = 0;
       } 
-      else {
-        g_errorCounter=100;
-      }
+      else if (sendlen == TOTAL_LETTERS*8) { //v2
+        updatePixelsv4(cmd);
+        g_errorCounter = 0;
+      } 
+    else{
+      g_errorCounter=100;
+    }
     break;
 
   case CMD_PING:
@@ -284,6 +363,27 @@ void updatePixelsv2(byte* buffer) {
     for (byte n=0; n < segmentSizeForTwoColorsPerLetter[i]; n++) {
       //two bytes per pixel
       strip.setPixelColor(pixelOffsetForTwoColorsPerLetter[i][n], color);
+    }        
+    src+=2;
+  }
+
+  strip.show(); 
+}
+
+// --------------------------------------------
+// update four colors per letter
+// --------------------------------------------
+void updatePixelsv4(byte* buffer) {
+  uint16_t color;
+  byte src=0;
+  byte dst=0;
+
+  //v4: four segments per letter
+  for (byte i=0; i < TOTAL_LETTERS*4; i++) {
+    color = buffer[src]<<8 | buffer[src+1];
+    for (byte n=0; n < segmentSizeForFourColorsPerLetter[i]; n++) {
+      //two bytes per pixel
+      strip.setPixelColor(pixelOffsetForFourColorsPerLetter[i][n], color);
     }        
     src+=2;
   }

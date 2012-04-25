@@ -55,7 +55,7 @@ void generateColor() {
 
       switch(genColor) {
       case GEN_COL_RAINBOW: //Rainbow
-        colorArray[i] = Wheel((frame+x+y)*globalDelayLocal);
+        colorArray[i] = Wheel((frame+x+y<<1)*globalDelayLocal);
         break;
 
       case GEN_COL_RAINBOW_SOLID: //Rainbow Solid
