@@ -14,7 +14,7 @@ import com.neophob.lpd6803.misc.*;
 private static final String STR_KALIKUT = "KALIKUTn";
 
 private static final int NR_OF_PIXELS_X = STR_KALIKUT.length();
-private static final int NR_OF_PIXELS_Y = 2;
+private static final int NR_OF_PIXELS_Y = 4;
 private static final int OSC_PORT = 10000;
 private static final String VERSION = "KALIKUT v0.51";
 

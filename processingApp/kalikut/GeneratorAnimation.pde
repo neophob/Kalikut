@@ -11,7 +11,8 @@ private static final int GEN_ANIM_KNIGHTRIDER = 8;
 private static final int GEN_ANIM_FLIPPER = 9;
 private static final int GEN_ANIM_FADER = 10;
 private static final int GEN_ANIM_INVERTER = 11;
-private static final int GEN_ANIM_ROTATOR = 12;
+private static final int GEN_ANIM_STROBO_H = 12;
+private static final int GEN_ANIM_STROBO_H2 = 13;
 
 private static final int MAX_ANIMATION = 12;
 
@@ -125,16 +126,17 @@ void generateAnimation() {
         }
         break;
 
-      case GEN_ANIM_ROTATOR:
-        if (y%2==1) {
-          int col = colorArray[i];
-          int rr=255-((col>>16)&0xff);
-          int gg=255-((col>>8)&0xff);
-          int bb=255-(col&0xff);
-          colorArray[i] = color(gg, bb, rr);
-        }
+      case GEN_ANIM_STROBO_H:
+        if (((frame-y)>>globalDelayLocal4)%2==0) {
+          colorArray[i] = color(0, 0, 0);
+        }       
         break;
 
+      case GEN_ANIM_STROBO_H2:
+        if (((frame-y)>>globalDelayLocal4)%(NR_OF_PIXELS_Y+1)==y) {
+          colorArray[i] = color(0, 0, 0);
+        }       
+        break;
       }
     }
   }

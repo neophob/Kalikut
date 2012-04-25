@@ -44,8 +44,9 @@ void initGui() {
                                     .addItem("Flipper", GEN_ANIM_FLIPPER)
                                       .addItem("Fader", GEN_ANIM_FADER)
                                         .addItem("Inverter", GEN_ANIM_INVERTER)
-                                          .addItem("ColorRotate", GEN_ANIM_ROTATOR)
-                                            .activate(0);
+                                          .addItem("Strobo Horiz 1", GEN_ANIM_STROBO_H)
+                                            .addItem("Strobo Horiz 2", GEN_ANIM_STROBO_H2)
+                                              .activate(0);
 
   soundButton = cp5.addRadioButton("soundButton")
     .setPosition(20, 320)
@@ -210,7 +211,7 @@ void drawBackgroundSlide(int ypos, int ysize) {
 
   int ofs=this.width*ypos;
   for (int y=0; y<ysize; y++) {
-    for (int x=10; x<this.width-80; x++) {
+    for (int x=10; x<this.width-10; x++) {
       this.pixels[ofs+x] = slideBackground;
     }
     ofs += this.width;
