@@ -21,6 +21,7 @@ private int[] rgbColBuffer = new int[NR_OF_PIXELS_X];
 private int[] plasma = new int [100];
 private float plasmaX=0, plasmaY=0;
 
+
 void generateColor() {
   if (genColor==GEN_COL_FIRE) {
     updateFireBuffer();
@@ -28,18 +29,21 @@ void generateColor() {
 
   if (frame%globalDelayInv==0) {
     for (int x=0; x<NR_OF_PIXELS_X; x++) {
+            
+      ColorSet cs = colorSet.get(colSet);
+
       int rnd = int(random(3));
       switch (rnd) {
-      case 0:
-        rgbColBuffer[x] = color(0, 0, 255);
+      case 0: 
+        rgbColBuffer[x] = cs.getR();
         break;
 
       case 1: 
-        rgbColBuffer[x] = color(255, 0, 0);
+        rgbColBuffer[x] = cs.getG();
         break;
 
       default:
-        rgbColBuffer[x] = color(0, 255, 0);
+        rgbColBuffer[x] = cs.getB();
         break;
       }
     }

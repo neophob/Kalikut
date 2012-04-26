@@ -111,6 +111,23 @@ void initGui() {
             .setSize(20, 20)
               .addItem("Invert NOW", 0)
                 ;
+                
+  //radiobuttons with color
+  colorButton = cp5.addRadioButton("colorButton")
+    .setPosition(501, 170)
+      .setSize(20, 20)
+        .setColorForeground(color(120))
+          .setColorActive(color(255))
+            .setColorLabel(color(255))
+              .setItemsPerRow(6)
+                .setSpacingColumn(50)
+                  .setNoneSelectedAllowed(false);
+  
+  int i=0;
+  for (ColorSet cs: colorSet) {
+    colorButton.addItem(cs.getSetName(), i++);
+  }
+  colorButton.activate(0);
 
   Textlabel tl = cp5.addTextlabel("sdesc", "KICK/SNARE/HAT", BOX_X, 175);
   tl.setFont(ControlP5.standard58);
@@ -181,11 +198,16 @@ void controlEvent(ControlEvent theEvent) {
     return;
   }
 
+  if (theEvent.isFrom(colorButton)) {
+    colSet = int(theEvent.getValue());
+    return;
+  }
+
   if (theEvent.isFrom(fpsSlider)) {
     globalDelay = 2+int(18*fpsSlider.getValue());
     globalDelayInv = 21-globalDelay;
 
-    println("INV: "+globalDelayInv);
+    //println("INV: "+globalDelayInv);
   }
 
   if (theEvent.isFrom(allColorSlider)) {

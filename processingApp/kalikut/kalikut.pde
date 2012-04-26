@@ -23,7 +23,7 @@ private int frame;
 
 //gui
 private ControlP5 cp5;
-private RadioButton colorModeButton, animationButton, soundButton;
+private RadioButton colorModeButton, animationButton, soundButton, colorButton;
 private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
@@ -31,7 +31,7 @@ private CheckBox checkbox;
 private int globalDelayInv = 10, globalDelay = 10;
 
 //internal fx
-private int genAnim = GEN_ANIM_NOTHING, genColor = GEN_COL_RAINBOW, genSnd = GEN_SND_NOTHING;
+private int genAnim = GEN_ANIM_NOTHING, genColor = GEN_COL_RAINBOW, genSnd = GEN_SND_NOTHING, colSet=0;
 private boolean invertNow = false;
 
 //buffer
@@ -49,6 +49,7 @@ private OscP5 oscP5;
 private int[] letterWidth;
 private PImage logoImg;
 
+private List<ColorSet> colorSet;
 
 void setup() {
   size(800, 500);
@@ -63,6 +64,10 @@ void setup() {
   // Set the font and its size (in units of pixels)
   textFont(fontA, 120);
   colorArray = new color[NR_OF_PIXELS_X*NR_OF_PIXELS_Y];
+  
+  colorSet = new ArrayList<ColorSet>();
+  colorSet.add( new ColorSet("RGB", color(0, 0, 255), color(255, 0, 0), color(0, 255, 0)) );
+  colorSet.add( new ColorSet("MiamiVice", color(255, 255, 255), color(27, 227, 255), color(255, 130, 220)) );
 
   initGui();
   frame=NR_OF_PIXELS_X*2; //init the safe way
@@ -101,5 +106,6 @@ void draw() {
 }
 
 //COL: florida, gelb + rosa
+//CGA Colors 
 //FX: Voll da, voll weg,  snake,  stobo halb unten und oben
-
+//Wasser fx?
