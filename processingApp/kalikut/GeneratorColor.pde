@@ -180,24 +180,31 @@ void updateFireBuffer() {
       fireBuffer[ofs] = 255;
     } 
     else {
-      fireBuffer[ofs] = 0;
+      fireBuffer[ofs] = 0;  
     }
   }
 
+  int yOfsMinusOneLine=0;
   //calculate
   for (int y=0; y<NR_OF_PIXELS_Y; y++) {
     ofs = y*(NR_OF_PIXELS_X+FIRE_BUFFER);
     for (int x=0; x<FIRE_BUFFER+NR_OF_PIXELS_X-1; x++) {
+      //calculate average for current y line
       int a = (fireBuffer[ofs+x] + fireBuffer[ofs+x+1])/2;
+
+      //additional calculations      
       if (y>0) {
-        a += (fireBuffer[x] + fireBuffer[x+1])/2;
+        a += (fireBuffer[yOfsMinusOneLine+x] + fireBuffer[yOfsMinusOneLine+x+1])/2;
         a/=2;
       }
+      
+      //decay
       if (a>1) {
         a--;
       }
       fireBuffer[ofs+x+1]=a;
     }
+    yOfsMinusOneLine = ofs;
   }
 }
 
