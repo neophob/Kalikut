@@ -100,13 +100,6 @@ void generateAnimation() {
         break;
 
       case GEN_ANIM_FLIPPER:
-        if (y>0) {   
-          long l = colorArray[x]&0xffffff;
-          if (l>0) {
-            colorArray[i] = color(0, 0, 0);
-          } 
-          break;
-        }
         if (((frame-i)/globalDelayInv)%2==0) {
           colorArray[i] = color(0, 0, 0);
         } 

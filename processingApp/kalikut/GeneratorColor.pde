@@ -101,7 +101,7 @@ void generateColor() {
         break;
 
       case GEN_COL_GLACE:
-        if (y>0) {
+        if (y%2==1) {
           colorArray[i] = WheelInv((frame+x+y)*globalDelayLocal);
         } 
         else {
@@ -111,7 +111,7 @@ void generateColor() {
 
       case GEN_COL_XXX:        
         ofs = i+frame;
-        xorR = ((frame*frame)>>4)%256; 
+        xorR = (frame|ofs)%256; 
         xorG = (frame*i)%256;
         xorB = ((i*ofs)^ofs)%256;
 
