@@ -74,7 +74,7 @@ const byte modulesPerLetter[TOTAL_LETTERS] = {
 
 //each letter is splitted up in two segments, a lower and a higher
 //"now" uses only lower segment
-const uint16_t pixelOffsetForTwoColorsPerLetter[16][15] = {
+const byte pixelOffsetForTwoColorsPerLetter[16][15] = {
   { 0, 1, 2,13,14,15},                //K
   {16,17,18,26,27,28,29,30},          //A
   {35,36,37,38,39,40},                //L
@@ -116,7 +116,7 @@ const byte segmentSizeForTwoColorsPerLetter[16] = {
 };
 
 
-const uint16_t pixelOffsetForFourColorsPerLetter[32][15] = {
+const byte pixelOffsetForFourColorsPerLetter[32][15] = {
   {0,1,14,15},                //K
   {16,17,27,28},          //A
   {37,38,39,40},                //L
@@ -133,7 +133,7 @@ const uint16_t pixelOffsetForFourColorsPerLetter[32][15] = {
   {53,54,58,63,64},  //K
   {70,71,77,78},        //U
   {89,90},        //T
-  {},            //NOW};
+  {},            //NOW
 
   {4,5,8,9,10},  //K
   {20,21,23,24},           //A
@@ -142,7 +142,7 @@ const uint16_t pixelOffsetForFourColorsPerLetter[32][15] = {
   {55,56,59,60,61},  //K
   {68,69,79,80},        //U
   {87,88},        //T
-  {},            //NOW};
+  {},            //NOW
 
   {11},  //K
   {22},           //A
@@ -151,7 +151,7 @@ const uint16_t pixelOffsetForFourColorsPerLetter[32][15] = {
   {62},  //K
   {67,81},        //U
   {82,83,84,85,86},        //T
-  {}            //NOW};
+  {}            //NOW
 };
 
 //how many modules per segment down to up
@@ -190,7 +190,7 @@ const byte segmentSizeForFourColorsPerLetter[32] = {
   1, //K
   2,  //U
   5,  //T
-  0,
+  0
 };
 
 //test with one strand
@@ -381,8 +381,7 @@ void updatePixelsv4(byte* buffer) {
     color = buffer[src]<<8 | buffer[src+1];
     for (byte n=0; n < segmentSizeForFourColorsPerLetter[i]; n++) {
       //two bytes per pixel
-//      strip.setPixelColor(pixelOffsetForFourColorsPerLetter[i][n], color);
-strip.setPixelColor(0, color);
+      strip.setPixelColor(pixelOffsetForFourColorsPerLetter[i][n], color);
     }        
     src+=2;
   }
