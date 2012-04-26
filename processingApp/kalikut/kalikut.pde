@@ -29,6 +29,7 @@ private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
 private CheckBox checkbox;
 private int globalDelayInv = 10, globalDelay = 10;
+private float globalDelayF;
 
 //internal fx
 private int genAnim = GEN_ANIM_NOTHING, genColor = GEN_COL_RAINBOW, genSnd = GEN_SND_NOTHING, colSet=0;

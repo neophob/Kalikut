@@ -27,23 +27,23 @@ void generateColor() {
     updateFireBuffer();
   }
 
+  ColorSet cs = colorSet.get(colSet);
+
   if (frame%globalDelayInv==0) {
     for (int x=0; x<NR_OF_PIXELS_X; x++) {
-            
-      ColorSet cs = colorSet.get(colSet);
 
       int rnd = int(random(3));
       switch (rnd) {
       case 0: 
-        rgbColBuffer[x] = cs.getR();
+        rgbColBuffer[x] = cs.getC1();
         break;
 
       case 1: 
-        rgbColBuffer[x] = cs.getG();
+        rgbColBuffer[x] = cs.getC2();
         break;
 
       default:
-        rgbColBuffer[x] = cs.getB();
+        rgbColBuffer[x] = cs.getC3();
         break;
       }
     }
@@ -89,19 +89,16 @@ void generateColor() {
         break;
 
       case GEN_COL_PULSE:
-        int ofs = i+frame;
-        int xorR = (frame*globalDelay)%256; 
-        int xorB = (frame*i)%256;
-        int xorG = 255-xorR;
-        colorArray[i]=color(xorR, xorG, xorB);
+        colorArray[i]=mul(cs, (frame*globalDelay*i)>>4);
         break;
 
       case GEN_COL_SLIDER:
-        ofs = i+frame;
-        xorR = (i*ofs)%256; 
-        xorB = ((i*ofs)^frame)%256;
-        xorG = (xorR+xorB)>>1;
-        colorArray[i]=color(xorR, xorG, xorB);
+        int ofs = i+frame;
+        int xorR = i*ofs; 
+        int xorB = (i*ofs)^frame;
+        int xorG = (xorR+xorB)>>1;
+        colorArray[i]=mul(cs, (globalDelay*(xorR))>>6);
+//        colorArray[i]=color(xorR, xorG, xorB);
         break;
 
       case GEN_COL_GLACE:
