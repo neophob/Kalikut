@@ -68,13 +68,19 @@ void setup() {
   colorSet = new ArrayList<ColorSet>();
   colorSet.add( new ColorSet("RGB", color(0, 0, 255), color(255, 0, 0), color(0, 255, 0)) );
   colorSet.add( new ColorSet("MiamiVice", color(255, 255, 255), color(27, 227, 255), color(255, 130, 220)) );
+  colorSet.add( new ColorSet("LeBron", color(255, 255, 255), color(62,62,62), color(212, 182, 0)) );
+  colorSet.add( new ColorSet("ML581AT", color(255, 255, 255), color(105,150,85), color(242, 106, 54)) );
+  colorSet.add( new ColorSet("Neon", color(180, 220, 0), color(113,113,85), color(50, 50, 40)) );
+  colorSet.add( new ColorSet("Rasta", color(220, 50, 60), color(240,203,88), color(60, 130, 94)) );
+  colorSet.add( new ColorSet("Brazil", color(223, 234, 0), color(0,140,83), color(46, 0, 228)) );
+  colorSet.add( new ColorSet("MIUSA", color(80, 75, 70), color(26,60,83), color(160, 0, 40)) );
 
   initGui();
   frame=NR_OF_PIXELS_X*2; //init the safe way
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();
-  initSerial();
+//  initSerial();
   initLetter();
 
   /* start oscP5, listening for incoming messages at port 12000 */

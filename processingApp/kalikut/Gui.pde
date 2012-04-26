@@ -114,12 +114,12 @@ void initGui() {
                 
   //radiobuttons with color
   colorButton = cp5.addRadioButton("colorButton")
-    .setPosition(501, 170)
+    .setPosition(231, 170)
       .setSize(20, 20)
         .setColorForeground(color(120))
           .setColorActive(color(255))
             .setColorLabel(color(255))
-              .setItemsPerRow(6)
+              .setItemsPerRow(8)
                 .setSpacingColumn(50)
                   .setNoneSelectedAllowed(false);
   
