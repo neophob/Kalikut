@@ -116,26 +116,17 @@ const byte segmentSizeForTwoColorsPerLetter[16] = {
 };
 
 
-const byte pixelOffsetForFourColorsPerLetter[32][15] = {
-  {0,1,14,15},                //K
-  {16,17,27,28},          //A
-  {37,38,39,40},                //L
-  {48,49,50},                   //I
-  {51,52,65,66},                //K
-  {72,73,74,75,76},             //U
-  {91,92},                         //T
-  {93,94,95,96,97,98,99,100,101,102,103,104,105,106,107}, //NOW
-  
-  {2,3,7,12,13},  //K
-  {18,19,25,26,29,30},           //A
-  {35,36},                    //L
-  {46,47},                 //I
-  {53,54,58,63,64},  //K
-  {70,71,77,78},        //U
-  {89,90},        //T
+const byte pixelOffsetForFourColorsPerLetter[32][15] = {  
+  {6, 11},  //K1
+  {22},           //A
+  {31,32},                    //L
+  {41,42,43},                 //I
+  {57, 62},  //K
+  {67,81},        //U
+  {82,83,84,85,86},        //T
   {},            //NOW
 
-  {4,5,8,9,10},  //K
+  {4,5,8,9,10},  //K2
   {20,21,23,24},           //A
   {33,34},                    //L
   {44,45},                 //I
@@ -144,28 +135,47 @@ const byte pixelOffsetForFourColorsPerLetter[32][15] = {
   {87,88},        //T
   {},            //NOW
 
-  {11},  //K
-  {22},           //A
-  {31,32},                    //L
-  {41,42,43},                 //I
-  {62},  //K
-  {67,81},        //U
-  {82,83,84,85,86},        //T
-  {}            //NOW
+  {2,3,7,12,13},  //K3
+  {18,19,25,26,29,30},           //A
+  {35,36},                    //L
+  {46,47},                 //I
+  {53,54,58,63,64},  //K
+  {70,71,77,78},        //U
+  {89,90},        //T
+  {},            //NOW
+
+  {0,1,14,15},                //K4
+  {16,17,27,28},          //A
+  {37,38,39,40},                //L
+  {48,49,50},                   //I
+  {51,52,65,66},                //K
+  {72,73,74,75,76},             //U
+  {91,92},                         //T
+  {93,94,95,96,97,98,99,100,101,102,103,104,105,106,107}, //NOW
+
 };
 
 //how many modules per segment down to up
 const byte segmentSizeForFourColorsPerLetter[32] = {
-  4,  //K
-  4,  //A
-  4,  //L
+  2, //K1 lowest
+  1,  //A
+  2,  //L
   3,  //I
-  4,  //K
-  5,  //U
+  2, //K
+  2,  //U
+  5,  //T
+  0,
+  
+  5,  //K2
+  4,  //A
+  2,  //L
+  2,  //I
+  5,  //K
+  4,  //U
   2,  //T
-  15, //NOW
-
-  5, //K
+  0, //NOW
+  
+  5, //K3
   6,  //A
   2,  //L
   2,  //I
@@ -174,23 +184,15 @@ const byte segmentSizeForFourColorsPerLetter[32] = {
   2,  //T
   0,
 
-  5,  //K
+  4,  //K4
   4,  //A
-  2,  //L
-  2,  //I
-  5,  //K
-  4,  //U
-  2,  //T
-  0, //NOW
-
-  1, //K
-  1,  //A
-  2,  //L
+  4,  //L
   3,  //I
-  1, //K
-  2,  //U
-  5,  //T
-  0
+  4,  //K
+  5,  //U
+  2,  //T
+  15, //NOW
+
 };
 
 //test with one strand
@@ -231,6 +233,7 @@ Neophob_LPD6803 strip = Neophob_LPD6803(TOTAL_MODULES);
 
 //I set it to 64 for arduino duemillanove
 #define SERIALBUFFERSIZE 4
+//#define SERIALBUFFERSIZE 64
 byte serialResonse[SERIALBUFFERSIZE];
 
 byte g_errorCounter;
