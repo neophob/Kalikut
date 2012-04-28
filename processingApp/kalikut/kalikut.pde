@@ -75,7 +75,13 @@ void setup() {
   colorSet.add( new ColorSet("Rasta", color(220, 50, 60), color(240,203,88), color(60, 130, 94)) );
   colorSet.add( new ColorSet("Brazil", color(223, 234, 0), color(0,140,83), color(46, 0, 228)) );
   colorSet.add( new ColorSet("MIUSA", color(80, 75, 70), color(26,60,83), color(160, 0, 40)) );
-  colorSet.add( new ColorSet("Simpson", color(#d9c23e), color(#a96a95), color(#7d954b)) );
+  colorSet.add( new ColorSet("Simpson", color(#d9c23e), color(#a96a95), color(#7d954b)) );//#4b396b
+  colorSet.add( new ColorSet("Kitty", color(#9f456b), color(#4f7a9a), color(#e6c84c)) );
+  colorSet.add( new ColorSet("Kitty HC", color(#c756a7), color(#e0dd00), color(#c9cdd0)) );
+  colorSet.add( new ColorSet("Smurf", color(#44bdf4), color(#e31e3a), color(#e8b118)) ); //#1d1628 #ffffff
+  colorSet.add( new ColorSet("Lantern", color(#0d9a0d), color(#000000), color(#ffffff)) ); 
+  colorSet.add( new ColorSet("Fame 575", color(#540c0d), color(#fb7423), color(#f9f48e)) );  //#4176c4 #5aaf2e
+  
 
   initGui();
   frame=NR_OF_PIXELS_X*2; //init the safe way
