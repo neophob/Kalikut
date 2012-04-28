@@ -4,12 +4,11 @@ private static final int GEN_COL_RAINBOW = 1;
 private static final int GEN_COL_RAINBOW_SOLID = 2;
 private static final int GEN_COL_SOLID = 3;
 private static final int GEN_COL_FIRE = 4;
-private static final int GEN_COL_RGBCOL = 5;
+private static final int GEN_COL_SOLIDCHAR = 5;
 private static final int GEN_COL_PLASMA = 6;
-private static final int GEN_COL_PULSE = 7;
-private static final int GEN_COL_SLIDER = 8;
-private static final int GEN_COL_GLACE = 9;
-private static final int GEN_COL_XXX = 10;
+//private static final int GEN_COL_PULSE = 7;
+private static final int GEN_COL_KAOS = 8;
+//private static final int GEN_COL_GLACE = 9;
 
 private static final int MAX_COLOR = 10;
 
@@ -75,7 +74,7 @@ void generateColor() {
         colorArray[i] = fireColors[ fireBuffer[fireOfs] ];
         break;
 
-      case GEN_COL_RGBCOL:
+      case GEN_COL_SOLIDCHAR:
         colorArray[i] = rgbColBuffer[x];
         break;
 
@@ -88,34 +87,19 @@ void generateColor() {
         plasmaX+=globalDelayPlasma;
         break;
 
-      case GEN_COL_PULSE:
-        //TODO
-        break;
+//      case GEN_COL_PULSE:
+//        //TODO
+//        break;
 
-      case GEN_COL_SLIDER:
+      case GEN_COL_KAOS:
         int ofs = i+frame;
-        int xorR = i*ofs; 
-        int xorB = (i*ofs)^frame;
-        int xorG = (xorR+xorB)>>1;
-        colorArray[i]=cs.getSmoothColor((globalDelay*(xorR))>>4);
-        //        colorArray[i]=color(xorR, xorG, xorB);
+        colorArray[i]=cs.getSmoothColor((globalDelay*i*ofs)>>4);
         break;
 
-      case GEN_COL_GLACE:
-        //TODO
-        break;
+//      case GEN_COL_GLACE:
+//        //TODO
+//        break;
 
-      case GEN_COL_XXX:        
-        ofs = i+frame;
-        xorR = (frame|ofs)%256; 
-        xorG = (frame*i)%256;
-        xorB = ((i*ofs)^ofs)%256;
-
-        //        int xorR = ((i*frame)^ofs)%256;
-        //        int xorG = (ofs^i)%256;
-        //        int xorB = (ofs^frame)%256;
-        colorArray[i]=color(xorR, xorG, xorB);
-        break;
       }
     }
   }

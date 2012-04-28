@@ -14,15 +14,14 @@ void initGui() {
                   .setNoneSelectedAllowed(false)
                     .addItem("Rainbow", GEN_COL_RAINBOW)
                       .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
-                        .addItem("Solid", GEN_COL_SOLID)
-                          .addItem("Fire", GEN_COL_FIRE)
-                            .addItem("RGB Color", GEN_COL_RGBCOL)
-                              .addItem("Plasma", GEN_COL_PLASMA)                  
-                                .addItem("Pulse", GEN_COL_PULSE)        
-                                  .addItem("Slider", GEN_COL_SLIDER)  
-                                    .addItem("Glace", GEN_COL_GLACE)  
-                                      .addItem("Test", GEN_COL_XXX)  
-                                        .activate(0);
+                        .addItem("Solid Chars", GEN_COL_SOLIDCHAR)
+                          .addItem("Kaos", GEN_COL_KAOS)
+                            .addItem("Solid", GEN_COL_SOLID)
+                              .addItem("Fire", GEN_COL_FIRE)
+                                .addItem("Plasma", GEN_COL_PLASMA)                  
+                                  //                                .addItem("Pulse", GEN_COL_PULSE)        
+                                  //                                    .addItem("Glace", GEN_COL_GLACE)  
+                                  .activate(0);
 
   animationButton = cp5.addRadioButton("animationButton")
     .setPosition(20, 260)
@@ -40,13 +39,13 @@ void initGui() {
                             .addItem("Random Char", GEN_ANIM_RANDOM_CHAR)
                               .addItem("Funny", GEN_ANIM_FUNNY)
                                 //.addItem("Hotel", GEN_ANIM_HOTEL)
-                                  .addItem("KnightRider", GEN_ANIM_KNIGHTRIDER)
-                                    .addItem("Flipper", GEN_ANIM_FLIPPER)
-                                      .addItem("Fader", GEN_ANIM_FADER)
-                                        .addItem("Inverter", GEN_ANIM_INVERTER)
-                                          .addItem("Strobo Horiz 1", GEN_ANIM_STROBO_H)
-                                            .addItem("Strobo Horiz 2", GEN_ANIM_STROBO_H2)
-                                              .activate(0);
+                                .addItem("KnightRider", GEN_ANIM_KNIGHTRIDER)
+                                  .addItem("Flipper", GEN_ANIM_FLIPPER)
+                                    .addItem("Fader", GEN_ANIM_FADER)
+                                      .addItem("Inverter", GEN_ANIM_INVERTER)
+                                        .addItem("Strobo Horiz 1", GEN_ANIM_STROBO_H)
+                                          .addItem("Strobo Horiz 2", GEN_ANIM_STROBO_H2)
+                                            .activate(0);
 
   soundButton = cp5.addRadioButton("soundButton")
     .setPosition(20, 320)
@@ -111,7 +110,7 @@ void initGui() {
             .setSize(20, 20)
               .addItem("Invert NOW", 0)
                 ;
-                
+
   //radiobuttons with color
   colorButton = cp5.addRadioButton("colorButton")
     .setPosition(231, 170)
@@ -122,7 +121,7 @@ void initGui() {
               .setItemsPerRow(8)
                 .setSpacingColumn(50)
                   .setNoneSelectedAllowed(false);
-  
+
   int i=0;
   for (ColorSet cs: colorSet) {
     colorButton.addItem(cs.getSetName(), i++);
@@ -207,7 +206,7 @@ void controlEvent(ControlEvent theEvent) {
     globalDelay = 2+int(18*fpsSlider.getValue());
     globalDelayInv = 21-globalDelay;
     globalDelayF = fpsSlider.getValue();
-//    println("INV: "+globalDelay);
+    //    println("INV: "+globalDelay);
   }
 
   if (theEvent.isFrom(allColorSlider)) {
@@ -252,7 +251,7 @@ void drawGradientBackground() {
     }
     ofs += this.width;
   }
-  
+
   drawBackgroundSlide(195, 51);
   drawBackgroundSlide(255, 51);
   drawBackgroundSlide(315, 51);
