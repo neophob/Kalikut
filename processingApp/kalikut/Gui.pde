@@ -1,5 +1,7 @@
 //create the gui
 boolean registerTextLabel = true;
+int slideBackground = color(48, 48, 48);
+
 
 void initGui() {
   cp5 = new ControlP5(this);
@@ -98,8 +100,8 @@ void initGui() {
       .setSize(200, 80)
         .setFont(createFont("arial", 12))
           .setLineHeight(14)
-            .setColor(color(192))
-              .setColorBackground(color(255, 100))
+            .setColor(color(192))            
+              .setColorBackground(slideBackground)
                 .setColorForeground(color(255, 100));
   ;
 
@@ -245,10 +247,8 @@ void controlEvent(ControlEvent theEvent) {
 
 }
 
-int slideBackground = color(48, 48, 48);
-
 //draw some rectangles
-void drawBackgroundSlide(int ypos, int ysize, String sectionName, boolean regTextlabel) {
+void drawBackgroundSlide(int ypos, int ysize, String sectionName) {
 
   int ofs=this.width*ypos;
   for (int y=0; y<ysize; y++) {
@@ -265,7 +265,7 @@ void drawBackgroundSlide(int ypos, int ysize, String sectionName, boolean regTex
     }
   }
   
-  if (regTextlabel) {
+  if (registerTextLabel) {
     Textlabel tl = cp5.addTextlabel(sectionName, "//"+sectionName, 10, ypos-6);
     tl.setFont(ControlP5.standard58);    
   }
@@ -285,10 +285,10 @@ void drawGradientBackground() {
     ofs += this.width;
   }
 
-  drawBackgroundSlide(135, 51, "Color", registerTextLabel);
-  drawBackgroundSlide(195, 51, "Generator", registerTextLabel);
-  drawBackgroundSlide(255, 51, "Effect", registerTextLabel);
-  drawBackgroundSlide(315, 51, "Audio", registerTextLabel);
+  drawBackgroundSlide(135, 51, "Color");
+  drawBackgroundSlide(195, 51, "Generator");
+  drawBackgroundSlide(255, 51, "Effect");
+  drawBackgroundSlide(315, 51, "Audio");
   registerTextLabel=false;
   
   this.updatePixels();
