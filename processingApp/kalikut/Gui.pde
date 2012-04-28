@@ -113,12 +113,12 @@ void initGui() {
 
   //radiobuttons with color
   colorButton = cp5.addRadioButton("colorButton")
-    .setPosition(231, 170)
+    .setPosition(20, 140)
       .setSize(20, 20)
         .setColorForeground(color(120))
           .setColorActive(color(255))
             .setColorLabel(color(255))
-              .setItemsPerRow(8)
+              .setItemsPerRow(11)
                 .setSpacingColumn(50)
                   .setNoneSelectedAllowed(false);
 
@@ -128,13 +128,13 @@ void initGui() {
   }
   colorButton.activate(0);
 
-  Textlabel tl = cp5.addTextlabel("sdesc", "KICK/SNARE/HAT", BOX_X, 175);
+  Textlabel tl = cp5.addTextlabel("sdesc", "KICK/SNARE/HAT", BOX_X+6, 6+BOX_Y+BOX_Y_SIZE);
   tl.setFont(ControlP5.standard58);
 }
 
 
-final int BOX_X = 37;
-final int BOX_Y = 150;
+final int BOX_X = 700;
+final int BOX_Y = 0;
 final int BOX_X_SIZE = 30;
 final int BOX_Y_SIZE = 20;
 
@@ -162,7 +162,7 @@ void drawBeatStatus() {
     fill(inActiveCol);
   }
   rect(BOX_X+BOX_X_SIZE*2, BOX_Y, BOX_X_SIZE, BOX_Y_SIZE);
-
+/*
   final int SINE_X = BOX_X+BOX_X_SIZE*4;
   stroke(255);  
   // draw the waveforms
@@ -170,7 +170,7 @@ void drawBeatStatus() {
     line(SINE_X+i, 10+BOX_Y + in.mix.get(i)*30, SINE_X+i+1, 10+BOX_Y + in.mix.get(i+1)*30);
   }
 
-  stroke(0);
+  stroke(0);*/
 }
 
 
@@ -252,6 +252,7 @@ void drawGradientBackground() {
     ofs += this.width;
   }
 
+  drawBackgroundSlide(135, 51);
   drawBackgroundSlide(195, 51);
   drawBackgroundSlide(255, 51);
   drawBackgroundSlide(315, 51);
