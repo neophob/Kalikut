@@ -27,7 +27,7 @@ private RadioButton colorModeButton, animationButton, soundButton, colorButton;
 private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
-private CheckBox checkbox,checkboxInvertEffect;
+private CheckBox checkbox, checkboxInvertEffect;
 private int globalDelayInv = 10;
 private float globalDelayF;
 
@@ -59,7 +59,7 @@ void setup() {
   background(0);
   frameRate(20);
   smooth();
-  
+
   // Load the font. Fonts must be placed within the data 
   // directory of your sketch. 
   fontA = loadFont("PTSans-Bold-120.vlw");
@@ -67,44 +67,45 @@ void setup() {
   // Set the font and its size (in units of pixels)
   textFont(fontA, 120);
   colorArray = new color[NR_OF_PIXELS_X*NR_OF_PIXELS_Y];
-  
+
+
   colorSet = new ArrayList<ColorSet>();
-  colorSet.add( new ColorSet("RGB", color(255, 0, 0), color(0, 255, 0), color(0, 0, 255)) );
-  colorSet.add( new ColorSet("MiamiVice", color(255, 255, 255), color(27, 227, 255), color(255, 130, 220)) );
-  colorSet.add( new ColorSet("LeBron", color(255, 255, 255), color(62,62,62), color(212, 182, 0)) );
-  colorSet.add( new ColorSet("ML581AT", color(255, 255, 255), color(105,150,85), color(242, 106, 54)) );
-  colorSet.add( new ColorSet("Neon", color(180, 220, 0), color(113,113,85), color(50, 50, 40)) );
-  colorSet.add( new ColorSet("Rasta", color(220, 50, 60), color(240,203,88), color(60, 130, 94)) );
-  colorSet.add( new ColorSet("Brazil", color(223, 234, 0), color(0,140,83), color(46, 0, 228)) );
-  colorSet.add( new ColorSet("MIUSA", color(80, 75, 70), color(26,60,83), color(160, 0, 40)) );
-  colorSet.add( new ColorSet("Simpson", color(#d9c23e), color(#a96a95), color(#7d954b)) );//#4b396b
-  colorSet.add( new ColorSet("Kitty", color(#9f456b), color(#4f7a9a), color(#e6c84c)) );
-  colorSet.add( new ColorSet("Kitty HC", color(#c756a7), color(#e0dd00), color(#c9cdd0)) );
-  colorSet.add( new ColorSet("Smurf", color(#44bdf4), color(#e31e3a), color(#e8b118)) ); //#1d1628 #ffffff
-  colorSet.add( new ColorSet("Lantern", color(#0d9a0d), color(#000000), color(#ffffff)) ); 
-  colorSet.add( new ColorSet("Fame 575", color(#540c0d), color(#fb7423), color(#f9f48e)) );  //#4176c4 #5aaf2e
-  colorSet.add( new ColorSet("CGA", color(#d3517d), color(#15a0bf), color(#ffc062)) );  //#4176c4 #5aaf2e
-  
+  colorSet.add( new ColorSet("RGB",         new int[] { color(255, 0, 0), color(0, 255, 0), color(0, 0, 255) } ));
+  colorSet.add( new ColorSet("MiamiVice",   new int[] { color(255, 255, 255), color(27, 227, 255), color(255, 130, 220)  } ));
+  colorSet.add( new ColorSet("LeBron",      new int[] { color(255, 255, 255), color(62, 62, 62), color(212, 182, 0) } ));
+  colorSet.add( new ColorSet("ML581AT",     new int[] { color(255, 255, 255), color(105, 150, 85), color(242, 106, 54) } ));
+  colorSet.add( new ColorSet("Neon",        new int[] { color(180, 220, 0), color(113, 113, 85), color(50, 50, 40) } ));
+  colorSet.add( new ColorSet("Rasta",       new int[] { color(220, 50, 60), color(240, 203, 88), color(60, 130, 94) }));
+  colorSet.add( new ColorSet("Brazil",      new int[] { color(223, 234, 0), color(0, 140, 83), color(46, 0, 228) } ));
+  colorSet.add( new ColorSet("MIUSA",       new int[] { color(80, 75, 70), color(26, 60, 83), color(160, 0, 40) } ));
+  colorSet.add( new ColorSet("Simpson",     new int[] { color(#d9c23e), color(#a96a95), color(#7d954b), color(#4b396b) } ));
+  colorSet.add( new ColorSet("Kitty",       new int[] { color(#9f456b), color(#4f7a9a), color(#e6c84c) } ));
+  colorSet.add( new ColorSet("Kitty HC",    new int[] { color(#c756a7), color(#e0dd00), color(#c9cdd0) } ));
+  colorSet.add( new ColorSet("Smurf",       new int[] { color(#44bdf4), color(#e31e3a), color(#e8b118), color(#1d1628), color(#ffffff) } )); 
+  colorSet.add( new ColorSet("Lantern",     new int[] { color(#0d9a0d), color(#000000), color(#ffffff) } )); 
+  colorSet.add( new ColorSet("Fame 575",    new int[] { color(#540c0d), color(#fb7423), color(#f9f48e), color(#4176c4), color(#5aaf2e) } ));
+  colorSet.add( new ColorSet("CGA",         new int[] { color(#d3517d), color(#15a0bf), color(#ffc062) } ));  
+
 
   initGui();
   frame=NR_OF_PIXELS_X*2; //init the safe way
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();
-//  initSerial();
+  //  initSerial();
   initLetter();
 
   /* start oscP5, listening for incoming messages at port 12000 */
-//  oscP5 = new OscP5(this, OSC_PORT);
-//  updateTextfield("OSC Server startet on port "+ OSC_PORT);
+  //  oscP5 = new OscP5(this, OSC_PORT);
+  //  updateTextfield("OSC Server startet on port "+ OSC_PORT);
 }
 
 
 void draw() {
   background(0);
-  
+
   drawGradientBackground();
-    
+
   //generate buffer content
   generator();
 
@@ -126,3 +127,4 @@ void draw() {
 //CGA Colors 
 //FX: Voll da, voll weg,  snake,  stobo halb unten und oben
 //Wasser fx?
+

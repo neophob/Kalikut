@@ -30,21 +30,7 @@ void generateColor() {
 
   if (frame%globalDelayInv==0) {
     for (int x=0; x<NR_OF_PIXELS_X; x++) {
-
-      int rnd = int(random(3));
-      switch (rnd) {
-      case 0: 
-        rgbColBuffer[x] = cs.getC1();
-        break;
-
-      case 1: 
-        rgbColBuffer[x] = cs.getC2();
-        break;
-
-      default:
-        rgbColBuffer[x] = cs.getC3();
-        break;
-      }
+      rgbColBuffer[x] = cs.getRandomColor();
     }
   }
 
