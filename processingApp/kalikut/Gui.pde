@@ -35,16 +35,16 @@ void initGui() {
                     .addItem("Nothing", GEN_ANIM_NOTHING)
                       .addItem("Strobo Vert 1", GEN_ANIM_STROBO1)
                         .addItem("Strobo Vert 2", GEN_ANIM_STROBO2)
-                          .addItem("One Char", GEN_ANIM_ONE_CHAR)
-                            .addItem("Random Char", GEN_ANIM_RANDOM_CHAR)
-                              .addItem("Funny", GEN_ANIM_FUNNY)
-                                //.addItem("Hotel", GEN_ANIM_HOTEL)
-                                .addItem("KnightRider", GEN_ANIM_KNIGHTRIDER)
-                                  .addItem("Flipper", GEN_ANIM_FLIPPER)
-                                    .addItem("Fader", GEN_ANIM_FADER)
-                                      .addItem("Inverter", GEN_ANIM_INVERTER)
-                                        .addItem("Strobo Horiz 1", GEN_ANIM_STROBO_H)
-                                          .addItem("Strobo Horiz 2", GEN_ANIM_STROBO_H2)
+                          .addItem("Strobo Horiz 1", GEN_ANIM_STROBO_H)
+                            .addItem("Strobo Horiz 2", GEN_ANIM_STROBO_H2)
+                              .addItem("One Char", GEN_ANIM_ONE_CHAR)
+                                .addItem("Random Char", GEN_ANIM_RANDOM_CHAR)
+                                  .addItem("Funny", GEN_ANIM_FUNNY)
+                                    //.addItem("Hotel", GEN_ANIM_HOTEL)
+                                    .addItem("KnightRider", GEN_ANIM_KNIGHTRIDER)
+                                      .addItem("Flipper", GEN_ANIM_FLIPPER)
+                                        .addItem("Fader", GEN_ANIM_FADER)
+                                          .addItem("Inverter", GEN_ANIM_INVERTER)
                                             .activate(0);
 
   soundButton = cp5.addRadioButton("soundButton")
@@ -162,15 +162,15 @@ void drawBeatStatus() {
     fill(inActiveCol);
   }
   rect(BOX_X+BOX_X_SIZE*2, BOX_Y, BOX_X_SIZE, BOX_Y_SIZE);
-/*
+  /*
   final int SINE_X = BOX_X+BOX_X_SIZE*4;
-  stroke(255);  
-  // draw the waveforms
-  for (int i = 0; i < in.bufferSize()-1; i++) {
-    line(SINE_X+i, 10+BOX_Y + in.mix.get(i)*30, SINE_X+i+1, 10+BOX_Y + in.mix.get(i+1)*30);
-  }
-
-  stroke(0);*/
+   stroke(255);  
+   // draw the waveforms
+   for (int i = 0; i < in.bufferSize()-1; i++) {
+   line(SINE_X+i, 10+BOX_Y + in.mix.get(i)*30, SINE_X+i+1, 10+BOX_Y + in.mix.get(i+1)*30);
+   }
+   
+   stroke(0);*/
 }
 
 
