@@ -29,17 +29,44 @@ color WheelInv(int WheelPos) {
   }
 }
 
+color calcSmoothColor(int col1, int col2, int pos) {
+  int b= col1&255;
+  int g=(col1>>8)&255;
+  int r=(col1>>16)&255;
+  int b2= col2&255;
+  int g2=(col2>>8)&255;
+  int r2=(col2>>16)&255;
 
-color mul(ColorSet cs, int pos) {
+  int p3=pos*3;
+  int oppisiteColor = 255-p3;
+  r=(r*p3)/255;
+  g=(g*p3)/255;
+  b=(b*p3)/255;
+  r+=(r2*oppisiteColor)/255;
+  g+=(g2*oppisiteColor)/255;
+  b+=(b2*oppisiteColor)/255;
+
+  return color(r, g, b);
+}
+
+color mulSmooth(ColorSet cs, int pos) {
   pos %= 255;
   if (pos < 85) {
     int b= cs.getC1()&255;
     int g=(cs.getC1()>>8)&255;
     int r=(cs.getC1()>>16)&255;
+    int b2= cs.getC2()&255;
+    int g2=(cs.getC2()>>8)&255;
+    int r2=(cs.getC2()>>16)&255;
 
-    r=(r*pos*3)/255;
-    g=(g*pos*3)/255;
-    b=(b*pos*3)/255;
+    int p3=pos*3;
+    int oppisiteColor = 255-p3;
+    r=(r*p3)/255;
+    g=(g*p3)/255;
+    b=(b*p3)/255;
+    r+=(r2*oppisiteColor)/255;
+    g+=(g2*oppisiteColor)/255;
+    b+=(b2*oppisiteColor)/255;
 
     return color(r, g, b);
   } 
@@ -48,10 +75,19 @@ color mul(ColorSet cs, int pos) {
     int b= cs.getC2()&255;
     int g=(cs.getC2()>>8)&255;
     int r=(cs.getC2()>>16)&255;
+    int b2= cs.getC3()&255;
+    int g2=(cs.getC3()>>8)&255;
+    int r2=(cs.getC3()>>16)&255;
 
-    r=(r*pos*3)/255;
-    g=(g*pos*3)/255;
-    b=(b*pos*3)/255;
+    int p3=pos*3;
+    int oppisiteColor = 255-p3;
+
+    r=(r*p3)/255;
+    g=(g*p3)/255;
+    b=(b*p3)/255;
+    r+=(r2*oppisiteColor)/255;
+    g+=(g2*oppisiteColor)/255;
+    b+=(b2*oppisiteColor)/255;
 
     return color(r, g, b);
   } 
@@ -60,10 +96,19 @@ color mul(ColorSet cs, int pos) {
   int b= cs.getC3()&255;
   int g=(cs.getC3()>>8)&255;
   int r=(cs.getC3()>>16)&255;
+  int b2= cs.getC1()&255;
+  int g2=(cs.getC1()>>8)&255;
+  int r2=(cs.getC1()>>16)&255;
 
-  r=(r*pos*3)/255;
-  g=(g*pos*3)/255;
-  b=(b*pos*3)/255;
+  int p3=pos*3;
+  int oppisiteColor = 255-p3;
+
+  r=(r*p3)/255;
+  g=(g*p3)/255;
+  b=(b*p3)/255;
+  r+=(r2*oppisiteColor)/255;
+  g+=(g2*oppisiteColor)/255;
+  b+=(b2*oppisiteColor)/255;
 
   return color(r, g, b);
 }
