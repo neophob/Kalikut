@@ -247,7 +247,7 @@ void controlEvent(ControlEvent theEvent) {
 int slideBackground = color(48, 48, 48);
 
 //draw some rectangles
-void drawBackgroundSlide(int ypos, int ysize) {
+void drawBackgroundSlide(int ypos, int ysize, String sectionName) {
 
   int ofs=this.width*ypos;
   for (int y=0; y<ysize; y++) {
@@ -256,6 +256,10 @@ void drawBackgroundSlide(int ypos, int ysize) {
     }
     ofs += this.width;
   }
+  
+  Textlabel tl = cp5.addTextlabel(sectionName, "//"+sectionName, this.width-28-sectionName.length()*4, ypos+ysize-10);
+  tl.setFont(ControlP5.standard58);
+
 }
 
 //draw background
@@ -271,10 +275,10 @@ void drawGradientBackground() {
     ofs += this.width;
   }
 
-  drawBackgroundSlide(135, 51);
-  drawBackgroundSlide(195, 51);
-  drawBackgroundSlide(255, 51);
-  drawBackgroundSlide(315, 51);
+  drawBackgroundSlide(135, 51, "Color");
+  drawBackgroundSlide(195, 51, "Generator");
+  drawBackgroundSlide(255, 51, "Effect");
+  drawBackgroundSlide(315, 51, "Audio");
 
   this.updatePixels();
 }
