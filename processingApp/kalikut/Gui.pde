@@ -97,7 +97,7 @@ void initGui() {
 
   myTextarea = cp5.addTextarea("txt")
     .setPosition(580, 380)
-      .setSize(200, 80)
+      .setSize(210, 80)
         .setFont(createFont("arial", 12))
           .setLineHeight(14)
             .setColor(color(192))            
