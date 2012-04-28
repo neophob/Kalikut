@@ -27,13 +27,14 @@ private RadioButton colorModeButton, animationButton, soundButton, colorButton;
 private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
-private CheckBox checkbox;
+private CheckBox checkbox,checkboxInvertEffect;
 private int globalDelayInv = 10, globalDelay = 10;
 private float globalDelayF;
 
 //internal fx
 private int genAnim = GEN_ANIM_NOTHING, genColor = GEN_COL_RAINBOW, genSnd = GEN_SND_NOTHING, colSet=0;
 private boolean invertNow = false;
+private boolean invertEffect = false;
 
 //buffer
 private int[] colorArray;  
@@ -81,6 +82,7 @@ void setup() {
   colorSet.add( new ColorSet("Smurf", color(#44bdf4), color(#e31e3a), color(#e8b118)) ); //#1d1628 #ffffff
   colorSet.add( new ColorSet("Lantern", color(#0d9a0d), color(#000000), color(#ffffff)) ); 
   colorSet.add( new ColorSet("Fame 575", color(#540c0d), color(#fb7423), color(#f9f48e)) );  //#4176c4 #5aaf2e
+  colorSet.add( new ColorSet("CGA", color(#d3517d), color(#15a0bf), color(#ffc062)) );  //#4176c4 #5aaf2e
   
 
   initGui();

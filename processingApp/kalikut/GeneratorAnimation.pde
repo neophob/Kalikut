@@ -65,19 +65,33 @@ void generateAnimation() {
         } 
         break;
 
-      case GEN_ANIM_HOTEL:
-      //TODO
-        break;
+        //      case GEN_ANIM_HOTEL:
+        //      //TODO
+        //        break;
 
       case GEN_ANIM_ONE_CHAR:
-        if ((frame/globalDelayLocal-x)%STR_KALIKUT.length()!=1) {
-          colorArray[i] = color(0, 0, 0);
+        if (invertEffect) {
+          if ((frame/globalDelayLocal-x)%STR_KALIKUT.length()==1) {
+            colorArray[i] = color(0, 0, 0);
+          }
+        } 
+        else {
+          if ((frame/globalDelayLocal-x)%STR_KALIKUT.length()!=1) {
+            colorArray[i] = color(0, 0, 0);
+          }
         }
         break;
 
       case GEN_ANIM_RANDOM_CHAR: //Random char
-        if (x!=selectedRandomChar) {
-          colorArray[i] = 0;
+        if (invertEffect) {
+          if (x==selectedRandomChar) {
+            colorArray[i] = 0;
+          }
+        } 
+        else {
+          if (x!=selectedRandomChar) {
+            colorArray[i] = 0;
+          }
         }
         break;
 
@@ -94,9 +108,16 @@ void generateAnimation() {
         break;
 
       case GEN_ANIM_KNIGHTRIDER:
-        if (x!=krPos) {
-          colorArray[i] = color(0, 0, 0);
-        }
+        if (invertEffect) {
+          if (x==krPos) {
+            colorArray[i] = color(0, 0, 0);
+          }
+        } 
+        else {
+          if (x!=krPos) {
+            colorArray[i] = color(0, 0, 0);
+          }
+        }      
         break;
 
       case GEN_ANIM_FLIPPER:
@@ -115,20 +136,27 @@ void generateAnimation() {
           int rr=255-((col>>16)&0xff);
           int gg=255-((col>>8)&0xff);
           int bb=255-(col&0xff);
-          colorArray[i] = color(rr, gg, bb);          
+          colorArray[i] = color(rr, gg, bb);
         }
         break;
 
       case GEN_ANIM_STROBO_H:
         if (((frame-y)>>globalDelayLocal4)%2==0) {
           colorArray[i] = color(0, 0, 0);
-        }       
+        }
         break;
 
       case GEN_ANIM_STROBO_H2:
-        if (((frame-y)>>globalDelayLocal4)%(NR_OF_PIXELS_Y+1)==y) {
-          colorArray[i] = color(0, 0, 0);
-        }       
+        if (invertEffect) {
+          if (((frame-y)>>globalDelayLocal4)%(NR_OF_PIXELS_Y+1)!=y) {
+            colorArray[i] = color(0, 0, 0);
+          }
+        } 
+        else {
+          if (((frame-y)>>globalDelayLocal4)%(NR_OF_PIXELS_Y+1)==y) {
+            colorArray[i] = color(0, 0, 0);
+          }
+        }            
         break;
       }
     }
@@ -136,12 +164,12 @@ void generateAnimation() {
   //println(frame);
 
   switch(genAnim) {
-  case GEN_ANIM_HOTEL:
-    if (int(random(77))==34) {
-      //very seldom in hotel mode, make everything black
-      clearAllChars();
-    }
-    break;
+    //  case GEN_ANIM_HOTEL:
+    //    if (int(random(77))==34) {
+    //very seldom in hotel mode, make everything black
+    //      clearAllChars();
+    //    }
+    //    break;
 
   case GEN_ANIM_KNIGHTRIDER:
     if (frame%globalDelayInv==0) {

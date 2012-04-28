@@ -111,6 +111,15 @@ void initGui() {
               .addItem("Invert NOW", 0)
                 ;
 
+  checkboxInvertEffect = cp5.addCheckBox("checkBoxEffect")
+    .setPosition(400, 460-1)
+      .setColorForeground(color(120))
+        .setColorActive(color(255))
+          .setColorLabel(color(255))
+            .setSize(20, 20)
+              .addItem("Invert Effect", 0)
+                ;
+
   //radiobuttons with color
   colorButton = cp5.addRadioButton("colorButton")
     .setPosition(20, 140)
@@ -223,6 +232,16 @@ void controlEvent(ControlEvent theEvent) {
       invertNow = false;
     }
   }
+
+  if (theEvent.isFrom(checkboxInvertEffect)) {
+    if (checkboxInvertEffect.getArrayValue()[0] > 0) {
+      invertEffect = true;
+    } 
+    else {
+      invertEffect = false;
+    }
+  }
+
 }
 
 int slideBackground = color(48, 48, 48);
