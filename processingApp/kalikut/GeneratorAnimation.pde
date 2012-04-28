@@ -110,7 +110,7 @@ void generateAnimation() {
         break;
 
       case GEN_ANIM_INVERTER:
-        if (y%2==1) {
+        if (y>=(NR_OF_PIXELS_Y/2)) {
           int col = colorArray[i];
           int rr=255-((col>>16)&0xff);
           int gg=255-((col>>8)&0xff);
