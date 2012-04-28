@@ -16,7 +16,7 @@ private static final String STR_KALIKUT = "KALIKUTn";
 private static final int NR_OF_PIXELS_X = STR_KALIKUT.length();
 private static final int NR_OF_PIXELS_Y = 4;
 private static final int OSC_PORT = 10000;
-private static final String VERSION = "KALIKUT v0.51";
+private static final String VERSION = "KALIKUT v0.6";
 
 private PFont fontA;
 private int frame;
@@ -28,13 +28,14 @@ private ColorPicker cp;
 private Slider fpsSlider, allColorSlider, soundSensitive;
 private Textarea myTextarea;
 private CheckBox checkbox,checkboxInvertEffect;
-private int globalDelayInv = 10, globalDelay = 10;
+private int globalDelayInv = 10;
 private float globalDelayF;
 
-//internal fx
+//internal fx, save those settings for presets
 private int genAnim = GEN_ANIM_NOTHING, genColor = GEN_COL_RAINBOW, genSnd = GEN_SND_NOTHING, colSet=0;
 private boolean invertNow = false;
 private boolean invertEffect = false;
+private int globalDelay = 10;
 
 //buffer
 private int[] colorArray;  
