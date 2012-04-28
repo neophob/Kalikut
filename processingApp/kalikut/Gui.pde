@@ -16,9 +16,9 @@ void initGui() {
                       .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
                         .addItem("Solid Chars", GEN_COL_SOLIDCHAR)
                           .addItem("Kaos", GEN_COL_KAOS)
-                            .addItem("Solid", GEN_COL_SOLID)
-                              .addItem("Fire", GEN_COL_FIRE)
-                                .addItem("Plasma", GEN_COL_PLASMA)                  
+                            .addItem("Plasma", GEN_COL_PLASMA)                                            
+                              .addItem("Solid", GEN_COL_SOLID)
+                                .addItem("Fire", GEN_COL_FIRE)
                                   //                                .addItem("Pulse", GEN_COL_PULSE)        
                                   //                                    .addItem("Glace", GEN_COL_GLACE)  
                                   .activate(0);

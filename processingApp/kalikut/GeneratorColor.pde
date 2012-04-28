@@ -82,8 +82,7 @@ void generateColor() {
         float ypi = y*PI;
         float xpi = x*PI/globalDelayLocal;
         int c=int(sin(ypi+plasmaY)*16+sin(ypi*1.5f+PI/6+plasmaY)*16+cos(xpi+plasmaX)*16+cos(xpi*2f+PI/2+plasmaX)*25)+32;
-        c=constrain(c, 0, 99);
-        colorArray[i]=plasma[c];
+        colorArray[i]=cs.getSmoothColor((c*globalDelay)>>3);
         plasmaX+=globalDelayPlasma;
         break;
 
