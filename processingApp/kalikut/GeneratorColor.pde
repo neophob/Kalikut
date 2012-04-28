@@ -59,11 +59,11 @@ void generateColor() {
 
       switch(genColor) {
       case GEN_COL_RAINBOW: //Rainbow
-        colorArray[i]=mul(cs, (frame+x+y<<1)*globalDelayLocal);
+        colorArray[i]=cs.getSmoothColor((frame+x+y<<1)*globalDelayLocal);
         break;
 
       case GEN_COL_RAINBOW_SOLID: //Rainbow Solid
-        colorArray[i]=mul(cs, frame*globalDelayLocal);
+        colorArray[i]=cs.getSmoothColor(frame*globalDelayLocal);
         break;
 
       case GEN_COL_SOLID: //Solid
@@ -89,7 +89,7 @@ void generateColor() {
         break;
 
       case GEN_COL_PULSE:
-        colorArray[i]=mul(cs, (frame+x+y<<1)*globalDelayLocal);
+        //TODO
         break;
 
       case GEN_COL_SLIDER:
@@ -97,7 +97,7 @@ void generateColor() {
         int xorR = i*ofs; 
         int xorB = (i*ofs)^frame;
         int xorG = (xorR+xorB)>>1;
-        colorArray[i]=mul(cs, (globalDelay*(xorR))>>6);
+        colorArray[i]=cs.getSmoothColor((globalDelay*(xorR))>>4);
         //        colorArray[i]=color(xorR, xorG, xorB);
         break;
 
