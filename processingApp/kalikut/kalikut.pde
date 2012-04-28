@@ -67,7 +67,7 @@ void setup() {
   colorArray = new color[NR_OF_PIXELS_X*NR_OF_PIXELS_Y];
   
   colorSet = new ArrayList<ColorSet>();
-  colorSet.add( new ColorSet("RGB", color(0, 0, 255), color(255, 0, 0), color(0, 255, 0)) );
+  colorSet.add( new ColorSet("RGB", color(255, 0, 0), color(0, 255, 0), color(0, 0, 255)) );
   colorSet.add( new ColorSet("MiamiVice", color(255, 255, 255), color(27, 227, 255), color(255, 130, 220)) );
   colorSet.add( new ColorSet("LeBron", color(255, 255, 255), color(62,62,62), color(212, 182, 0)) );
   colorSet.add( new ColorSet("ML581AT", color(255, 255, 255), color(105,150,85), color(242, 106, 54)) );

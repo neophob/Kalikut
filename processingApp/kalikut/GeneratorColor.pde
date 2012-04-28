@@ -52,18 +52,18 @@ void generateColor() {
   int globalDelayLocal = globalDelay/2;
   float globalDelayPlasma = globalDelay/400.0f;
   plasmaY+=globalDelayPlasma;
-  
+
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
     for (int y=0; y<NR_OF_PIXELS_Y; y++) {
       int i = y*NR_OF_PIXELS_X+x;
 
       switch(genColor) {
       case GEN_COL_RAINBOW: //Rainbow
-        colorArray[i] = Wheel((frame+x+y<<1)*globalDelayLocal);
+        colorArray[i]=mul(cs, (frame+x+y<<1)*globalDelayLocal);
         break;
 
       case GEN_COL_RAINBOW_SOLID: //Rainbow Solid
-        colorArray[i] = Wheel(frame*globalDelayLocal);
+        colorArray[i]=mul(cs, frame*globalDelayLocal);
         break;
 
       case GEN_COL_SOLID: //Solid
@@ -89,7 +89,7 @@ void generateColor() {
         break;
 
       case GEN_COL_PULSE:
-        colorArray[i]=mul(cs, (frame*globalDelay*i)>>4);
+        colorArray[i]=mul(cs, (frame+x+y<<1)*globalDelayLocal);
         break;
 
       case GEN_COL_SLIDER:
@@ -98,16 +98,11 @@ void generateColor() {
         int xorB = (i*ofs)^frame;
         int xorG = (xorR+xorB)>>1;
         colorArray[i]=mul(cs, (globalDelay*(xorR))>>6);
-//        colorArray[i]=color(xorR, xorG, xorB);
+        //        colorArray[i]=color(xorR, xorG, xorB);
         break;
 
       case GEN_COL_GLACE:
-        if (y%2==1) {
-          colorArray[i] = WheelInv((frame+x+y)*globalDelayLocal);
-        } 
-        else {
-          colorArray[i] = Wheel((frame+x+y)*globalDelayLocal);
-        }
+        //TODO
         break;
 
       case GEN_COL_XXX:        
@@ -181,7 +176,7 @@ void updateFireBuffer() {
       fireBuffer[ofs] = 255;
     } 
     else {
-      fireBuffer[ofs] = 0;  
+      fireBuffer[ofs] = 0;
     }
   }
 
@@ -198,7 +193,7 @@ void updateFireBuffer() {
         a += (fireBuffer[yOfsMinusOneLine+x] + fireBuffer[yOfsMinusOneLine+x+1])/2;
         a/=2;
       }
-      
+
       //decay
       if (a>1) {
         a--;

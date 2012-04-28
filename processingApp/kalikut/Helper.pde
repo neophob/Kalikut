@@ -1,32 +1,28 @@
 
-color Wheel(int WheelPos) {
-  WheelPos %= 255;
-  if (WheelPos < 85) {
-    return color(WheelPos * 3, 255 - WheelPos * 3, 0);
-  } 
-  else if (WheelPos < 170) {
-    WheelPos -= 85;
-    return color(255 - WheelPos * 3, 0, WheelPos * 3);
-  } 
-  else {
-    WheelPos -= 170; 
-    return color(0, WheelPos * 3, 255 - WheelPos * 3);
-  }
+color calcColor(int col1, int pos) {
+  int b= col1&255;
+  int g=(col1>>8)&255;
+  int r=(col1>>16)&255;
+
+  int p3=pos*3;
+  r=(r*p3)/255;
+  g=(g*p3)/255;
+  b=(b*p3)/255;
+
+  return color(r, g, b);
 }
 
-color WheelInv(int WheelPos) {
-  WheelPos %= 255;
-  if (WheelPos < 85) {
-    return color(255-WheelPos * 3, WheelPos * 3, 255);
+color mulX(ColorSet cs, int pos) {
+  pos %= 255;
+  if (pos < 85) {
+    return calcColor(cs.getC1(), pos);
   } 
-  else if (WheelPos < 170) {
-    WheelPos -= 85;
-    return color(WheelPos * 3, 255, 255-WheelPos * 3);
+  else if (pos < 170) {
+    pos -= 85;
+    return calcColor(cs.getC2(), pos);
   } 
-  else {
-    WheelPos -= 170; 
-    return color(255, 255-WheelPos * 3, WheelPos * 3);
-  }
+  pos -= 170;
+  return calcColor(cs.getC3(), pos);
 }
 
 color calcSmoothColor(int col1, int col2, int pos) {
@@ -49,70 +45,18 @@ color calcSmoothColor(int col1, int col2, int pos) {
   return color(r, g, b);
 }
 
-color mulSmooth(ColorSet cs, int pos) {
+color mul(ColorSet cs, int pos) {
   pos %= 255;
   if (pos < 85) {
-    int b= cs.getC1()&255;
-    int g=(cs.getC1()>>8)&255;
-    int r=(cs.getC1()>>16)&255;
-    int b2= cs.getC2()&255;
-    int g2=(cs.getC2()>>8)&255;
-    int r2=(cs.getC2()>>16)&255;
-
-    int p3=pos*3;
-    int oppisiteColor = 255-p3;
-    r=(r*p3)/255;
-    g=(g*p3)/255;
-    b=(b*p3)/255;
-    r+=(r2*oppisiteColor)/255;
-    g+=(g2*oppisiteColor)/255;
-    b+=(b2*oppisiteColor)/255;
-
-    return color(r, g, b);
+    return calcSmoothColor(cs.getC2(), cs.getC1(), pos); //0-255
   } 
   else if (pos < 170) {
     pos -= 85;
-    int b= cs.getC2()&255;
-    int g=(cs.getC2()>>8)&255;
-    int r=(cs.getC2()>>16)&255;
-    int b2= cs.getC3()&255;
-    int g2=(cs.getC3()>>8)&255;
-    int r2=(cs.getC3()>>16)&255;
-
-    int p3=pos*3;
-    int oppisiteColor = 255-p3;
-
-    r=(r*p3)/255;
-    g=(g*p3)/255;
-    b=(b*p3)/255;
-    r+=(r2*oppisiteColor)/255;
-    g+=(g2*oppisiteColor)/255;
-    b+=(b2*oppisiteColor)/255;
-
-    return color(r, g, b);
+    return calcSmoothColor(cs.getC3(), cs.getC2(), pos); //255-512
   } 
-
-  pos -= 170; 
-  int b= cs.getC3()&255;
-  int g=(cs.getC3()>>8)&255;
-  int r=(cs.getC3()>>16)&255;
-  int b2= cs.getC1()&255;
-  int g2=(cs.getC1()>>8)&255;
-  int r2=(cs.getC1()>>16)&255;
-
-  int p3=pos*3;
-  int oppisiteColor = 255-p3;
-
-  r=(r*p3)/255;
-  g=(g*p3)/255;
-  b=(b*p3)/255;
-  r+=(r2*oppisiteColor)/255;
-  g+=(g2*oppisiteColor)/255;
-  b+=(b2*oppisiteColor)/255;
-
-  return color(r, g, b);
+  pos -= 170;
+  return calcSmoothColor(cs.getC1(), cs.getC3(), pos); //512-0
 }
-
 
 //colorize buffer
 void tintBuffer() {
