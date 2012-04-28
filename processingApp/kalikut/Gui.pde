@@ -16,15 +16,15 @@ void initGui() {
                 .setSpacingColumn(80)
                   .setNoneSelectedAllowed(false)
                     .addItem("Rainbow", GEN_COL_RAINBOW)
-                      .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
-                        .addItem("Solid Chars", GEN_COL_SOLIDCHAR)
-                          .addItem("Kaos", GEN_COL_KAOS)
-                            .addItem("Plasma", GEN_COL_PLASMA)                                            
-                              .addItem("Solid", GEN_COL_SOLID)
-                                .addItem("Fire", GEN_COL_FIRE)
-                                  //                                .addItem("Pulse", GEN_COL_PULSE)        
-                                  //                                    .addItem("Glace", GEN_COL_GLACE)  
-                                  .activate(0);
+                      .addItem("Up'n'Down", GEN_COL_UPDOWN)        
+                        .addItem("Kaos", GEN_COL_KAOS)
+                          .addItem("Plasma", GEN_COL_PLASMA)                                            
+                            .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
+                              .addItem("Solid Chars", GEN_COL_SOLIDCHAR)
+                                .addItem("Solid", GEN_COL_SOLID)
+                                  .addItem("Fire", GEN_COL_FIRE)
+                                    //                                    .addItem("Glace", GEN_COL_GLACE)  
+                                    .activate(0);
 
   animationButton = cp5.addRadioButton("animationButton")
     .setPosition(20, 260)
@@ -136,7 +136,7 @@ void initGui() {
 
   int i=0;
   for (ColorSet cs: colorSet) {
-    colorButton.addItem(cs.getSetName(), i++);
+    colorButton.addItem(cs.getName(), i++);
   }
   colorButton.activate(0);
 
@@ -244,7 +244,6 @@ void controlEvent(ControlEvent theEvent) {
       invertEffect = false;
     }
   }
-
 }
 
 //draw some rectangles
@@ -264,12 +263,11 @@ void drawBackgroundSlide(int ypos, int ysize, String sectionName) {
       this.pixels[ofs+x] = slideBackground;
     }
   }
-  
+
   if (registerTextLabel) {
     Textlabel tl = cp5.addTextlabel(sectionName, "//"+sectionName, 10, ypos-6);
-    tl.setFont(ControlP5.standard58);    
+    tl.setFont(ControlP5.standard58);
   }
-
 }
 
 //draw background
@@ -290,7 +288,7 @@ void drawGradientBackground() {
   drawBackgroundSlide(255, 51, "Effect");
   drawBackgroundSlide(315, 51, "Audio");
   registerTextLabel=false;
-  
+
   this.updatePixels();
 }
 

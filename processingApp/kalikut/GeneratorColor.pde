@@ -6,7 +6,7 @@ private static final int GEN_COL_SOLID = 3;
 private static final int GEN_COL_FIRE = 4;
 private static final int GEN_COL_SOLIDCHAR = 5;
 private static final int GEN_COL_PLASMA = 6;
-//private static final int GEN_COL_PULSE = 7;
+private static final int GEN_COL_UPDOWN = 7;
 private static final int GEN_COL_KAOS = 8;
 //private static final int GEN_COL_GLACE = 9;
 
@@ -72,9 +72,9 @@ void generateColor() {
         plasmaX+=globalDelayPlasma;
         break;
 
-//      case GEN_COL_PULSE:
-//        //TODO
-//        break;
+      case GEN_COL_UPDOWN:
+        colorArray[i]=cs.getSmoothColor((frame*globalDelay*(y+1))>>2);
+        break;
 
       case GEN_COL_KAOS:
         int ofs = i+frame;
