@@ -8,7 +8,7 @@ private static final int GEN_COL_SOLIDCHAR = 5;
 private static final int GEN_COL_PLASMA = 6;
 private static final int GEN_COL_UPDOWN = 7;
 private static final int GEN_COL_KAOS = 8;
-//private static final int GEN_COL_GLACE = 9;
+private static final int GEN_COL_LEFTRIGHT = 9;
 
 private static final int MAX_COLOR = 10;
 
@@ -81,9 +81,9 @@ void generateColor() {
         colorArray[i]=cs.getSmoothColor((globalDelay*i*ofs)>>4);
         break;
 
-//      case GEN_COL_GLACE:
-//        //TODO
-//        break;
+      case GEN_COL_LEFTRIGHT:
+        colorArray[i]=cs.getSmoothColor((globalDelay*i*frame)>>4);
+        break;
 
       }
     }

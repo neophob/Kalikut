@@ -18,13 +18,13 @@ void initGui() {
                     .addItem("Rainbow", GEN_COL_RAINBOW)
                       .addItem("Up'n'Down", GEN_COL_UPDOWN)        
                         .addItem("Kaos", GEN_COL_KAOS)
-                          .addItem("Plasma", GEN_COL_PLASMA)                                            
-                            .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
-                              .addItem("Solid Chars", GEN_COL_SOLIDCHAR)
-                                .addItem("Solid", GEN_COL_SOLID)
-                                  .addItem("Fire", GEN_COL_FIRE)
-                                    //                                    .addItem("Glace", GEN_COL_GLACE)  
-                                    .activate(0);
+                          .addItem("Left'n'Right", GEN_COL_LEFTRIGHT)  
+                            .addItem("Plasma", GEN_COL_PLASMA)                                            
+                              .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
+                                .addItem("Solid Chars", GEN_COL_SOLIDCHAR)
+                                  .addItem("Solid", GEN_COL_SOLID)
+                                    .addItem("Fire", GEN_COL_FIRE)                                    
+                                      .activate(0);
 
   animationButton = cp5.addRadioButton("animationButton")
     .setPosition(20, 260)
