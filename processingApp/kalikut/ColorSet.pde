@@ -38,7 +38,7 @@ public class ColorSet {
     }
     
     int targetOfs = (ofs+1)%colors.length;
-    //println("ofs:"+ofs+" targetofs:"+targetOfs);
+    //println("ofs:"+ofs+" targetofs:"+targetOfs);    
     return calcSmoothColor(colors[targetOfs], colors[ofs], pos);
   }
   

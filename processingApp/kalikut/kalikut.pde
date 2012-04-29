@@ -71,7 +71,7 @@ void setup() {
   textFont(fontA, 120);
   colorArray = new color[NR_OF_PIXELS_X*NR_OF_PIXELS_Y];
 
-
+  //http://kuler.adobe.com/#themes/random?time=30
   colorSet = new ArrayList<ColorSet>();
   colorSet.add( new ColorSet("RGB",         new int[] { color(255, 0, 0), color(0, 255, 0), color(0, 0, 255) } ));
   colorSet.add( new ColorSet("MiamiVice",   new int[] { color(27, 227, 255), color(255, 130, 220), color(255, 255, 255)  } ));
@@ -88,7 +88,11 @@ void setup() {
   colorSet.add( new ColorSet("Lantern",     new int[] { color(#0d9a0d), color(#000000), color(#ffffff) } )); 
   colorSet.add( new ColorSet("Fame 575",    new int[] { color(#540c0d), color(#fb7423), color(#f9f48e), color(#4176c4), color(#5aaf2e) } ));
   colorSet.add( new ColorSet("CGA",         new int[] { color(#d3517d), color(#15a0bf), color(#ffc062) } ));  
-  colorSet.add( new ColorSet("B&W",         new int[] { color(#000000), color(#ffffff) } ));  
+  colorSet.add( new ColorSet("B&W",         new int[] { color(#000000), color(#ffffff) } ));    
+  colorSet.add( new ColorSet("Civil",       new int[] { color(#362F2D), color(#4C4C4C), color(#94B73E), color(#B5C0AF), color(#FAFDF2) } ));  
+  colorSet.add( new ColorSet("Dribble",     new int[] { color(#3D4C53), color(#70B7BA), color(#F1433F), color(#E7E1D4), color(#FFFFFF) } ));  
+  colorSet.add( new ColorSet("Castle",      new int[] { color(#4B345C), color(#946282), color(#E5A19B) } ));  
+  colorSet.add( new ColorSet("Fizz",        new int[] { color(#04BFBF), color(#F7E967), color(#588F27) } ));  
 
 
   initGui();
@@ -111,7 +115,12 @@ void draw() {
   drawGradientBackground();
 
   //generate buffer content
-  generator();
+  try {
+    generator();    
+  } catch (Exception e) {
+    println("ooops: ");
+    e.printStackTrace();
+  }
 
   drawLetter();
 
