@@ -74,12 +74,12 @@ void setup() {
 
   colorSet = new ArrayList<ColorSet>();
   colorSet.add( new ColorSet("RGB",         new int[] { color(255, 0, 0), color(0, 255, 0), color(0, 0, 255) } ));
-  colorSet.add( new ColorSet("MiamiVice",   new int[] { color(255, 255, 255), color(27, 227, 255), color(255, 130, 220)  } ));
-  colorSet.add( new ColorSet("LeBron",      new int[] { color(255, 255, 255), color(62, 62, 62), color(212, 182, 0) } ));
-  colorSet.add( new ColorSet("ML581AT",     new int[] { color(255, 255, 255), color(105, 150, 85), color(242, 106, 54) } ));
-  colorSet.add( new ColorSet("Neon",        new int[] { color(180, 220, 0), color(113, 113, 85), color(50, 50, 40) } ));
+  colorSet.add( new ColorSet("MiamiVice",   new int[] { color(27, 227, 255), color(255, 130, 220), color(255, 255, 255)  } ));
+  colorSet.add( new ColorSet("LeBron",      new int[] { color(62, 62, 62), color(212, 182, 0), color(255, 255, 255) } ));
+  colorSet.add( new ColorSet("ML581AT",     new int[] { color(105, 150, 85), color(242, 106, 54), color(255, 255, 255) } ));
+  colorSet.add( new ColorSet("Neon",        new int[] { color(50, 50, 40), color(113, 113, 85), color(180, 220, 0) } ));
   colorSet.add( new ColorSet("Rasta",       new int[] { color(220, 50, 60), color(240, 203, 88), color(60, 130, 94) }));
-  colorSet.add( new ColorSet("Brazil",      new int[] { color(223, 234, 0), color(0, 140, 83), color(46, 0, 228) } ));
+  colorSet.add( new ColorSet("Brazil",      new int[] { color(0, 140, 83), color(46, 0, 228), color(223, 234, 0) } ));
   colorSet.add( new ColorSet("MIUSA",       new int[] { color(80, 75, 70), color(26, 60, 83), color(160, 0, 40) } ));
   colorSet.add( new ColorSet("Simpson",     new int[] { color(#d9c23e), color(#a96a95), color(#7d954b), color(#4b396b) } ));
   colorSet.add( new ColorSet("Kitty",       new int[] { color(#9f456b), color(#4f7a9a), color(#e6c84c) } ));
@@ -88,7 +88,7 @@ void setup() {
   colorSet.add( new ColorSet("Lantern",     new int[] { color(#0d9a0d), color(#000000), color(#ffffff) } )); 
   colorSet.add( new ColorSet("Fame 575",    new int[] { color(#540c0d), color(#fb7423), color(#f9f48e), color(#4176c4), color(#5aaf2e) } ));
   colorSet.add( new ColorSet("CGA",         new int[] { color(#d3517d), color(#15a0bf), color(#ffc062) } ));  
-  colorSet.add( new ColorSet("Black&White", new int[] { color(#000000), color(#ffffff) } ));  
+  colorSet.add( new ColorSet("B&W",         new int[] { color(#000000), color(#ffffff) } ));  
 
 
   initGui();
@@ -101,15 +101,7 @@ void setup() {
 
   /* start oscP5, listening for incoming messages at port 12000 */
   //  oscP5 = new OscP5(this, OSC_PORT);
-  //  updateTextfield("OSC Server startet on port "+ OSC_PORT);
-  
-  
-//  blink = new BlinkenLibrary(this, "bb-gewaber1r.bml");
-  blink = new BlinkenLibrary(this, "bb-frogskin1.bml");
-  blink.loop();
-  //ignore the delay of the movie, use our fps!
-  blink.setIgnoreFileDelay(true);
-  tmpImg=createImage(blink.width,  blink.height, RGB);
+  //  updateTextfield("OSC Server startet on port "+ OSC_PORT);  
 }
 
 
