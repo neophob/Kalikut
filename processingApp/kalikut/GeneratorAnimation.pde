@@ -46,7 +46,36 @@ void generateAnimation() {
   }
 
   int fadrCol = color((frame*globalDelay)%256, (frame*globalDelay)%256, (frame*globalDelay)%256); 
+  
+  //do some pre loop calculations
+  switch(genAnim) {
+    //  case GEN_ANIM_HOTEL:
+    //    if (int(random(77))==34) {
+    //very seldom in hotel mode, make everything black
+    //      clearAllChars();
+    //    }
+    //    break;
 
+  case GEN_ANIM_KNIGHTRIDER:
+    if (frame%globalDelayInv==0) {
+      if (krDirection == 0) {
+        krPos++;
+        if (krPos == 7) {
+          krDirection=1;
+        }
+      } 
+      else {
+        krPos--;
+        if (krPos == 0) {
+          krDirection=0;
+        }
+      }
+    }
+    break;
+  }
+
+
+  //apply effect
   for (int x=0; x<NR_OF_PIXELS_X; x++) {
     for (int y=0; y<NR_OF_PIXELS_Y; y++) {
       int i = y*NR_OF_PIXELS_X+x;
@@ -163,31 +192,6 @@ void generateAnimation() {
   }
   //println(frame);
 
-  switch(genAnim) {
-    //  case GEN_ANIM_HOTEL:
-    //    if (int(random(77))==34) {
-    //very seldom in hotel mode, make everything black
-    //      clearAllChars();
-    //    }
-    //    break;
-
-  case GEN_ANIM_KNIGHTRIDER:
-    if (frame%globalDelayInv==0) {
-      if (krDirection == 0) {
-        krPos++;
-        if (krPos == 7) {
-          krDirection=1;
-        }
-      } 
-      else {
-        krPos--;
-        if (krPos == 0) {
-          krDirection=0;
-        }
-      }
-    }
-    break;
-  }
 }
 
 

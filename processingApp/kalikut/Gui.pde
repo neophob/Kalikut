@@ -20,11 +20,12 @@ void initGui() {
                         .addItem("Kaos", GEN_COL_KAOS)
                           .addItem("Left'n'Right", GEN_COL_LEFTRIGHT)  
                             .addItem("Plasma", GEN_COL_PLASMA)                                            
-                              .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
-                                .addItem("Solid Chars", GEN_COL_SOLIDCHAR)
-                                  .addItem("Solid", GEN_COL_SOLID)
-                                    .addItem("Fire", GEN_COL_FIRE)                                    
-                                      .activate(0);
+                              .addItem("Blinken", GEN_COL_BLINKEN)                                    
+                                .addItem("Rainbow Solid", GEN_COL_RAINBOW_SOLID)
+                                  .addItem("Solid Chars", GEN_COL_SOLIDCHAR)
+                                    .addItem("Solid", GEN_COL_SOLID)
+                                      .addItem("Fire", GEN_COL_FIRE)    
+                                        .activate(0);
 
   animationButton = cp5.addRadioButton("animationButton")
     .setPosition(20, 260)

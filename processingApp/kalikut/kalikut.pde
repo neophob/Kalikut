@@ -10,6 +10,7 @@ import oscP5.*;
 
 import com.neophob.lpd6803.*;
 import com.neophob.lpd6803.misc.*;
+import processing.lib.blinken.*;
 
 private static final String STR_KALIKUT = "KALIKUTn";
 
@@ -20,6 +21,8 @@ private static final String VERSION = "KALIKUT v0.6";
 
 private PFont fontA;
 private int frame;
+private BlinkenLibrary blink;
+private PImage tmpImg;
 
 //gui
 private ControlP5 cp5;
@@ -85,6 +88,7 @@ void setup() {
   colorSet.add( new ColorSet("Lantern",     new int[] { color(#0d9a0d), color(#000000), color(#ffffff) } )); 
   colorSet.add( new ColorSet("Fame 575",    new int[] { color(#540c0d), color(#fb7423), color(#f9f48e), color(#4176c4), color(#5aaf2e) } ));
   colorSet.add( new ColorSet("CGA",         new int[] { color(#d3517d), color(#15a0bf), color(#ffc062) } ));  
+  colorSet.add( new ColorSet("Black&White", new int[] { color(#000000), color(#ffffff) } ));  
 
 
   initGui();
@@ -98,6 +102,14 @@ void setup() {
   /* start oscP5, listening for incoming messages at port 12000 */
   //  oscP5 = new OscP5(this, OSC_PORT);
   //  updateTextfield("OSC Server startet on port "+ OSC_PORT);
+  
+  
+//  blink = new BlinkenLibrary(this, "bb-gewaber1r.bml");
+  blink = new BlinkenLibrary(this, "bb-frogskin1.bml");
+  blink.loop();
+  //ignore the delay of the movie, use our fps!
+  blink.setIgnoreFileDelay(true);
+  tmpImg=createImage(blink.width,  blink.height, RGB);
 }
 
 

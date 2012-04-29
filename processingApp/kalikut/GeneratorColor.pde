@@ -9,6 +9,7 @@ private static final int GEN_COL_PLASMA = 6;
 private static final int GEN_COL_UPDOWN = 7;
 private static final int GEN_COL_KAOS = 8;
 private static final int GEN_COL_LEFTRIGHT = 9;
+private static final int GEN_COL_BLINKEN = 10;
 
 private static final int MAX_COLOR = 10;
 
@@ -21,7 +22,8 @@ private int[] plasma = new int [100];
 private float plasmaX=0, plasmaY=0;
 
 
-void generateColor() {
+void generateColor() {              
+            
   if (genColor==GEN_COL_FIRE) {
     updateFireBuffer();
   }
@@ -85,6 +87,18 @@ void generateColor() {
         colorArray[i]=cs.getSmoothColor((globalDelay*i*frame)>>4);
         break;
 
+      case GEN_COL_BLINKEN:
+        if (i==0) {
+          tmpImg.copy(blink, 0, 0, blink.width,  blink.height, 0, 0, blink.width,  blink.height);
+          tmpImg.resize(NR_OF_PIXELS_X, NR_OF_PIXELS_Y);
+          image(tmpImg, 750, 107, NR_OF_PIXELS_X*5, NR_OF_PIXELS_Y*5);
+          tmpImg.loadPixels();
+          for (int n=0; n<NR_OF_PIXELS_X*NR_OF_PIXELS_Y; n++) {
+            colorArray[n]=cs.getSmoothColor(tmpImg.pixels[n]&255);
+          }
+          tmpImg.updatePixels();
+        }
+        break;
       }
     }
   }
