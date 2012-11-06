@@ -148,7 +148,8 @@ void setupColor() {
     
 //  blink = new BlinkenLibrary(this, "bb-gewaber1r.bml");
 //  blink = new BlinkenLibrary(this, "bb-frogskin1.bml");
-  blink = new BlinkenLibrary(this, "bb-rauten1.bml");
+  blink = new BlinkenLibrary(this);
+  blink.loadFile("bb-rauten1.bml");
   blink.loop();
   //ignore the delay of the movie, use our fps!
   blink.setIgnoreFileDelay(true);

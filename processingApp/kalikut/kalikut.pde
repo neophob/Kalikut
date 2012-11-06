@@ -17,7 +17,7 @@ private static final String STR_KALIKUT = "KALIKUTn";
 private static final int NR_OF_PIXELS_X = STR_KALIKUT.length();
 private static final int NR_OF_PIXELS_Y = 4;
 private static final int OSC_PORT = 10000;
-private static final String VERSION = "KALIKUT v0.6";
+private static final String VERSION = "KALIKUT v0.62";
 
 private PFont fontA;
 private int frame;
@@ -100,12 +100,12 @@ void setup() {
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();
-  //  initSerial();
+  initSerial();
   initLetter();
 
   /* start oscP5, listening for incoming messages at port 12000 */
-  //  oscP5 = new OscP5(this, OSC_PORT);
-  //  updateTextfield("OSC Server startet on port "+ OSC_PORT);  
+  oscP5 = new OscP5(this, OSC_PORT);
+  updateTextfield("OSC Server startet on port "+ OSC_PORT);  
 }
 
 
