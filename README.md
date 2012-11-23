@@ -5,7 +5,7 @@ Stage Design project for a band, illuminate eight 80cm high letters with 110 led
 For more information check out the **Blog Entry**: http://neophob.com/2012/11/kalikut-now-stage-design/
 
 ## Arduino
-Tested with Version 1.0.1.
+Tested with Version 1.0.1. As I need a low latency serial connection I used a Teensy board.
 
 You need to install the lpd6803 library and time1 library in your Arduino lib directory.
 
