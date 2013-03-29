@@ -95,5 +95,52 @@ static void splitUpBuffers(int targetBuffersize, int[] data, int colorFormat, in
   }
 }
 
+private static final String CONFIG_FILE = "config.txt";
+Properties config = new Properties();
 
+void loadConfigFile() {  
+  InputStream is = null;
+  try {
+    is = createInput(CONFIG_FILE);        	
+    config.load(is);            
+    println("Config loaded, "+config.size()+" entries");
+  } 
+  catch (Exception e) {
+    String error = "Failed to open the configfile "+CONFIG_FILE;
+    println(error);
+    e.printStackTrace();
+    throw new IllegalArgumentException(error);
+  } 
+  finally {
+    try {
+      if (is!=null) {
+        is.close();
+      }
+    } 
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+}
+
+
+int parseConfigInt(String property, int defaultValue) {
+  String rawConfig = config.getProperty(property);
+  if (rawConfig != null && !rawConfig.trim().isEmpty()) {
+    try {
+      int val = Integer.parseInt(rawConfig);
+      if (val >= 0) {
+        return val;
+      } 
+      else {
+        println("Ignored negative value "+ rawConfig);
+      }
+    } 
+    catch (Exception e) {
+      println("Failed to parse!");
+      e.printStackTrace();
+    }
+  }
+  return defaultValue;
+}
 

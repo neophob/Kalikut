@@ -69,7 +69,8 @@ void setup() {
   background(0);
   frameRate(20);
   smooth();
-
+  loadConfigFile();
+  
   // Load the font. Fonts must be placed within the data 
   // directory of your sketch. 
   fontA = loadFont("PTSans-Bold-120.vlw");

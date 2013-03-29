@@ -54,8 +54,16 @@ void sendE131Packet(int universeId, byte[] buffer) {
 void initE131() {
   //TODO make ip configurable
   println("Init E1.31 code");
+  
+  String ip = config.getProperty("e131.controller.ip");
+  println("Using IP: "+ip);
+  
+  //pixelPerUniverse
+  this.pixelsPerUniverse = parseConfigInt("e131.cfg.pixel.per.universe", 170);
+  println("Pixel per Universe: "+pixelsPerUniverse);
+  
   try {
-    this.targetAdress = InetAddress.getByName("192.168.111.55");
+    this.targetAdress = InetAddress.getByName(ip);
     this.firstUniverseId = 1;
     calculateNrOfE131Universe();
     packet = new DatagramPacket(new byte[0], 0, targetAdress, E1_31DataPacket.E131_PORT);
@@ -70,7 +78,6 @@ void initE131() {
 void calculateNrOfE131Universe() {
   //check how many universe we need
   this.nrOfUniverse = 1;
-  this.pixelsPerUniverse = 170;
   //TODO
   int bufferSize=NR_OF_PIXELS_X*NR_OF_PIXELS_Y;
   if (bufferSize > pixelsPerUniverse) {
