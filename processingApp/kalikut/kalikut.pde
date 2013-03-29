@@ -195,6 +195,7 @@ void draw() {
   //display some audio stuff
   drawBeatStatus();
 
+  sendE131();
   //send serial data if initialized and wait at least 45ms before sending again
   /*  if (initialized && System.currentTimeMillis()-lastSendTime > 19) {    
    println(lastSendTime+" send: "+colorArray.length);
@@ -204,33 +205,5 @@ void draw() {
   frame++;
 }
 
-void initE131() {
-  //TODO make ip configurable
-  println("Init E1.31 code");
-  try {
-    this.targetAdress = InetAddress.getByName("192.168.111.55");
-    this.firstUniverseId = 1;
-    calculateNrOfE131Universe();
-    packet = new DatagramPacket(new byte[0], 0, targetAdress, E1_31DataPacket.E131_PORT);
-    dsocket = new DatagramSocket();
-  } 
-  catch (Exception e) {
-    println("failed to initialize E1.31 device");
-    e.printStackTrace();
-  }
-}
 
-void calculateNrOfE131Universe() {
-  //check how many universe we need
-  this.nrOfUniverse = 1;
-  this.pixelsPerUniverse = 170;
-  //TODO
-  int bufferSize=NR_OF_PIXELS_X*NR_OF_PIXELS_Y;
-  if (bufferSize > pixelsPerUniverse) {
-    while (bufferSize > pixelsPerUniverse) {
-      this.nrOfUniverse++;
-      bufferSize -= pixelsPerUniverse;
-    }
-  }
-}
 
