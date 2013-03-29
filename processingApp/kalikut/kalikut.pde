@@ -12,12 +12,12 @@ import com.neophob.lpd6803.*;
 import com.neophob.lpd6803.misc.*;
 import processing.lib.blinken.*;
 
-private static final String STR_KALIKUT = "KALIKUTn";
+private static final String STR_YONAS = "YONAS";
 
-private static final int NR_OF_PIXELS_X = STR_KALIKUT.length();
+private static final int NR_OF_PIXELS_X = STR_YONAS.length();
 private static final int NR_OF_PIXELS_Y = 4;
 private static final int OSC_PORT = 10000;
-private static final String VERSION = "KALIKUT v0.62";
+private static final String VERSION = "Yonas v0.62";
 
 private PFont fontA;
 private int frame;
@@ -42,11 +42,6 @@ private int globalDelay = 10;
 
 //buffer
 private int[] colorArray;  
-
-//Serial
-private Lpd6803 lpd6803;
-private boolean initialized;
-private long lastSendTime;
 
 //OSC
 private OscP5 oscP5;
@@ -100,7 +95,7 @@ void setup() {
   updateTextfield(VERSION); 
   initAudio();  
   initGenerator();
-  initSerial();
+//  initSerial();
   initLetter();
 
   /* start oscP5, listening for incoming messages at port 12000 */
@@ -128,11 +123,11 @@ void draw() {
   drawBeatStatus();
 
   //send serial data if initialized and wait at least 45ms before sending again
-  if (initialized && System.currentTimeMillis()-lastSendTime > 19) {    
+/*  if (initialized && System.currentTimeMillis()-lastSendTime > 19) {    
     println(lastSendTime+" send: "+colorArray.length);
     lpd6803.sendRgbFrame((byte)0, colorArray, ColorFormat.RGB);
     lastSendTime = System.currentTimeMillis();
-  }
+  }*/
   frame++;
 }
 

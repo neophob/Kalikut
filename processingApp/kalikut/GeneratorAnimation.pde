@@ -41,7 +41,7 @@ void generateAnimation() {
 
 
   if (frame%globalDelayInv==0) {
-    selectedRandomChar = int(random(STR_KALIKUT.length()));
+    selectedRandomChar = int(random(STR_YONAS.length()));
     selectedRandomWord = int(random(funnyWords.size()));
   }
 
@@ -100,12 +100,12 @@ void generateAnimation() {
 
       case GEN_ANIM_ONE_CHAR:
         if (invertEffect) {
-          if ((frame/globalDelayLocal-x)%STR_KALIKUT.length()==1) {
+          if ((frame/globalDelayLocal-x)%STR_YONAS.length()==1) {
             colorArray[i] = color(0, 0, 0);
           }
         } 
         else {
-          if ((frame/globalDelayLocal-x)%STR_KALIKUT.length()!=1) {
+          if ((frame/globalDelayLocal-x)%STR_YONAS.length()!=1) {
             colorArray[i] = color(0, 0, 0);
           }
         }

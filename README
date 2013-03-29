@@ -1,19 +1,17 @@
-Hint, the default librxtxSerial.jnilib will crash on osx, don't know why.
+# Arduino
+Make sure you install all libraries from the arduinoFw/libs directory.
 
-i replaced the version (/Applications/Processing.app/Contents/Resources/Java/modes/java/libraries/serial/library/macosx/) with mine.
+
+# Processing
+
+Version 1.5.1
+Hint, the default librxtxSerial.jnilib will crash on osx, don't know why. I replaced the version (/Applications/Processing.app/Contents/Resources/Java/modes/java/libraries/serial/library/macosx/) with mine.
 
 
-Trace errors:
--------------
--Replace power supply (impulsstrom issues)
--Twistet pair Kabel verwenden?
--Use Teensy instead an Arduino
--Increase CPU Power for the LPD6803 (strip.setCPUmax(90))
-
-Already done:
--------------
--Elkos/Kerkos zur Spannungsglättung
--Strom neu einspeisen
--Common Ground
--Nie, aber GAR nie Lautsprecherkabel (2 Polige Kabel) für EINE Leitung verwenden!
--Kabel überprüft
+# Trace errors
+* Replace power supply (impulsstrom issues)
+* Use twistet pair cable?
+* Use Teensy instead an Arduino
+* Play with CPU setting for the LPD6803 (strip.setCPUmax(90))
+* Common ground
+* recheck cable

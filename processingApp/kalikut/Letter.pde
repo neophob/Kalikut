@@ -9,17 +9,12 @@ private static final int IMAGE_Y_SIZE = 120;
 private int totalWidth = 0; 
 
 public void initLetter() {
-  String letters = "KALIKUTn";  
   //init array
-  letterWidth = new int[letters.length()];
+  letterWidth = new int[STR_YONAS.length()];
 
   //get width of each char
-  for (int i=0; i<letters.length(); i++) {
-    String s = ""+letters.charAt(i);
-    if (s.equals("n")) {
-      s = "now ";
-    }
-
+  for (int i=0; i<STR_YONAS.length(); i++) {
+    String s = ""+STR_YONAS.charAt(i);
     int w = int(textWidth(s));    
     letterWidth[i] = w;
     totalWidth += w;
@@ -31,7 +26,7 @@ public void initLetter() {
   pg.fill(color(255, 255, 255));
   pg.textFont(fontA, IMAGE_Y_SIZE);
   pg.textSize(IMAGE_Y_SIZE);
-  pg.text("KALIKUT now", 0, 110);
+  pg.text(STR_YONAS, 0, 110);
   pg.endDraw();
 
   logoImg = createImage(totalWidth, IMAGE_Y_SIZE, ARGB);
