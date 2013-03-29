@@ -8,7 +8,7 @@ void generator() {
 
   generateColor();
   
-    //tint buffer
+  //tint buffer
   tintBuffer();
 
 
