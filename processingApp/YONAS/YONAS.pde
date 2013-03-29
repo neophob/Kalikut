@@ -166,7 +166,8 @@ void setup() {
   frame=NR_OF_PIXELS_X*2; //init the safe way
   updateTextfield(VERSION); 
   initAudio();  
-  initGenerator();
+  setupAnimation();
+  setupColor();
   initE131();
   initLetter();
 
@@ -183,7 +184,11 @@ void draw() {
 
   //generate buffer content
   try {
-    generator();
+    generateColor();  
+    //tint buffer
+    tintBuffer();
+    generateAnimation();
+    generateSound();
   } 
   catch (Exception e) {
     println("ooops: ");
@@ -204,6 +209,5 @@ void draw() {
    }*/
   frame++;
 }
-
 
 
