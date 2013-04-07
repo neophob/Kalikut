@@ -1,5 +1,5 @@
 #enter the ip address of your controller
-e131.controller.ip=192.168.111.55
+e131.controller.ip=239.255.0.0
 
 #nr of rgb pixels per universe, maximal value: 512/3=170
 e131.cfg.pixel.per.universe=170
